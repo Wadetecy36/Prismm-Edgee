@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PRISM EDGE — Built To Scale Brands</title>
+  <link rel="icon" type="image/jpeg" href="../-zZkCND/assets/prism-edge-logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;600;700&family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'prism-gold': '#E8C97A',
+            'prism-pearl': '#F5F5F0',
+            'prism-black': '#0A0A0A',
+            'prism-blue': '#1A3EBF',
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="text-prism-pearl font-sans antialiased overflow-x-hidden">
+
+  <nav class="fixed top-0 left-0 right-0 z-50 glass-nav">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#hero" class="flex items-center gap-3 group">
+        <img src="assets/prism-edge-logo.jpg" alt="PRISM EDGE Logo"
+          class="w-10 h-10 object-contain mix-blend-screen group-hover:scale-110 transition-transform">
+        <span class="font-serif text-2xl text-prism-gold tracking-wider">PRISM <span
+            class="font-light">EDGE</span></span>
+      </a>
+      <div class="hidden md:flex gap-8 text-sm tracking-wide">
+        <a href="#about" class="hover:text-prism-gold transition">About</a>
+        <a href="#story" class="hover:text-prism-gold transition">Story</a>
+        <a href="#websites" class="hover:text-prism-gold transition">Websites</a>
+        <a href="#marketing" class="hover:text-prism-gold transition">Marketing</a>
+        <a href="#prisma" class="hover:text-prism-gold transition">PRISMA AI</a>
+        <a href="/" onclick="if(window.location.protocol==='file:'){event.preventDefault();window.location.href='../main site/index.html';}" class="hover:text-prism-gold transition">
+          MAIN SITE
+          <span
+            class="px-2 py-0.5 bg-prism-gold/10 text-[10px] text-prism-gold rounded-full border border-prism-gold/20">Parent</span>
+        </a>
+        <a href="/shop/" onclick="if(window.location.protocol==='file:'){event.preventDefault();window.location.href='../edge products/index.html';}"
+          class="hover:text-prism-gold transition">
+          EDGE PRODUCTS
+        </a>
+      </div>
+      <a href="#prisma"
+        class="hidden md:block px-5 py-2 border border-prism-gold/40 text-prism-gold rounded-full text-xs tracking-wider hover:bg-prism-gold hover:text-prism-black transition">CONSULT</a>
+    </div>
+  </nav>
+
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+
+
+    <div class="relative z-10 text-center px-6 max-w-5xl">
+      <p class="text-prism-gold/80 tracking-[0.4em] text-xs mb-6 fade-up">A PRISM EDGE COMPANY</p>
+      <h1 class="font-serif text-8xl md:text-[10rem] font-light text-prism-gold leading-none mb-8 fade-up shimmer-text"
+        style="animation-delay:.1s">PRISM LABS</h1>
+      <p class="font-serif italic text-3xl md:text-4xl text-prism-pearl/90 mb-6 fade-up" style="animation-delay:.2s">
+        Clarity Through Innovation</p>
+      <p class="max-w-3xl mx-auto text-xl text-prism-pearl/80 mb-12 leading-relaxed fade-up"
+        style="animation-delay:.3s">
+        We are the digital growth division of Prism Edge — helping brands, products, and companies scale through
+        world-class website development, digital marketing, and AI-powered business consulting.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center fade-up" style="animation-delay:.4s">
+        <a href="#websites"
+          class="px-8 py-4 bg-prism-gold text-prism-black font-medium rounded-full hover:scale-105 transition-transform tracking-wide">Explore
+          Our Work</a>
+        <a href="#prisma"
+          class="px-8 py-4 border border-prism-blue/60 text-prism-pearl rounded-full hover:bg-prism-blue/20 transition tracking-wide">Talk
+          to Our AI Advisor</a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-prism-gold/60">
+      <span class="text-[10px] tracking-[0.3em]">SCROLL</span>
+      <div class="scroll-indicator"></div>
+    </div>
+  </section>
+
+  <section id="about" class="py-32 px-6 relative">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-16 items-center mb-20">
+        <div class="reveal">
+          <p class="text-prism-gold/70 tracking-[0.3em] text-xs mb-4">— WHO WE ARE</p>
+          <h2 class="font-serif text-6xl md:text-7xl text-prism-gold mb-10 leading-tight">Built for the<br />brands that
+            build futures.</h2>
+          <div class="space-y-5 text-prism-pearl/75 leading-relaxed">
+            <p>Prism Labs is the creative and digital growth arm of Prism Edge — a forward-thinking technology and
+              innovation company. We exist for one reason: to help businesses grow.</p>
+            <p>Whether you're a startup finding your footing or an established brand ready to scale, Prism Labs brings
+              together elite website development, data-driven digital marketing, and AI-backed consulting to transform
+              how your business shows up in the world.</p>
+            <p class="text-prism-gold/90 italic font-serif text-xl">We don't just build websites — we build digital
+              ecosystems that attract, convert, and retain customers.</p>
+          </div>
+        </div>
+        <div class="reveal relative">
+          <div class="aspect-square relative flex items-center justify-center about-prism-scene">
+            <div class="absolute inset-0 prism-visual opacity-40"></div>
+            <div class="about-prism z-10 animate-float">
+              <div class="face f1"></div>
+              <div class="face f2"></div>
+              <div class="face f3"></div>
+              <div class="face f4"></div>
+              <div class="face f5"></div>
+              <div class="face f6"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mt-24">
+        <div class="glass-card p-8 reveal flex flex-col">
+          <div class="w-12 h-12 mb-6 rounded-lg bg-prism-gold/10 flex items-center justify-center text-prism-gold"><svg
+              class="" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+              </path>
+            </svg></div>
+          <h3 class="font-serif text-2xl text-prism-gold mb-3">Website Development</h3>
+          <p class="text-prism-pearl/70 text-sm leading-relaxed flex-1">High-performance digital experiences engineered
+            around your brand and conversion goals.</p>
+          <a href="templates.html" target="_blank"
+            class="btn-view-templates-trigger mt-8 inline-flex items-center gap-2 text-xs font-bold tracking-widest text-prism-black bg-prism-gold px-5 py-2.5 rounded-full hover:scale-105 transition-transform self-start">
+            VIEW TEMPLATES <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+              <polygon points="10 7 15 10 10 13 10 7"></polygon>
+            </svg>
+          </a>
+        </div>
+        <div class="glass-card p-8 reveal">
+          <div class="w-12 h-12 mb-6 rounded-lg bg-prism-blue/20 flex items-center justify-center text-prism-blue"><svg
+              width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 11l18-5v12L3 14v-3z"></path>
+              <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path>
+            </svg></div>
+          <h3 class="font-serif text-2xl text-prism-gold mb-3">Digital Marketing</h3>
+          <p class="text-prism-pearl/70 text-sm leading-relaxed">Strategy, content, and paid media that compounds
+            visibility into measurable revenue.</p>
+        </div>
+        <div class="glass-card p-8 reveal">
+          <div class="w-12 h-12 mb-6 rounded-lg bg-prism-gold/10 flex items-center justify-center text-prism-gold"><svg
+              width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg></div>
+          <h3 class="font-serif text-2xl text-prism-gold mb-3">Brand Scaling & AI Consulting</h3>
+          <p class="text-prism-pearl/70 text-sm leading-relaxed">PRISMA, our proprietary AI advisor, decodes your brand
+            and prescribes precise next moves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="story" class="py-32 px-6 relative bg-transparent">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="text-prism-gold/70 tracking-[0.3em] text-xs mb-4">— STORIES THAT DRIVE US</p>
+        <h2 class="font-serif text-6xl md:text-7xl text-prism-gold mb-8">Every brand has a story.</h2>
+        <p class="max-w-3xl mx-auto text-lg text-prism-pearl/80">We help you tell it — and grow it. Here are some of the
+          businesses we've been privileged to walk alongside.</p>
+      </div>
+
+      <div id="stories-container" class="space-y-12"></div>
+
+      <p class="text-center mt-16 font-serif italic text-xl text-prism-pearl/80 reveal max-w-3xl mx-auto">
+        "Our prime objective, above all else, is your growth. That's not a slogan — it's our commitment."
+      </p>
+    </div>
+  </section>
+
+  <section id="websites" class="py-32 px-6 relative">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-16 reveal">
+        <p class="text-prism-gold/70 tracking-[0.3em] text-xs mb-4">— WEBSITE DEVELOPMENT</p>
+        <h2 class="font-serif text-6xl md:text-7xl text-prism-gold mb-8">Your digital home, built to convert.</h2>
+        <p class="max-w-3xl text-lg text-prism-pearl/80 leading-relaxed">We design and develop high-performance websites
+          tailored to your brand's identity and business goals. Browse our design styles below and choose the one that
+          speaks to your vision.</p>
+      </div>
+
+      <div class="mt-8 reveal">
+        <div id="template-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="marketing" class="py-32 px-6 relative bg-transparent">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-16 reveal">
+        <p class="text-prism-gold/70 tracking-[0.3em] text-xs mb-4">— DIGITAL MARKETING</p>
+        <h2 class="font-serif text-6xl md:text-7xl text-prism-gold mb-8">Reach more. Convert more.<br />Grow faster.
+        </h2>
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="max-w-3xl space-y-5 text-prism-pearl/80 text-lg leading-relaxed">
+            <p>In today's world, visibility is currency. Digital marketing is no longer optional — it's the engine
+              behind every thriving business. From social media strategy to paid advertising, content creation to SEO,
+              we craft campaigns that don't just get impressions — they get results.</p>
+            <p>Studies show that businesses with a strong digital marketing strategy grow revenue up to <span
+                class="text-prism-gold font-medium">2.8x faster</span> than those without. At Prism Edge, we use data,
+              creativity, and precision targeting to put your brand in front of the right people at the right time.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-4 reveal">
+            <div class="relative group overflow-hidden rounded-xl border border-white/5">
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600"
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+              <div class="absolute inset-0 bg-prism-gold/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            <div class="relative group overflow-hidden rounded-xl border border-white/5 mt-8">
+              <img src="https://images.unsplash.com/photo-1561070791-2526d30994b8?w=600"
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+              <div class="absolute inset-0 bg-prism-gold/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="media-gallery" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16"></div>
+
+      <div class="text-center reveal">
+        <a id="marketing-cta" href="#"
+          class="inline-block px-12 py-5 rounded-full font-medium text-prism-black text-lg gold-cta tracking-wide">
+          📈 Market & Grow With Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="prisma" class="py-32 px-6 relative">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-16 reveal text-center">
+        <p class="text-prism-gold/70 tracking-[0.3em] text-xs mb-4">— BRAND SCALING & AI CONSULTING</p>
+        <h2 class="font-serif text-5xl md:text-6xl text-prism-gold mb-6">Real intelligence. Real growth.</h2>
+        <p class="max-w-3xl mx-auto text-lg text-prism-pearl/80 leading-relaxed">Not sure why your business isn't
+          growing as fast as it should? Our AI Advisor analyses your brand, business model, and market positioning in
+          real time — giving you actionable, professional insights before any human consultation begins.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-5 gap-6">
+        <div class="lg:col-span-3 glass-card flex flex-col h-[600px] overflow-hidden">
+          <div class="px-6 py-4 border-b border-prism-gold/10 flex items-center gap-3">
+            <div class="w-2 h-2 rounded-full bg-prism-gold animate-pulse"></div>
+            <div>
+              <p class="font-serif text-prism-gold text-lg leading-none">PRISMA</p>
+              <p class="text-[10px] tracking-widest text-prism-pearl/40">AI BRAND STRATEGIST · ONLINE</p>
+            </div>
+          </div>
+          <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+          <div class="p-4 border-t border-prism-gold/10">
+            <form id="chat-form" class="flex gap-2">
+              <input id="chat-input" type="text" placeholder="Tell PRISMA about your business..."
+                class="flex-1 bg-prism-black/60 border border-prism-pearl/10 rounded-full px-5 py-3 text-sm focus:outline-none focus:border-prism-gold/60 transition" />
+              <button type="submit"
+                class="px-5 py-3 bg-prism-gold text-prism-black rounded-full hover:scale-105 transition-transform flex items-center justify-center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2 glass-card p-6 h-[600px] overflow-y-auto relative">
+          <p class="text-prism-gold/70 tracking-[0.3em] text-xs mb-4">GRAPHICAL ANALYSIS</p>
+          <div id="analysis-placeholder"
+            class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-prism-pearl/40 bg-prism-black/20 backdrop-blur-sm z-10">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="mb-4 text-prism-gold/40">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+            <p class="text-sm">Your brand analysis dashboard will appear here once PRISMA gathers enough context.</p>
+          </div>
+          <div id="analysis-output" class="hidden relative z-0">
+            <div class="mb-6">
+              <canvas id="brandRadar"></canvas>
+            </div>
+            <div class="grid grid-cols-2 gap-3 mb-6">
+              <div class="p-4 rounded-lg bg-prism-blue/10 border border-prism-blue/30">
+                <p class="text-prism-blue text-xs tracking-widest mb-2">WORKING</p>
+                <ul id="working-list" class="text-xs text-prism-pearl/80 space-y-1"></ul>
+              </div>
+              <div class="p-4 rounded-lg bg-prism-gold/10 border border-prism-gold/30">
+                <p class="text-prism-gold text-xs tracking-widest mb-2">TO FIX</p>
+                <ul id="fix-list" class="text-xs text-prism-pearl/80 space-y-1"></ul>
+              </div>
+            </div>
+            <p class="text-prism-gold/70 tracking-[0.3em] text-xs mb-3">ROADMAP</p>
+            <ol id="roadmap-list" class="space-y-3 text-sm"></ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-12 reveal">
+        <p class="text-prism-pearl/70 mb-4 font-serif italic text-xl">Want a human strategist to take it from here?</p>
+        <a id="consult-cta" href="#"
+          class="inline-block px-10 py-4 bg-prism-blue text-prism-pearl rounded-full hover:bg-prism-blue/80 transition tracking-wide">Book
+          a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-prism-gold/10 py-16 px-6 bg-transparent">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10">
+      <div class="md:col-span-2">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-4 mb-4">
+            <img src="../-zZkCND/assets/prism-edge-logo.jpg" alt="Logo"
+              class="w-12 h-12 object-contain mix-blend-screen">
+            <h3 class="font-serif text-3xl text-prism-gold tracking-wider">PRISM EDGE</h3>
+          </div>
+          <p class="text-prism-pearl/60 text-sm max-w-md leading-relaxed">Architecting digital prestige for the brands
+            that build futures.</p>
+        </div>
+      </div>
+      <div>
+        <p class="text-prism-gold tracking-widest text-xs mb-4">NAVIGATE</p>
+        <ul class="space-y-2 text-sm text-prism-pearl/70">
+          <li><a href="#about" class="hover:text-prism-gold">About</a></li>
+          <li><a href="#story" class="hover:text-prism-gold">Story</a></li>
+          <li><a href="#websites" class="hover:text-prism-gold">Websites</a></li>
+          <li><a href="#marketing" class="hover:text-prism-gold">Marketing</a></li>
+          <li><a href="#prisma" class="hover:text-prism-gold">PRISMA AI</a></li>
+          <li><a href="/" target="_blank" class="hover:text-prism-gold font-medium mt-4 inline-block">← Back to Main
+              Site</a></li>
+          <li><a href="#" id="admin-login-link" class="hover:text-prism-gold mt-2 inline-block">Admin Portal</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-prism-gold tracking-widest text-xs mb-4">CONTACT</p>
+        <ul class="space-y-2 text-sm text-prism-pearl/70">
+          <li>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=prismmedgee@gmail.com" target="_blank"
+              class="hover:text-prism-gold flex items-center gap-2">
+              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              prismmedgee@gmail.com
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/2330248607998" target="_blank" class="hover:text-prism-gold flex items-center gap-2">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.27-2.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                </path>
+              </svg>
+              +233 248 607 998
+            </a>
+          </li>
+        </ul>
+        <div class="flex gap-3 mt-5">
+          <a href="https://www.instagram.com/" target="_blank"
+            class="w-9 h-9 rounded-full border border-prism-gold/20 flex items-center justify-center hover:border-prism-gold transition">
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+            </svg>
+          </a>
+          <a href="https://web.facebook.com/" target="_blank"
+            class="w-9 h-9 rounded-full border border-prism-gold/20 flex items-center justify-center hover:border-prism-gold transition">
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto mt-12 pt-6 border-t border-prism-gold/10 text-center text-prism-pearl/40 text-xs">
+      © 2025 Prism Labs | Prism Edge. All rights reserved.
+    </div>
+  </footer>
+
+  <div id="modal-root"></div>
+  <div id="lightbox-root"></div>
+  <div id="admin-root"></div>
+
+  <script src="../kqDJT8D/js/db.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/cursor.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/prisma_chat.js?v=3"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/hero.js"></script>
+  <script src="js/interactive_logo.js"></script>
+  <script src="js/stories.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

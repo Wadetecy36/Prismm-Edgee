@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PRISM EDGE — Templates</title>
+  <link rel="icon" type="image/png" href="assets/prism-edge-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'prism-gold': '#E8C97A',
+            'prism-pearl': '#F5F5F0',
+            'prism-black': '#0A0A0A',
+            'prism-blue': '#1A3EBF',
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="text-prism-pearl font-sans antialiased overflow-x-hidden" style="background:#000;">
+  
+  <div id="modal-root"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/templates.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Create the showcase directly on the page
+      openTemplatesShowcase();
+      
+      // Remove the close button since this is a dedicated page
+      setTimeout(() => {
+        const closeBtn = document.getElementById('tpl-close-btn');
+        if (closeBtn) closeBtn.style.display = 'none';
+        const overlay = document.getElementById('tpl-overlay');
+        if (overlay) {
+          overlay.style.position = 'relative';
+          overlay.style.background = '#000';
+          overlay.style.minHeight = '100vh';
+        }
+      }, 50);
+    });
+  </script>
+</body>
+</html>
