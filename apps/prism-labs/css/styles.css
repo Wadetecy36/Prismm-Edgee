@@ -424,7 +424,7 @@ h4,
   position: absolute;
   inset: 0;
   border: 1px solid rgba(232, 201, 122, 0.3);
-  background: url("../../-zZkCND/assets/prism-edge-logo.jpg") no-repeat center/contain;
+  background: url("../assets/prism-edge-logo.jpg") no-repeat center/contain;
   background-color: #050505;
   box-shadow: inset 0 0 50px rgba(232, 201, 122, 0.08);
   transition: box-shadow 0.3s;
