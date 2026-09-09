@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edge Products — Admin Portal</title>
+  <link rel="icon" type="image/jpeg" href="assets/prism-edge-logo.jpg">
+  <!-- Google Fonts & Tailwind CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              300: '#F4DF9B',
+              400: '#E8C97A',
+              500: '#D4AF37',
+              600: '#AA820A'
+            },
+            navy: {
+              DEFAULT: '#070D1E',
+              soft: '#0F1830',
+              border: '#1B294A'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(-45deg, #000000, #001f3f, #3a3a3a, #fcf1d1, #ffffff);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      background-attachment: fixed;
+      color: #FFFFFF;
+      min-height: 100vh;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF0C3 0%, #E8C97A 50%, #B89028 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-border-glow {
+      border: 1px solid rgba(232, 201, 122, 0.3);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+    }
+
+    .glass-card {
+      background: rgba(12, 14, 22, 0.88);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .input-field {
+      background: rgba(7, 13, 30, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #fff;
+      transition: all 0.2s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: #E8C97A;
+      box-shadow: 0 0 10px rgba(232, 201, 122, 0.25);
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #E8C97A 0%, #C49B30 100%);
+      color: #07070b;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #F4DF9B 0%, #D4AF37 100%);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .btn-gold:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .tab-btn.active {
+      border-bottom: 2px solid #E8C97A !important;
+      color: #E8C97A !important;
+      background: rgba(232, 201, 122, 0.15) !important;
+      font-weight: 700 !important;
+    }
+
+    .drop-zone {
+      border: 2px dashed rgba(232, 201, 122, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .drop-zone.over,
+    .drop-zone:hover {
+      border-color: #E8C97A;
+      background: rgba(232, 201, 122, 0.08);
+    }
+
+    /* Toast styles */
+    #toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast-msg {
+      background: rgba(12, 14, 22, 0.95);
+      border: 1px solid #E8C97A;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+  <!-- TOP APP BAR -->
+  <header class="bg-[#070D1E] border-b border-[#1B294A] px-6 py-4 flex items-center justify-between sticky top-0 z-50 backdrop-blur-md">
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="flex items-center gap-2">
+        <svg class="w-8 h-8" viewBox="0 0 30 30" fill="none">
+          <path d="M4 26L15 4L26 26H4Z" stroke="#16233F" stroke-width="2" stroke-linejoin="round" />
+          <path d="M4 26L15 4L15 26H4Z" fill="#C8850A" />
+        </svg>
+        <span class="font-display font-bold text-xl text-white tracking-tight">Edge<span class="text-[#E8C97A]">Products</span></span>
+      </a>
+      <span class="text-[10px] font-mono tracking-widest uppercase text-[#E8C97A] bg-[#E8C97A]/10 border border-[#E8C97A]/20 px-2 py-0.5 rounded">ADMIN PORTAL</span>
+    </div>
+
+    <div class="flex items-center gap-4 text-xs font-medium">
+      <a href="index.html" class="text-neutral-300 hover:text-[#E8C97A] transition flex items-center gap-1.5">
+        <i data-lucide="external-link" class="w-3.5 h-3.5"></i> View Storefront
+      </a>
+      <button onclick="lockPortal()" class="text-neutral-400 hover:text-red-400 transition flex items-center gap-1.5">
+        <i data-lucide="lock" class="w-3.5 h-3.5"></i> Lock Portal
+      </button>
+    </div>
+  </header>
+
+  <!-- LOGIN OVERLAY -->
+  <div id="login-overlay" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="glass-card gold-border-glow p-8 rounded-2xl max-w-md w-full text-center space-y-6">
+      <div class="w-16 h-16 rounded-full bg-[#E8C97A]/10 border border-[#E8C97A]/30 mx-auto flex items-center justify-center">
+        <i data-lucide="shield-check" class="w-8 h-8 text-[#E8C97A]"></i>
+      </div>
+      <div>
+        <h2 class="font-display text-2xl font-bold text-white tracking-wide">ADMIN PORTAL</h2>
+        <p class="text-xs text-neutral-400 mt-1">Enter key to access upload management</p>
+      </div>
+
+      <form onsubmit="handleLogin(event)" class="space-y-4">
+        <div>
+          <input type="password" id="pass-input" placeholder="ENTER ADMINISTRATIVE KEY" required
+            class="w-full input-field py-3 text-center text-xs tracking-widest uppercase font-mono rounded-lg">
+        </div>
+        <button type="submit"
+          class="w-full btn-gold py-3 text-xs uppercase tracking-widest font-semibold rounded-lg flex items-center justify-center gap-2">
+          <i data-lucide="key" class="w-4 h-4"></i> Unlock Portal
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD WORKSPACE -->
+  <div id="dashboard-workspace" class="hidden flex-1 flex flex-col">
+    <!-- Tabs Nav -->
+    <div class="border-b border-[#1B294A] bg-[#070D1E] px-6 flex items-center gap-2 overflow-x-auto">
+      <button onclick="switchTab('shop-upload')" id="tab-btn-shop-upload"
+        class="tab-btn active py-3.5 px-5 text-xs font-semibold uppercase tracking-widest text-neutral-300 hover:text-white transition flex items-center gap-2">
+        <i data-lucide="upload-cloud" class="w-4 h-4"></i> Shop Products Upload
+      </button>
+      <button onclick="switchTab('manage-businesses')" id="tab-btn-manage-businesses"
+        class="tab-btn py-3.5 px-5 text-xs font-semibold uppercase tracking-widest text-neutral-300 hover:text-white transition flex items-center gap-2">
+        <i data-lucide="store" class="w-4 h-4"></i> Manage Businesses / Shops
+      </button>
+      <button onclick="switchTab('store-manager')" id="tab-btn-store-manager"
+        class="tab-btn py-3.5 px-5 text-xs font-semibold uppercase tracking-widest text-neutral-300 hover:text-white transition flex items-center gap-2">
+        <i data-lucide="package" class="w-4 h-4"></i> Store Manager Catalog
+      </button>
+      <button onclick="switchTab('storefront-showcase')" id="tab-btn-storefront-showcase"
+        class="tab-btn py-3.5 px-5 text-xs font-semibold uppercase tracking-widest text-neutral-300 hover:text-white transition flex items-center gap-2">
+        <i data-lucide="grid" class="w-4 h-4"></i> Storefront Showcase
+      </button>
+    </div>
+
+    <!-- TAB 1: SHOP PRODUCTS UPLOAD -->
+    <main id="panel-shop-upload" class="flex-1 p-6 md:p-10 max-w-7xl w-full mx-auto space-y-8">
+      <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+        <div>
+          <h2 class="font-display text-2xl text-white">Shop Products & Media Upload</h2>
+          <p class="text-xs text-neutral-400 mt-1">Upload images directly to the <strong
+              class="text-[#E8C97A]">Edge Products Storefront Hero Slideshow & Catalog</strong>.</p>
+        </div>
+        <span id="shop-media-count"
+          class="px-3 py-1 rounded-full bg-[#E8C97A]/10 border border-[#E8C97A]/20 text-[#E8C97A] text-xs font-mono">0
+          items published</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Upload Form Card -->
+        <div class="glass-card p-6 rounded-xl space-y-5">
+          <h3 class="font-display text-lg text-[#E8C97A]">Add to Storefront Showcase</h3>
+
+          <div id="shop-drop-zone" onclick="document.getElementById('shop-file-input').click()"
+            class="drop-zone p-8 rounded-xl text-center cursor-pointer">
+            <div
+              class="w-14 h-14 rounded-full bg-[#E8C97A]/10 border border-[#E8C97A]/20 mx-auto mb-3 flex items-center justify-center">
+              <i data-lucide="image-plus" class="w-6 h-6 text-[#E8C97A]"></i>
+            </div>
+            <p class="text-sm text-neutral-200 font-medium mb-1">Click or Drag & Drop product images</p>
+            <p class="text-xs text-neutral-400">JPG, PNG, WEBP, GIF (up to 10MB each)</p>
+            <input type="file" id="shop-file-input" accept="image/*" multiple class="hidden"
+              onchange="handleShopFilesSelected(this.files)">
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1.5">Caption / Product Title</label>
+              <input type="text" id="shop-caption" placeholder="e.g. Masterpiece Edition — 2026 Collection"
+                class="w-full input-field py-2.5 px-3 text-xs rounded-lg">
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1.5">Price (GHS)</label>
+              <input type="number" id="shop-price" placeholder="1850" step="0.01"
+                class="w-full input-field py-2.5 px-3 text-xs rounded-lg">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1.5">Category Sector *</label>
+              <select id="shop-category" class="w-full input-field py-2.5 px-3 text-xs rounded-lg bg-[#070D1E]">
+                <option value="Electronics">🔌 Electronics</option>
+                <option value="Beauty & Cosmetics">💄 Beauty & Cosmetics</option>
+                <option value="Food Services">🍽️ Food Services</option>
+                <option value="Technical Tools">🔧 Technical Tools</option>
+                <option value="Apparel & Textiles">👔 Apparel & Textiles</option>
+                <option value="Home & Industrial">🏭 Home & Industrial</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1.5">Affiliated Boutique House</label>
+              <select id="shop-biz-owner" class="w-full input-field py-2.5 px-3 text-xs rounded-lg bg-[#070D1E]">
+                <option value="">Independent Masterpiece (None)</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="shop-files-preview-wrap" class="hidden space-y-2">
+            <label class="block text-xs uppercase tracking-widest text-neutral-400">Selected Files:</label>
+            <div id="shop-files-list" class="space-y-1.5 max-h-32 overflow-y-auto pr-1"></div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div id="shop-prog-wrap" class="hidden space-y-2">
+            <div class="flex justify-between text-xs">
+              <span id="shop-prog-text" class="text-neutral-300">Uploading...</span>
+              <span id="shop-prog-pct" class="font-mono text-[#E8C97A]">0%</span>
+            </div>
+            <div class="w-full bg-neutral-900 h-2 rounded-full overflow-hidden border border-neutral-800">
+              <div id="shop-prog-bar"
+                class="bg-gradient-to-r from-[#E8C97A] to-[#D4AF37] h-full w-0 transition-all duration-300"></div>
+            </div>
+          </div>
+
+          <button id="shop-upload-btn" onclick="uploadShopFiles()" disabled
+            class="w-full btn-gold py-3 text-xs uppercase tracking-widest rounded-lg flex items-center justify-center gap-2">
+            <i data-lucide="upload" class="w-4 h-4"></i> Publish to Shop Storefront
+          </button>
+        </div>
+
+        <!-- Live Preview Grid -->
+        <div class="space-y-6">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="font-display text-lg text-white">Live Storefront Media</h3>
+              <button onclick="loadStorefrontMedia()"
+                class="text-xs text-neutral-400 hover:text-[#E8C97A] transition flex items-center gap-1">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Refresh
+              </button>
+            </div>
+            <div id="shop-media-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-[280px] overflow-y-auto p-1">
+              <!-- Media items rendered here -->
+            </div>
+          </div>
+
+          <div class="space-y-3 pt-4 border-t border-neutral-800">
+            <div class="flex items-center justify-between">
+              <h3 class="font-display text-lg text-white">Published Catalog Listings</h3>
+              <span id="products-count" class="text-xs font-mono text-[#E8C97A]">0 products</span>
+            </div>
+            <div id="products-grid" class="space-y-3 max-h-[280px] overflow-y-auto p-1">
+              <!-- Products rendered here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- TAB 2: MANAGE BUSINESSES -->
+    <main id="panel-manage-businesses" class="hidden flex-1 p-6 md:p-10 max-w-7xl w-full mx-auto space-y-8">
+      <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+        <div>
+          <h2 class="font-display text-2xl text-white">Manage Boutique Businesses</h2>
+          <p class="text-xs text-neutral-400 mt-1">Add or manage partner boutiques in the <strong
+              class="text-[#E8C97A]">Shops Directory</strong>.</p>
+        </div>
+        <span id="biz-count"
+          class="px-3 py-1 rounded-full bg-[#E8C97A]/10 border border-[#E8C97A]/20 text-[#E8C97A] text-xs font-mono">0
+          boutiques</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Register Business Form -->
+        <form onsubmit="handleSaveBusiness(event)" class="glass-card p-6 rounded-xl space-y-4">
+          <h3 class="font-display text-lg text-[#E8C97A]">Register New Partner Boutique</h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Business Name *</label>
+              <input type="text" id="biz-name" required placeholder="e.g. Vance & Co. Fine Horology"
+                class="w-full input-field py-2.5 px-3 text-xs rounded-lg">
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Contact Details *</label>
+              <input type="text" id="biz-contact" required placeholder="e.g. +233 501 000 001"
+                class="w-full input-field py-2.5 px-3 text-xs rounded-lg">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Location *</label>
+            <input type="text" id="biz-location" required placeholder="e.g. Airport City, Accra"
+              class="w-full input-field py-2.5 px-3 text-xs rounded-lg">
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-2">Category Sectors</label>
+            <div class="grid grid-cols-2 gap-2 text-xs text-neutral-300">
+              <label class="flex items-center gap-2 p-2 rounded bg-black/40 border border-neutral-800 cursor-pointer">
+                <input type="checkbox" value="Electronics" id="cat-elec" class="accent-[#E8C97A]"> 🔌 Electronics
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded bg-black/40 border border-neutral-800 cursor-pointer">
+                <input type="checkbox" value="Beauty & Cosmetics" id="cat-beauty" class="accent-[#E8C97A]"> 💄 Beauty & Cosmetics
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded bg-black/40 border border-neutral-800 cursor-pointer">
+                <input type="checkbox" value="Food Services" id="cat-food" class="accent-[#E8C97A]"> 🍽️ Food Services
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded bg-black/40 border border-neutral-800 cursor-pointer">
+                <input type="checkbox" value="Technical Tools" id="cat-tools" class="accent-[#E8C97A]"> 🔧 Technical Tools
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded bg-black/40 border border-neutral-800 cursor-pointer">
+                <input type="checkbox" value="Apparel & Textiles" id="cat-apparel" class="accent-[#E8C97A]"> 👔 Apparel & Textiles
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded bg-black/40 border border-neutral-800 cursor-pointer">
+                <input type="checkbox" value="Home & Industrial" id="cat-industrial" class="accent-[#E8C97A]"> 🏭 Home & Industrial
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Description *</label>
+            <textarea id="biz-description" rows="3" required placeholder="Brand background and luxury offerings..."
+              class="w-full input-field py-2.5 px-3 text-xs rounded-lg"></textarea>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Logo Upload</label>
+              <input type="file" id="biz-logo" accept="image/*"
+                class="w-full text-xs text-neutral-400 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:bg-[#E8C97A] file:text-black cursor-pointer">
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Cover Image Upload</label>
+              <input type="file" id="biz-cover" accept="image/*"
+                class="w-full text-xs text-neutral-400 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:bg-[#E8C97A] file:text-black cursor-pointer">
+            </div>
+          </div>
+
+          <button type="submit"
+            class="w-full btn-gold py-3 text-xs uppercase tracking-widest rounded-lg flex items-center justify-center gap-2">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> Commit Business Listing
+          </button>
+        </form>
+
+        <!-- Live Businesses Preview Grid -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-display text-lg text-white">Active Boutique Directory</h3>
+            <button onclick="loadBusinesses()"
+              class="text-xs text-neutral-400 hover:text-[#E8C97A] transition flex items-center gap-1">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Refresh
+            </button>
+          </div>
+          <div id="biz-grid" class="space-y-3 max-h-[600px] overflow-y-auto p-1">
+            <!-- Businesses rendered here -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- TAB 3: STORE MANAGER CATALOG -->
+    <main id="panel-store-manager" class="hidden flex-1 p-6 md:p-10 max-w-7xl w-full mx-auto space-y-8">
+      <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+        <div>
+          <h2 class="font-display text-2xl text-white">Store Catalog Manager</h2>
+          <p class="text-xs text-neutral-400 mt-1">Register products to display in the main Edge Products catalog grid.</p>
+        </div>
+        <span id="products-count"
+          class="px-3 py-1 rounded-full bg-[#E8C97A]/10 border border-[#E8C97A]/20 text-[#E8C97A] text-xs font-mono">0 products</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Add Product Form -->
+        <form onsubmit="handleSaveProduct(event)" class="glass-card p-6 rounded-xl space-y-4">
+          <h3 class="font-display text-lg text-[#E8C97A]">Add Catalog Item</h3>
+
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Product Title *</label>
+            <input type="text" id="prod-name" required placeholder="e.g. Wireless Charging Stand"
+              class="w-full input-field py-2.5 px-3 text-xs rounded-lg">
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Price (GHS) *</label>
+              <input type="number" id="prod-price" required step="0.01" placeholder="1250"
+                class="w-full input-field py-2.5 px-3 text-xs rounded-lg">
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Stock Quantity *</label>
+              <input type="number" id="prod-stock" required value="10" min="1"
+                class="w-full input-field py-2.5 px-3 text-xs rounded-lg">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Category Sector *</label>
+              <select id="prod-category" class="w-full input-field py-2.5 px-3 text-xs rounded-lg bg-[#070D1E]">
+                <option value="Electronics">🔌 Electronics</option>
+                <option value="Beauty & Cosmetics">💄 Beauty & Cosmetics</option>
+                <option value="Food Services">🍽️ Food Services</option>
+                <option value="Technical Tools">🔧 Technical Tools</option>
+                <option value="Apparel & Textiles">👔 Apparel & Textiles</option>
+                <option value="Home & Industrial">🏭 Home & Industrial</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Affiliated Boutique</label>
+              <select id="prod-biz-owner" class="w-full input-field py-2.5 px-3 text-xs rounded-lg bg-[#070D1E]">
+                <option value="">Independent Vendor (None)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Description</label>
+            <textarea id="prod-description" rows="3" placeholder="Product details, specifications..."
+              class="w-full input-field py-2.5 px-3 text-xs rounded-lg"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Images Upload</label>
+            <input type="file" id="prod-images" accept="image/*" multiple
+              class="w-full text-xs text-neutral-400 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:bg-[#E8C97A] file:text-black cursor-pointer">
+          </div>
+
+          <button type="submit"
+            class="w-full btn-gold py-3 text-xs uppercase tracking-widest rounded-lg flex items-center justify-center gap-2">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> Save &amp; Publish Product
+          </button>
+        </form>
+
+        <!-- Live Products Grid -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-display text-lg text-white">Active Product Listings</h3>
+            <button onclick="loadProducts()"
+              class="text-xs text-neutral-400 hover:text-[#E8C97A] transition flex items-center gap-1">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Refresh
+            </button>
+          </div>
+          <div id="products-grid" class="space-y-3 max-h-[600px] overflow-y-auto p-1">
+            <!-- Products rendered here -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- TAB 4: STOREFRONT SHOWCASE -->
+    <main id="panel-storefront-showcase" class="hidden flex-1 p-6 md:p-10 max-w-7xl w-full mx-auto space-y-8">
+      <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+        <div>
+          <h2 class="font-display text-2xl text-white">Storefront Showcase Overview</h2>
+          <p class="text-xs text-neutral-400 mt-1">Review live active images and products published across the storefront.</p>
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-xl space-y-4">
+        <h3 class="font-display text-lg text-[#E8C97A]">Active Published Assets</h3>
+        <div id="showcase-all-media" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-h-[600px] overflow-y-auto p-1">
+          <!-- All assets rendered here -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script>
+    let API = '/api/data';
+    const shopSyncChannel = new BroadcastChannel('prism_shop_sync');
+
+    function notifyShopUpdate() {
+      try { shopSyncChannel.postMessage({ type: 'PRISM_SHOP_UPDATED', ts: Date.now() }); } catch (_) {}
+      try { localStorage.setItem('prism_shop_sync', Date.now().toString()); } catch (_) {}
+    }
+
+    // Unlimited Storage Engine (IndexedDB + API + LocalStorage)
+    const DB_NAME = 'prism_edge_db';
+    const DB_VERSION = 2;
+
+    function getIDB() {
+      return new Promise((resolve) => {
+        if (!window.indexedDB) return resolve(null);
+        const req = indexedDB.open(DB_NAME, DB_VERSION);
+        req.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          ['products', 'businesses', 'customers', 'orders', 'storefrontMedia', 'adminConfig'].forEach(store => {
+            if (!db.objectStoreNames.contains(store)) {
+              db.createObjectStore(store, { keyPath: 'id' });
+            }
+          });
+        };
+        req.onsuccess = (e) => resolve(e.target.result);
+        req.onerror = () => resolve(null);
+      });
+    }
+
+    async function idbGetAll(storeName) {
+      const db = await getIDB();
+      if (!db) return null;
+      return new Promise((resolve) => {
+        try {
+          const tx = db.transaction(storeName, 'readonly');
+          const req = tx.objectStore(storeName).getAll();
+          req.onsuccess = () => resolve(req.result || []);
+          req.onerror = () => resolve(null);
+        } catch (_) { resolve(null); }
+      });
+    }
+
+    async function idbSave(storeName, item) {
+      const db = await getIDB();
+      if (!db) return false;
+      return new Promise((resolve) => {
+        try {
+          const tx = db.transaction(storeName, 'readwrite');
+          const req = tx.objectStore(storeName).put(item);
+          req.onsuccess = () => resolve(true);
+          req.onerror = () => resolve(false);
+        } catch (_) { resolve(false); }
+      });
+    }
+
+    async function idbDelete(storeName, id) {
+      const db = await getIDB();
+      if (!db) return false;
+      return new Promise((resolve) => {
+        try {
+          const tx = db.transaction(storeName, 'readwrite');
+          const req = tx.objectStore(storeName).delete(id);
+          req.onsuccess = () => resolve(true);
+          req.onerror = () => resolve(false);
+        } catch (_) { resolve(false); }
+      });
+    }
+
+    let selectedShopFiles = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      // Mandatory password entry everytime
+      sessionStorage.removeItem('admin_authenticated');
+      document.getElementById('login-overlay').classList.remove('hidden');
+      document.getElementById('dashboard-workspace').classList.add('hidden');
+
+      // Setup drop zone
+      const dz = document.getElementById('shop-drop-zone');
+      if (dz) {
+        ['dragenter', 'dragover'].forEach(e => dz.addEventListener(e, (ev) => { ev.preventDefault(); dz.classList.add('over'); }));
+        ['dragleave', 'drop'].forEach(e => dz.addEventListener(e, (ev) => { ev.preventDefault(); dz.classList.remove('over'); }));
+        dz.addEventListener('drop', (ev) => {
+          if (ev.dataTransfer.files.length) {
+            handleShopFilesSelected(ev.dataTransfer.files);
+          }
+        });
+      }
+    });
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const pass = document.getElementById('pass-input').value;
+      if (pass === 'PrismAdmin') {
+        sessionStorage.setItem('admin_authenticated', 'true');
+        document.getElementById('login-overlay').classList.add('hidden');
+        document.getElementById('dashboard-workspace').classList.remove('hidden');
+        loadAllData();
+        showToast('✓ Authentication Successful');
+      } else {
+        showToast('Invalid Administrative Key', 'err');
+      }
+    }
+
+    function lockPortal() {
+      sessionStorage.removeItem('admin_authenticated');
+      document.getElementById('login-overlay').classList.remove('hidden');
+      document.getElementById('dashboard-workspace').classList.add('hidden');
+      showToast('Portal Locked');
+    }
+
+    function switchTab(tabId) {
+      ['shop-upload', 'manage-businesses', 'store-manager', 'storefront-showcase'].forEach(t => {
+        const panel = document.getElementById(`panel-${t}`);
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (panel) panel.classList.add('hidden');
+        if (btn) btn.classList.remove('active');
+      });
+
+      const activePanel = document.getElementById(`panel-${tabId}`);
+      const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+      if (activePanel) activePanel.classList.remove('hidden');
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (tabId === 'shop-upload') { loadStorefrontMedia(); loadBusinesses(); }
+      if (tabId === 'manage-businesses') loadBusinesses();
+      if (tabId === 'store-manager') loadProducts();
+      if (tabId === 'storefront-showcase') loadShowcaseAll();
+    }
+
+    function showToast(msg, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast-msg';
+      if (type === 'err') toast.style.borderColor = '#ef4444';
+      toast.textContent = msg;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+
+    // Storage API Helpers (IndexedDB + API + LocalStorage)
+    async function fetchAdminItems(storeName) {
+      // 1. Server API
+      try {
+        let res = await fetch(`${API}/${storeName}`).catch(() => null);
+        if (!res || !res.ok) {
+          res = await fetch(`http://localhost:8000/api/data/${storeName}`).catch(() => null);
+        }
+        if (res && res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            for (const it of data) {
+              if (it && it.id) await idbSave(storeName, it);
+            }
+          }
+        }
+      } catch (_) {}
+
+      // 2. IndexedDB (Primary Truth)
+      const items = await idbGetAll(storeName);
+      if (items && items.length > 0) return items;
+
+      // 3. LocalStorage
+      if (storeName !== 'products' && storeName !== 'storefrontMedia') {
+        try {
+          return JSON.parse(localStorage.getItem(storeName) || '[]');
+        } catch (_) {}
+      }
+      return [];
+    }
+
+    async function saveAdminItem(storeName, item) {
+      // 1. IndexedDB (Supports unlimited storage, zero 5MB limits)
+      await idbSave(storeName, item);
+
+      // 2. LocalStorage (SKIP for large media stores)
+      if (storeName !== 'products' && storeName !== 'storefrontMedia') {
+        try {
+          let items = JSON.parse(localStorage.getItem(storeName) || '[]');
+          const idx = items.findIndex(it => String(it.id) === String(item.id));
+          if (idx !== -1) items[idx] = item; else items.push(item);
+          localStorage.setItem(storeName, JSON.stringify(items));
+        } catch (_) {}
+      }
+
+      // 3. Server API
+      try {
+        let res = await fetch(`${API}/${storeName}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(item)
+        }).catch(() => null);
+
+        if (!res || !res.ok) {
+          await fetch(`http://localhost:8000/api/data/${storeName}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(item)
+          }).catch(() => null);
+        }
+      } catch (_) {}
+
+      return true;
+    }
+
+    async function deleteAdminItem(storeName, id) {
+      // 1. IndexedDB
+      await idbDelete(storeName, id);
+
+      // 2. LocalStorage (SKIP for large media stores)
+      if (storeName !== 'products' && storeName !== 'storefrontMedia') {
+        try {
+          let items = JSON.parse(localStorage.getItem(storeName) || '[]');
+          items = items.filter(it => String(it.id) !== String(id));
+          localStorage.setItem(storeName, JSON.stringify(items));
+        } catch (_) {}
+      }
+
+      // 3. Server API
+      try {
+        await fetch(`${API}/${storeName}/${id}`, { method: 'DELETE' }).catch(() => null);
+        await fetch(`http://localhost:8000/api/data/${storeName}/${id}`, { method: 'DELETE' }).catch(() => null);
+      } catch (_) {}
+    }
+
+    function compressImageFile(file, maxWidth = 800, maxHeight = 800, quality = 0.75) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let w = img.width;
+            let h = img.height;
+            if (w > maxWidth || h > maxHeight) {
+              if (w > h) { h = Math.round((h * maxWidth) / w); w = maxWidth; }
+              else { w = Math.round((w * maxHeight) / h); h = maxHeight; }
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          };
+          img.onerror = () => resolve(e.target.result);
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function loadAllData() {
+      loadStorefrontMedia();
+      loadBusinesses();
+      loadProducts();
+    }
+
+    // TAB 1: Shop Products Upload
+    function handleShopFilesSelected(files) {
+      selectedShopFiles = Array.from(files);
+      const wrap = document.getElementById('shop-files-preview-wrap');
+      const list = document.getElementById('shop-files-list');
+      const btn = document.getElementById('shop-upload-btn');
+
+      if (!selectedShopFiles.length) {
+        wrap.classList.add('hidden');
+        btn.disabled = true;
+        return;
+      }
+
+      wrap.classList.remove('hidden');
+      btn.disabled = false;
+      list.innerHTML = selectedShopFiles.map(f => `
+        <div class="flex items-center justify-between p-2 rounded bg-black/40 text-xs text-neutral-300">
+          <span class="truncate">${f.name}</span>
+          <span class="font-mono text-[10px] text-neutral-500">${(f.size / 1024).toFixed(1)} KB</span>
+        </div>
+      `).join('');
+    }
+
+    async function uploadShopFiles() {
+      if (!selectedShopFiles.length) return;
+      const btn = document.getElementById('shop-upload-btn');
+      const progWrap = document.getElementById('shop-prog-wrap');
+      const progBar = document.getElementById('shop-prog-bar');
+      const progPct = document.getElementById('shop-prog-pct');
+      const progText = document.getElementById('shop-prog-text');
+      const caption = document.getElementById('shop-caption').value.trim();
+      const price = parseFloat(document.getElementById('shop-price').value) || 1850;
+      const category = document.getElementById('shop-category').value || 'Electronics';
+      const bizId = document.getElementById('shop-biz-owner').value || null;
+
+      btn.disabled = true;
+      progWrap.classList.remove('hidden');
+
+      let done = 0;
+      for (const f of selectedShopFiles) {
+        try {
+          const pct = Math.round(((done + 1) / selectedShopFiles.length) * 100);
+          progBar.style.width = pct + '%';
+          progPct.textContent = pct + '%';
+          progText.textContent = `Uploading ${done + 1}/${selectedShopFiles.length}: ${f.name}`;
+
+          const dataUrl = await compressImageFile(f);
+
+          const item = {
+            id: `shop_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+            type: 'image',
+            url: dataUrl,
+            src: dataUrl,
+            caption: caption || f.name,
+            ts: Date.now(),
+            businessId: bizId,
+            price: price,
+            source: 'edge-admin-portal'
+          };
+
+          await saveAdminItem('storefrontMedia', item);
+
+          const prodItem = {
+            id: `prod_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+            name: caption || f.name.replace(/\.[^/.]+$/, ''),
+            description: 'Curated luxury item added via Edge Admin.',
+            price: price,
+            stock: 10,
+            sold: 0,
+            category: category,
+            businessId: bizId,
+            images: [dataUrl],
+            visible: true,
+            createdAt: new Date().toISOString()
+          };
+          await saveAdminItem('products', prodItem);
+
+        } catch (err) {
+          showToast(`Failed to upload ${f.name}`, 'err');
+        }
+        done++;
+      }
+
+      progBar.style.width = '100%';
+      progPct.textContent = '100%';
+      progText.textContent = `Done! Published ${done} file(s).`;
+      showToast(`✓ Published ${done} image(s) to Storefront!`);
+      notifyShopUpdate();
+
+      setTimeout(() => {
+        progWrap.classList.add('hidden');
+        document.getElementById('shop-files-preview-wrap').classList.add('hidden');
+        document.getElementById('shop-caption').value = '';
+        selectedShopFiles = [];
+        btn.disabled = true;
+        loadStorefrontMedia();
+      }, 1000);
+    }
+
+    async function loadStorefrontMedia() {
+      try {
+        const data = await fetchAdminItems('storefrontMedia');
+        document.getElementById('shop-media-count').textContent = `${data.length} items published`;
+
+        const grid = document.getElementById('shop-media-grid');
+        if (!data.length) {
+          grid.innerHTML = '<p class="text-xs text-neutral-500 col-span-full text-center py-6">No shop media published yet.</p>';
+          return;
+        }
+
+        grid.innerHTML = data.map(m => `
+          <div class="relative group aspect-square rounded-lg overflow-hidden border border-neutral-800 bg-black">
+            <img src="${m.url || m.src}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2 p-2 text-center">
+              <button onclick="deleteStorefrontMedia('${m.id}')" class="p-2 rounded-full bg-red-500/80 text-white hover:bg-red-600 transition">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        `).join('');
+        lucide.createIcons();
+      } catch (e) {
+        showToast('Error loading media', 'err');
+      }
+    }
+
+    async function deleteStorefrontMedia(id) {
+      if (!confirm('Remove this media item from storefront?')) return;
+      try {
+        await deleteAdminItem('storefrontMedia', id);
+        showToast('Media item deleted');
+        notifyShopUpdate();
+        loadStorefrontMedia();
+      } catch (e) {
+        showToast('Error deleting media', 'err');
+      }
+    }
+
+    // TAB 2: Manage Businesses
+    async function handleSaveBusiness(e) {
+      e.preventDefault();
+      const name = document.getElementById('biz-name').value.trim();
+      const contact = document.getElementById('biz-contact').value.trim();
+      const location = document.getElementById('biz-location').value.trim();
+      const desc = document.getElementById('biz-description').value.trim();
+
+      const categories = [];
+      if (document.getElementById('cat-elec').checked) categories.push('Electronics');
+      if (document.getElementById('cat-beauty').checked) categories.push('Beauty & Cosmetics');
+      if (document.getElementById('cat-food').checked) categories.push('Food Services');
+      if (document.getElementById('cat-tools').checked) categories.push('Technical Tools');
+      if (document.getElementById('cat-apparel') && document.getElementById('cat-apparel').checked) categories.push('Apparel & Textiles');
+      if (document.getElementById('cat-industrial') && document.getElementById('cat-industrial').checked) categories.push('Home & Industrial');
+
+      const logoInput = document.getElementById('biz-logo');
+      const coverInput = document.getElementById('biz-cover');
+
+      let logoUrl = 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=150';
+      let coverUrl = 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1200';
+
+      if (logoInput.files[0]) {
+        logoUrl = await compressImageFile(logoInput.files[0], 300, 300, 0.8);
+      }
+      if (coverInput.files[0]) {
+        coverUrl = await compressImageFile(coverInput.files[0], 1200, 600, 0.75);
+      }
+
+      const newBiz = {
+        id: `biz_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+        name,
+        contact,
+        location,
+        description: desc,
+        categories: categories.length ? categories : ['General'],
+        logo: logoUrl,
+        coverImage: coverUrl,
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        await saveAdminItem('businesses', newBiz);
+        showToast('✓ Business registered in directory!');
+        notifyShopUpdate();
+        e.target.reset();
+        loadBusinesses();
+      } catch (err) {
+        showToast('Error saving business', 'err');
+      }
+    }
+
+    async function loadBusinesses() {
+      try {
+        const data = await fetchAdminItems('businesses');
+        document.getElementById('biz-count').textContent = `${data.length} boutiques`;
+
+        const optionsHtml = '<option value="">Independent Vendor (None)</option>' +
+          data.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
+
+        const select1 = document.getElementById('shop-biz-owner');
+        const select2 = document.getElementById('prod-biz-owner');
+        if (select1) select1.innerHTML = optionsHtml;
+        if (select2) select2.innerHTML = optionsHtml;
+
+        const grid = document.getElementById('biz-grid');
+        if (!data.length) {
+          grid.innerHTML = '<p class="text-xs text-neutral-500 text-center py-6">No businesses listed yet.</p>';
+          return;
+        }
+
+        grid.innerHTML = data.map(b => `
+          <div class="glass-card p-4 rounded-xl flex items-center justify-between border border-neutral-800">
+            <div class="flex items-center gap-3">
+              <img src="${b.logo}" class="w-10 h-10 rounded-full border border-neutral-700 object-cover bg-black">
+              <div>
+                <h4 class="text-sm font-semibold text-white">${b.name}</h4>
+                <p class="text-[11px] text-neutral-400">${b.location} • ${b.categories ? b.categories.join(', ') : ''}</p>
+              </div>
+            </div>
+            <button onclick="deleteBusiness('${b.id}')" class="p-2 text-neutral-400 hover:text-red-400 transition">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+        `).join('');
+        lucide.createIcons();
+      } catch (e) {
+        showToast('Error loading businesses', 'err');
+      }
+    }
+
+    async function deleteBusiness(id) {
+      if (!confirm('Remove this business partner?')) return;
+      try {
+        await deleteAdminItem('businesses', id);
+        showToast('Business removed');
+        notifyShopUpdate();
+        loadBusinesses();
+      } catch (e) {
+        showToast('Error deleting business', 'err');
+      }
+    }
+
+    // TAB 3: Store Catalog Products
+    async function handleSaveProduct(e) {
+      e.preventDefault();
+      const name = document.getElementById('prod-name').value.trim();
+      const price = parseFloat(document.getElementById('prod-price').value);
+      const stock = parseInt(document.getElementById('prod-stock').value) || 10;
+      const category = document.getElementById('prod-category').value;
+      const bizId = document.getElementById('prod-biz-owner').value;
+      const desc = document.getElementById('prod-description').value.trim();
+      const imagesInput = document.getElementById('prod-images');
+
+      let images = [];
+      if (imagesInput.files.length) {
+        for (const file of Array.from(imagesInput.files)) {
+          images.push(await compressImageFile(file, 800, 800, 0.75));
+        }
+      } else {
+        images.push('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600');
+      }
+
+      const newProduct = {
+        id: `prod_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+        name,
+        description: desc || 'Catalog Product',
+        price,
+        stock,
+        sold: 0,
+        category,
+        businessId: bizId || null,
+        images,
+        visible: true,
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        await saveAdminItem('products', newProduct);
+        showToast('✓ Product published to catalog!');
+        notifyShopUpdate();
+        e.target.reset();
+        loadProducts();
+      } catch (err) {
+        showToast('Error saving product', 'err');
+      }
+    }
+
+    async function loadProducts() {
+      try {
+        const data = await fetchAdminItems('products');
+        document.getElementById('products-count').textContent = `${data.length} products`;
+
+        const grid = document.getElementById('products-grid');
+        if (!data.length) {
+          grid.innerHTML = '<p class="text-xs text-neutral-500 text-center py-6">No products listed in catalog yet.</p>';
+          return;
+        }
+
+        grid.innerHTML = data.map(p => `
+          <div class="glass-card p-4 rounded-xl flex items-center justify-between border border-neutral-800">
+            <div class="flex items-center gap-3">
+              <img src="${(p.images && p.images[0]) || 'assets/no-goods-placeholder.jpg'}" class="w-12 h-12 rounded border border-neutral-700 object-cover bg-black">
+              <div>
+                <h4 class="text-sm font-semibold text-white">${p.name}</h4>
+                <p class="text-[11px] text-neutral-400">GHS ${(p.price || 0).toLocaleString()} • ${p.category || 'General'} • Stock: ${p.stock ?? 10}</p>
+              </div>
+            </div>
+            <button onclick="deleteProduct('${p.id}')" class="p-2 text-neutral-400 hover:text-red-400 transition">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+        `).join('');
+        lucide.createIcons();
+      } catch (e) {
+        showToast('Error loading products', 'err');
+      }
+    }
+
+    async function deleteProduct(id) {
+      if (!confirm('Remove this product listing?')) return;
+      try {
+        await deleteAdminItem('products', id);
+        showToast('Product removed');
+        notifyShopUpdate();
+        loadProducts();
+      } catch (e) {
+        showToast('Error deleting product', 'err');
+      }
+    }
+
+    // TAB 4: Showcase All
+    async function loadShowcaseAll() {
+      const container = document.getElementById('showcase-all-media');
+      if (!container) return;
+      container.innerHTML = '<p class="text-xs text-neutral-500 col-span-full text-center py-6">Loading all published assets...</p>';
+
+      const media = await fetchAdminItems('storefrontMedia');
+      const products = await fetchAdminItems('products');
+
+      let all = [];
+      media.forEach(m => all.push({ img: m.url || m.src, title: m.caption || 'Storefront Image', tag: 'Shop Media' }));
+      products.forEach(p => {
+        if (p.images) p.images.forEach(i => all.push({ img: i, title: p.name, tag: p.category || 'Product' }));
+      });
+
+      if (!all.length) {
+        container.innerHTML = '<p class="text-xs text-neutral-500 col-span-full text-center py-6">No assets published yet.</p>';
+        return;
+      }
+
+      container.innerHTML = all.map(a => `
+        <div class="relative group aspect-square rounded-lg overflow-hidden border border-neutral-800 bg-black">
+          <img src="${a.img}" class="w-full h-full object-cover" onerror="this.src='assets/no-goods-placeholder.jpg'">
+          <div class="absolute bottom-0 inset-x-0 bg-black/70 p-2 text-center">
+            <p class="text-[11px] font-semibold text-white truncate">${a.title}</p>
+            <span class="text-[9px] text-[#E8C97A] font-mono">${a.tag}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

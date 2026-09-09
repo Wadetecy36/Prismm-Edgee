@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edge Products — Full Gallery</title>
+  <link rel="icon" type="image/jpeg" href="assets/prism-edge-logo.jpg">
+
+  <!-- Google Fonts: Space Grotesk, Inter, IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Vector Icons Library -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#07070b',
+              card: '#111118',
+              border: '#1a1a2a',
+              gold: '#E8C97A'
+            },
+            gold: {
+              100: '#FAF2D7',
+              200: '#F5E6B8',
+              300: '#F0D899',
+              400: '#E8C97A',
+              500: '#D4AF37',
+              600: '#AA820A',
+              700: '#806107'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Base styles & Prism Labs Gradient */
+    :root {
+      --gold-primary: #E8C97A;
+      --gold-hover: #F4DF9B;
+      --bg-dark: #07070b;
+      --card-dark: #111118;
+      --border-dark: #1a1a2a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(-45deg, #000000, #001f3f, #3a3a3a, #fcf1d1, #ffffff);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      background-attachment: fixed;
+      color: #e5e5e5;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #000000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #E8C97A;
+      border-radius: 4px;
+    }
+
+    /* Custom Animations */
+    .fade-in-up {
+      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .glass-card {
+      background: rgba(12, 14, 22, 0.88);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(232, 201, 122, 0.5);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF0C3 0%, #E8C97A 50%, #B89028 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .lightbox-backdrop {
+      background-color: rgba(7, 7, 11, 0.95);
+      backdrop-filter: blur(20px);
+    }
+  </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+  <!-- ================= TOP NAVIGATION BAR ================= -->
+  <header class="sticky top-0 z-40 bg-[#070D1E] border-b border-[#1B294A] backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo & Title -->
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="assets/prism-edge-logo.jpg" alt="Logo" class="w-9 h-9 object-contain rounded border border-gold-400/30 group-hover:border-gold-400 transition" onerror="this.style.display='none'">
+          <div class="flex flex-col">
+            <span class="font-display font-bold text-xl tracking-wider text-white">EDGE <span class="text-gold-400">PRODUCTS</span></span>
+            <span class="text-[10px] font-mono text-gold-400 uppercase tracking-widest -mt-1">Full Showcase Gallery</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Header Action Controls -->
+      <div class="flex items-center gap-3 sm:gap-4">
+        <button onclick="fetchAndRenderGallery(true)" id="refresh-btn" class="p-2.5 rounded-lg bg-black/40 border border-neutral-800 text-neutral-300 hover:text-gold-400 hover:border-gold-400/40 transition flex items-center gap-2 text-xs font-mono">
+          <i data-lucide="refresh-cw" class="w-4 h-4" id="refresh-icon"></i>
+          <span class="hidden sm:inline">Refresh Sync</span>
+        </button>
+
+        <a href="index.html" onclick="handleStoreNavigation(event)" class="px-4 py-2.5 rounded-lg bg-black/40 border border-neutral-800 text-neutral-300 hover:text-white hover:border-neutral-700 transition flex items-center gap-2 text-xs font-medium">
+          <i data-lucide="shopping-bag" class="w-4 h-4 text-gold-400"></i>
+          <span>Storefront</span>
+        </a>
+
+        <a href="admin.html" onclick="handleAdminNavigation(event)" class="px-4 py-2.5 rounded-lg bg-gold-400 text-black font-semibold hover:bg-gold-300 transition flex items-center gap-2 text-xs uppercase tracking-wider shadow-lg shadow-gold-400/20">
+          <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Admin Upload</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO HEADER SECTION ================= -->
+  <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-800 pb-8">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-2 h-2 rounded-full bg-gold-400 animate-pulse"></span>
+          <span class="text-xs font-mono uppercase tracking-widest text-gold-400">Shop Products Upload Showcase</span>
+        </div>
+        <h1 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
+          PRISM PRODUCTS — <span class="gold-gradient-text">GALLERY</span>
+        </h1>
+        <p class="text-sm text-neutral-400 mt-2 max-w-xl">
+          Browse every single item, visual asset, and brand photo published directly from the Admin Portal's Shop Products Upload tab.
+        </p>
+      </div>
+
+      <!-- Stats counter badge -->
+      <div class="flex items-center gap-4 bg-black/40 border border-neutral-800 px-5 py-3 rounded-xl self-start md:self-auto">
+        <div class="p-2 rounded-lg bg-gold-400/10 text-gold-400">
+          <i data-lucide="images" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <div class="text-2xl font-bold font-mono text-white" id="total-count-badge">0</div>
+          <div class="text-[11px] font-mono text-neutral-400 uppercase tracking-wider">Published Assets</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search & Filter Controls Bar -->
+    <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="relative w-full sm:w-80">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400"></i>
+        <input type="text" id="gallery-search" placeholder="Search gallery by title..." oninput="handleSearch(this.value)" class="w-full bg-black/60 border border-neutral-800 rounded-lg pl-10 pr-4 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-gold-400 transition">
+      </div>
+
+      <div class="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
+        <button onclick="setFilter('all')" data-filter="all" class="gallery-filter-btn active px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition bg-gold-400 text-black">All Uploads</button>
+        <button onclick="setFilter('shopMedia')" data-filter="shopMedia" class="gallery-filter-btn px-4 py-2 rounded-lg text-xs font-medium uppercase tracking-wider transition bg-black/40 border border-neutral-800 text-neutral-400 hover:text-white">Shop Media</button>
+        <button onclick="setFilter('catalog')" data-filter="catalog" class="gallery-filter-btn px-4 py-2 rounded-lg text-xs font-medium uppercase tracking-wider transition bg-black/40 border border-neutral-800 text-neutral-400 hover:text-white">Catalog Products</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MAIN GALLERY CONTAINER ================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+    <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      <!-- Dynamic grid cards rendered here -->
+    </div>
+
+    <!-- Empty State Container -->
+    <div id="empty-state" class="hidden flex-col items-center justify-center text-center py-24 glass-card rounded-2xl p-8 max-w-xl mx-auto">
+      <div class="w-16 h-16 rounded-full bg-gold-400/10 border border-gold-400/20 flex items-center justify-center text-gold-400 mb-4">
+        <i data-lucide="image-off" class="w-8 h-8"></i>
+      </div>
+      <h3 class="font-display font-bold text-xl text-white mb-2">No Images Uploaded Yet</h3>
+      <p class="text-xs text-neutral-400 max-w-md mb-6 leading-relaxed">
+        Publish product images from the Admin Portal's <strong class="text-gold-400">Shop Products Upload</strong> tab to populate this full-screen gallery.
+      </p>
+      <a href="admin.html" onclick="handleAdminNavigation(event)" class="px-6 py-3 rounded-lg bg-gold-400 text-black font-semibold text-xs uppercase tracking-wider hover:bg-gold-300 transition flex items-center gap-2 shadow-lg shadow-gold-400/20">
+        <i data-lucide="upload" class="w-4 h-4"></i>
+        <span>Go to Admin Upload</span>
+      </a>
+    </div>
+  </main>
+
+  <!-- ================= FULLSCREEN LIGHTBOX MODAL ================= -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 hidden lightbox-backdrop flex items-center justify-center p-4 sm:p-6" onclick="closeLightbox(event)">
+    <div class="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute -top-12 right-0 sm:top-2 sm:-right-12 text-neutral-400 hover:text-white p-2 rounded-full bg-black/60 transition">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <div class="w-full h-full flex flex-col items-center">
+        <div class="relative max-h-[75vh] w-full flex items-center justify-center overflow-hidden rounded-xl bg-black/80 border border-neutral-800">
+          <img id="lightbox-img" src="" alt="" class="max-h-[75vh] max-w-full object-contain rounded-xl">
+        </div>
+
+        <div class="mt-4 text-center max-w-2xl px-4">
+          <h4 id="lightbox-title" class="font-display font-bold text-lg text-white"></h4>
+          <p id="lightbox-sub" class="text-xs font-mono text-gold-400 mt-1"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="mt-auto bg-[#070D1E] border-t border-[#1B294A] py-8">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-neutral-400">
+      <p>© 2026 Edge Products. All rights reserved. Part of the Prism Edge Ecosystem.</p>
+    </div>
+  </footer>
+
+  <!-- ================= LOGIC SCRIPT ================= -->
+  <script>
+    let API_BASE = '/api/data';
+    const DB_NAME = 'prism_edge_db';
+    const DB_VERSION = 2;
+
+    let galleryState = {
+      allItems: [],
+      filteredItems: [],
+      searchQuery: '',
+      activeFilter: 'all'
+    };
+
+    function getIDB() {
+      return new Promise((resolve) => {
+        if (!window.indexedDB) return resolve(null);
+        const req = indexedDB.open(DB_NAME, DB_VERSION);
+        req.onsuccess = (e) => resolve(e.target.result);
+        req.onerror = () => resolve(null);
+      });
+    }
+
+    async function idbGetAll(storeName) {
+      const db = await getIDB();
+      if (!db) return [];
+      return new Promise((resolve) => {
+        try {
+          const tx = db.transaction(storeName, 'readonly');
+          const req = tx.objectStore(storeName).getAll();
+          req.onsuccess = () => resolve(req.result || []);
+          req.onerror = () => resolve([]);
+        } catch (_) { resolve([]); }
+      });
+    }
+
+    function handleStoreNavigation(e) {
+      if (e) e.preventDefault();
+      window.location.href = (window.location.protocol === 'file:') ? 'index.html' : '/shop/';
+    }
+
+    function handleAdminNavigation(e) {
+      if (e) e.preventDefault();
+      window.location.href = (window.location.protocol === 'file:') ? 'admin.html' : '/shop/admin.html';
+    }
+
+    function extractImageUrl(item) {
+      if (!item) return null;
+      if (item.src && typeof item.src === 'string' && item.src.trim()) return item.src.trim();
+      if (item.url && typeof item.url === 'string' && item.url.trim()) return item.url.trim();
+      if (item.images && Array.isArray(item.images) && item.images.length > 0) return item.images[0].trim();
+      return null;
+    }
+
+    async function fetchCollectionData(storeName) {
+      let serverData = [];
+      // 1. Try Server API to fetch latest
+      try {
+        const ts = Date.now();
+        let res = await fetch(`${API_BASE}/${storeName}?_t=${ts}`).catch(() => null);
+        if (!res || !res.ok) {
+          res = await fetch(`http://localhost:8000/api/data/${storeName}?_t=${ts}`).catch(() => null);
+        }
+        if (res && res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) serverData = data;
+        }
+      } catch (_) {}
+
+      if (serverData.length > 0) return serverData;
+
+      // 2. Try IndexedDB (Primary truth)
+      const idbData = await idbGetAll(storeName);
+      if (idbData && idbData.length > 0) return idbData;
+
+      // 3. Try localStorage (Fallback for small data)
+      if (storeName !== 'products' && storeName !== 'storefrontMedia') {
+        try {
+          const stored = localStorage.getItem(storeName);
+          if (stored) return JSON.parse(stored) || [];
+        } catch (_) {}
+      }
+
+      return [];
+    }
+
+    async function fetchAndRenderGallery(showSpinner = false) {
+      const refreshIcon = document.getElementById('refresh-icon');
+      if (showSpinner && refreshIcon) refreshIcon.classList.add('animate-spin');
+
+      const [mediaList, productsList] = await Promise.all([
+        fetchCollectionData('storefrontMedia'),
+        fetchCollectionData('products')
+      ]);
+
+      let items = [];
+
+      mediaList.forEach(m => {
+        const img = extractImageUrl(m);
+        if (img) {
+          items.push({
+            id: m.id || `m_${Math.random()}`,
+            type: 'shopMedia',
+            title: m.caption || m.name || 'Uploaded Shop Product',
+            price: m.price ? `GHS ${m.price.toLocaleString()}` : null,
+            img: img,
+            raw: m
+          });
+        }
+      });
+
+      productsList.forEach(p => {
+        const img = extractImageUrl(p);
+        if (img && !items.some(i => i.img === img)) {
+          items.push({
+            id: p.id || `p_${Math.random()}`,
+            type: 'catalog',
+            title: p.name || 'Catalog Product',
+            price: p.price ? `GHS ${p.price.toLocaleString()}` : null,
+            img: img,
+            raw: p
+          });
+        }
+      });
+
+      galleryState.allItems = items;
+      document.getElementById('total-count-badge').textContent = items.length;
+
+      applyFiltersAndRender();
+
+      if (showSpinner && refreshIcon) {
+        setTimeout(() => refreshIcon.classList.remove('animate-spin'), 600);
+      }
+    }
+
+    function applyFiltersAndRender() {
+      let filtered = galleryState.allItems;
+
+      if (galleryState.activeFilter !== 'all') {
+        filtered = filtered.filter(i => i.type === galleryState.activeFilter);
+      }
+
+      if (galleryState.searchQuery) {
+        const q = galleryState.searchQuery.toLowerCase();
+        filtered = filtered.filter(i => i.title.toLowerCase().includes(q));
+      }
+
+      galleryState.filteredItems = filtered;
+
+      const grid = document.getElementById('gallery-grid');
+      const emptyState = document.getElementById('empty-state');
+
+      grid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        grid.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+        emptyState.classList.add('flex');
+        return;
+      }
+
+      grid.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+      emptyState.classList.remove('flex');
+
+      filtered.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'glass-card rounded-xl overflow-hidden cursor-pointer group fade-in-up';
+        card.style.animationDelay = `${(idx % 12) * 50}ms`;
+
+        card.innerHTML = `
+          <div class="aspect-square relative bg-black overflow-hidden" onclick="openLightbox('${item.img}', '${esc(item.title)}', '${item.price || ''}')">
+            <img src="${item.img}" alt="${esc(item.title)}" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" onerror="this.src='assets/no-goods-placeholder.jpg'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+              <span class="text-[11px] font-mono text-gold-400 uppercase">Click to expand</span>
+            </div>
+          </div>
+          <div class="p-3.5">
+            <h4 class="font-semibold text-xs text-white truncate" title="${esc(item.title)}">${esc(item.title)}</h4>
+            ${item.price ? `<p class="text-xs font-mono text-gold-400 font-bold mt-1">${item.price}</p>` : ''}
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function handleSearch(q) {
+      galleryState.searchQuery = q.trim();
+      applyFiltersAndRender();
+    }
+
+    function setFilter(filterType) {
+      galleryState.activeFilter = filterType;
+      document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
+        if (btn.dataset.filter === filterType) {
+          btn.className = 'gallery-filter-btn active px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition bg-gold-400 text-black';
+        } else {
+          btn.className = 'gallery-filter-btn px-4 py-2 rounded-lg text-xs font-medium uppercase tracking-wider transition bg-black/40 border border-neutral-800 text-neutral-400 hover:text-white';
+        }
+      });
+      applyFiltersAndRender();
+    }
+
+    function openLightbox(img, title, sub) {
+      document.getElementById('lightbox-img').src = img;
+      document.getElementById('lightbox-title').textContent = title;
+      document.getElementById('lightbox-sub').textContent = sub || '';
+      document.getElementById('lightbox-modal').classList.remove('hidden');
+    }
+
+    function closeLightbox(e) {
+      document.getElementById('lightbox-modal').classList.add('hidden');
+    }
+
+    function esc(str) {
+      if (!str) return '';
+      return String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      fetchAndRenderGallery();
+
+      try {
+        const syncChannel = new BroadcastChannel('prism_shop_sync');
+        syncChannel.onmessage = (e) => {
+          if (e.data && e.data.type === 'PRISM_SHOP_UPDATED') {
+            fetchAndRenderGallery();
+          }
+        };
+      } catch (_) {}
+
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'prism_shop_sync') fetchAndRenderGallery();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edge Products — Wholesale &amp; Retail Marketplace</title>
+  <link rel="icon" type="image/jpeg" href="assets/prism-edge-logo.jpg">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    /* Mega Nav Dropdown */
+    .pe-mega-nav { position: relative; display: inline-block; }
+    .pe-mega-tab { background: none; border: none; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--ink); padding: 8px 12px; }
+    .pe-mega-tab:hover { color: var(--primary); }
+    .pe-chevron { display: inline-block; transition: transform 0.25s; font-size: 10px; margin-left: 2px; }
+    .pe-mega-nav:hover .pe-chevron { transform: rotate(180deg); }
+    .pe-mega-drop {
+      position: absolute; top: calc(100% + 5px); left: 50%; transform: translateX(-50%) translateY(10px);
+      opacity: 0; pointer-events: none; transition: all 0.2s ease;
+      z-index: 200; min-width: 280px; text-align: left;
+    }
+    .pe-mega-nav:hover .pe-mega-drop { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+    .pe-mega-inner {
+      background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .pe-mega-inner h4 { font-size: 14px; font-weight: 700; margin: 0 0 10px; color: var(--ink-dark); }
+    .pe-mega-inner p { font-size: 12px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 12px; }
+    .pe-mega-cta { color: var(--primary); font-size: 12px; font-weight: 600; text-decoration: none; }
+    .pe-help-grid, .pe-contact-list { display: flex; flex-direction: column; gap: 8px; }
+    .pe-help-item, .pe-contact-row { display: flex; align-items: center; gap: 8px; color: var(--ink-soft); font-size: 12px; text-decoration: none; padding: 6px; border-radius: 6px; }
+    .pe-help-item:hover, .pe-contact-row:hover { background: var(--surface); color: var(--primary); }
+    .pe-trust-badges span { display: inline-block; padding: 4px 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; font-size: 11px; margin: 2px; }
+  </style>
+</head>
+<body>
+
+  <!-- ================= HEADER NAVBAR ================= -->
+  <header class="site-header">
+    <div class="wrap" style="max-width: 1920px; padding: 0 32px;">
+      <a href="#/" class="logo" aria-label="Edge Products home" id="logo-link">
+        <img src="../main site/assets/new_logo.jpg" alt="Logo" class="mark" style="width: 24px; height: 24px; object-fit: contain;">
+        Edge<span class="accent">Products</span>
+      </a>
+
+      <!-- Search bar -->
+      <form class="search-bar" id="search-form" role="search">
+        <select id="search-cat" aria-label="Category filter">
+          <option value="all">All Categories</option>
+          <option value="electronics">Electronics</option>
+          <option value="food">Food Services</option>
+          <option value="beauty">Beauty &amp; Cosmetics</option>
+          <option value="tools">Technical Tools</option>
+          <option value="apparel">Apparel &amp; Textiles</option>
+          <option value="industrial">Home &amp; Industrial</option>
+        </select>
+        <input type="text" id="search-input" placeholder="Search products, suppliers, categories..." aria-label="Search">
+        <button type="submit" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </button>
+      </form>
+
+      <!-- Navigation & Auth Links -->
+      <nav class="header-links">
+        <a href="/" onclick="if(window.location.protocol==='file:'){event.preventDefault();window.location.href='../main site/index.html';}" class="muted">Prism Edge</a>
+        <a href="/labs/" onclick="if(window.location.protocol==='file:'){event.preventDefault();window.location.href='../prism labs/prism labs.html';}" class="muted">Prism Labs</a>
+        <a href="#" class="muted" id="signin-trigger-btn">Sign In</a>
+        <button class="cart-btn" id="wishlist-open-btn" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="cart-count" id="wishlist-count">0</span>
+        </button>
+        <button class="cart-btn" id="cart-open-btn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke="currentColor"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+          <span class="cart-count" id="cart-count">0</span>
+        </button>
+        <a href="admin.html" onclick="event.preventDefault(); window.location.href=(window.location.protocol==='file:'?'admin.html':'/shop/admin.html');" class="sell-link">Admin Portal</a>
+        <!-- Mega Dropdown Tabs -->
+        <div class="pe-mega-nav">
+          <button class="pe-mega-tab">Our Story <span class="pe-chevron">▾</span></button>
+          <div class="pe-mega-drop">
+            <div class="pe-mega-inner">
+              <h4>Our Story</h4>
+              <p>Edge Products is the marketplace arm of Prism Edge. Quality, Speed, and Edge.</p>
+              <a href="../main site/index.html#about" class="pe-mega-cta">Read More →</a>
+            </div>
+          </div>
+        </div>
+        <div class="pe-mega-nav">
+          <button class="pe-mega-tab">Help Center <span class="pe-chevron">▾</span></button>
+          <div class="pe-mega-drop">
+            <div class="pe-mega-inner">
+              <h4>Help Center</h4>
+              <div class="pe-help-grid">
+                <a href="help.html" class="pe-help-item"><span>💼</span><span>Getting Started</span></a>
+                <a href="help.html#orders" class="pe-help-item"><span>📦</span><span>Orders & Delivery</span></a>
+                <a href="help.html#payment" class="pe-help-item"><span>💳</span><span>Payments</span></a>
+                <a href="help.html#returns" class="pe-help-item"><span>🔄</span><span>Returns</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pe-mega-nav">
+          <button class="pe-mega-tab">Contact Us <span class="pe-chevron">▾</span></button>
+          <div class="pe-mega-drop">
+            <div class="pe-mega-inner">
+              <h4>Contact Us</h4>
+              <div class="pe-contact-list">
+                <a href="mailto:prismmedge@gmail.com" class="pe-contact-row"><span>✉️</span><span>prismmedge@gmail.com</span></a>
+                <a href="https://wa.me/2330248607998" target="_blank" class="pe-contact-row"><span>💬</span><span>+233 248 607 998</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pe-mega-nav">
+          <button class="pe-mega-tab">Trust & Safety <span class="pe-chevron">▾</span></button>
+          <div class="pe-mega-drop">
+            <div class="pe-mega-inner">
+              <h4>Trust & Safety</h4>
+              <div class="pe-trust-badges">
+                <span>🔒 SSL Secured</span>
+                <span>✅ Verified Vendors</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= SECONDARY NAVIGATION (TABS) ================= -->
+  <nav class="secondary-nav" id="secondary-nav">
+    <div class="wrap" id="secondary-nav-inner">
+      <button class="nav-section-tab active" data-section="shops">All Shops</button>
+      <button class="nav-section-tab" data-section="home" data-cat="all">All Products</button>
+      <button class="nav-section-tab" data-section="admin">Admin Portal</button>
+      <button class="nav-section-tab" data-section="home" data-cat="electronics">🔌 Electronics</button>
+      <button class="nav-section-tab" data-section="home" data-cat="food">🍽️ Food Services</button>
+      <button class="nav-section-tab" data-section="home" data-cat="beauty">💄 Beauty &amp; Cosmetics</button>
+      <button class="nav-section-tab" data-section="home" data-cat="tools">🔧 Technical Tools</button>
+      <button class="nav-section-tab" data-section="home" data-cat="apparel">👔 Apparel &amp; Textiles</button>
+      <button class="nav-section-tab" data-section="home" data-cat="industrial">🏭 Home &amp; Industrial</button>
+    </div>
+  </nav>
+
+  <!-- ================= HERO PRISM PRODUCTS SECTION ================= -->
+  <section class="prism-hero" id="hero-section">
+    <div class="wrap text-center py-6">
+      <!-- Live Slideshow right on top of Prism Products button -->
+      <div class="hero-slideshow-wrap mb-6">
+        <div id="slide-track" class="hero-slideshow-track">
+          <!-- Injected dynamically via app.js -->
+        </div>
+        <button class="hero-arrow prev" id="hero-prev" aria-label="Previous slide">‹</button>
+        <button class="hero-arrow next" id="hero-next" aria-label="Next slide">›</button>
+        <div class="hero-dots" id="hero-dots">
+          <!-- Injected via app.js -->
+        </div>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl md:text-4xl font-bold tracking-tight text-white mb-2">
+          PRISM <span class="text-[#E8C97A]">PRODUCTS</span>
+        </h2>
+        <p class="text-xs md:text-sm text-neutral-300 max-w-xl mx-auto mb-5 leading-relaxed">
+          Explore our full curated luxury gallery of uploaded shop products, masterworks, and brand catalog showcases.
+        </p>
+        <!-- Opens in the SAME window (no target="_blank") -->
+        <a href="gallery.html" id="prism-products-btn" class="btn-prism-products">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:middle; margin-right:8px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          Prism Products
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOME PAGE CONTENT (PRODUCTS) ================= -->
+  <main id="page-home" class="wrap shell">
+    <aside class="sidebar" aria-label="Categories">
+      <h4>All Categories</h4>
+      <ul id="sidebar-list">
+        <li>
+          <button class="sidebar-cat-btn active" data-cat="all">All Products</button>
+        </li>
+        <li>
+          <button class="sidebar-cat-btn" data-cat="electronics">
+            🔌 Electronics <span class="chev">›</span>
+          </button>
+          <div class="flyout">
+            <a href="#" data-sub="electronics" data-sub-name="Consumer Electronics">Consumer Electronics</a>
+            <a href="#" data-sub="electronics" data-sub-name="Components &amp; Semiconductors">Components &amp; Semiconductors</a>
+            <a href="#" data-sub="electronics" data-sub-name="Audio &amp; Video">Audio &amp; Video</a>
+            <a href="#" data-sub="electronics" data-sub-name="Wearables">Wearables</a>
+            <a href="#" data-sub="electronics" data-sub-name="Office Electronics">Office Electronics</a>
+          </div>
+        </li>
+        <li>
+          <button class="sidebar-cat-btn" data-cat="beauty">
+            💄 Beauty &amp; Cosmetics <span class="chev">›</span>
+          </button>
+          <div class="flyout">
+            <a href="#" data-sub="beauty" data-sub-name="Skincare">Skincare</a>
+            <a href="#" data-sub="beauty" data-sub-name="Haircare">Haircare</a>
+            <a href="#" data-sub="beauty" data-sub-name="Fragrances">Fragrances</a>
+            <a href="#" data-sub="beauty" data-sub-name="Makeup &amp; Color Cosmetics">Makeup &amp; Color Cosmetics</a>
+            <a href="#" data-sub="beauty" data-sub-name="Personal Care Tools">Personal Care Tools</a>
+          </div>
+        </li>
+        <li>
+          <button class="sidebar-cat-btn" data-cat="food">
+            🍽️ Food Services <span class="chev">›</span>
+          </button>
+          <div class="flyout">
+            <a href="#" data-sub="food" data-sub-name="Bulk Grains &amp; Cereals">Bulk Grains &amp; Cereals</a>
+            <a href="#" data-sub="food" data-sub-name="Beverages &amp; Concentrates">Beverages &amp; Concentrates</a>
+            <a href="#" data-sub="food" data-sub-name="Packaged Snacks">Packaged Snacks</a>
+            <a href="#" data-sub="food" data-sub-name="Commercial Kitchen Equipment">Commercial Kitchen Equipment</a>
+            <a href="#" data-sub="food" data-sub-name="Spices &amp; Seasonings">Spices &amp; Seasonings</a>
+          </div>
+        </li>
+        <li>
+          <button class="sidebar-cat-btn" data-cat="tools">
+            🔧 Technical Tools <span class="chev">›</span>
+          </button>
+          <div class="flyout">
+            <a href="#" data-sub="tools" data-sub-name="Hardware &amp; Tools">Hardware &amp; Hand Tools</a>
+            <a href="#" data-sub="tools" data-sub-name="Power Tools">Power Tools</a>
+            <a href="#" data-sub="tools" data-sub-name="Industrial Equipment">Industrial Equipment</a>
+            <a href="#" data-sub="tools" data-sub-name="Precision Instruments">Precision Instruments</a>
+          </div>
+        </li>
+        <li>
+          <button class="sidebar-cat-btn" data-cat="apparel">
+            👔 Apparel &amp; Textiles <span class="chev">›</span>
+          </button>
+          <div class="flyout">
+            <a href="#" data-sub="apparel" data-sub-name="Workwear">Workwear</a>
+            <a href="#" data-sub="apparel" data-sub-name="Fabrics &amp; Trims">Fabrics &amp; Trims</a>
+            <a href="#" data-sub="apparel" data-sub-name="Footwear">Footwear</a>
+            <a href="#" data-sub="apparel" data-sub-name="Uniforms">Uniforms</a>
+          </div>
+        </li>
+        <li>
+          <button class="sidebar-cat-btn" data-cat="industrial">
+            🏭 Home &amp; Industrial <span class="chev">›</span>
+          </button>
+          <div class="flyout">
+            <a href="#" data-sub="industrial" data-sub-name="Packaging Supplies">Packaging Supplies</a>
+            <a href="#" data-sub="industrial" data-sub-name="Safety Equipment">Safety Equipment</a>
+            <a href="#" data-sub="industrial" data-sub-name="Building Materials">Building Materials</a>
+            <a href="#" data-sub="industrial" data-sub-name="Chemicals">Industrial Chemicals</a>
+          </div>
+        </li>
+      </ul>
+    </aside>
+
+    <div class="content">
+      <div class="content-head">
+        <h3 id="content-title">Featured Products</h3>
+      </div>
+      <!-- Sub-tabs for products selection -->
+      <div class="tabs" id="product-tabs">
+        <button class="product-tab-btn active" data-cat="all">All Products</button>
+        <button class="product-tab-btn" data-cat="electronics">Electronics</button>
+        <button class="product-tab-btn" data-cat="food">Food Services</button>
+        <button class="product-tab-btn" data-cat="beauty">Beauty &amp; Cosmetics</button>
+        <button class="product-tab-btn" data-cat="tools">Technical Tools</button>
+        <button class="product-tab-btn" data-cat="apparel">Apparel &amp; Textiles</button>
+        <button class="product-tab-btn" data-cat="industrial">Home &amp; Industrial</button>
+      </div>
+
+      <div class="cat-pills" id="cat-pills">
+        <button class="active" data-cat="all">All Products</button>
+        <button data-cat="electronics">🔌 Electronics</button>
+        <button data-cat="food">🍽️ Food Services</button>
+        <button data-cat="beauty">💄 Beauty &amp; Cosmetics</button>
+        <button data-cat="tools">🔧 Technical Tools</button>
+        <button data-cat="apparel">👔 Apparel &amp; Textiles</button>
+        <button data-cat="industrial">🏭 Home &amp; Industrial</button>
+      </div>
+      
+      <div class="toolbar" id="product-toolbar">
+        <span class="toolbar-count" id="product-count"></span>
+        <div class="toolbar-right">
+          <select id="sort-select" class="sort-select">
+            <option value="relevance">Sort: Relevance</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating">Highest Rated</option>
+            <option value="newest">Newest First</option>
+            <option value="trending">Trending</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid" id="product-grid">
+        <!-- Injected via app.js -->
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= SHOPS SECTION (B2B DIRECTORY) ================= -->
+  <main id="page-shops" class="wrap shell" hidden>
+    <aside class="sidebar" aria-label="Categories">
+      <h4>Shop Categories</h4>
+      <ul id="shops-sidebar-list">
+        <li><button class="sidebar-shop-btn active" data-shop-cat="all">All Shops</button></li>
+        <li><button class="sidebar-shop-btn" data-shop-cat="electronics">🔌 Electronics</button></li>
+        <li><button class="sidebar-shop-btn" data-shop-cat="food">🍽️ Food Services</button></li>
+        <li><button class="sidebar-shop-btn" data-shop-cat="beauty">💄 Beauty &amp; Cosmetics</button></li>
+        <li><button class="sidebar-shop-btn" data-shop-cat="tools">🔧 Technical Tools</button></li>
+        <li><button class="sidebar-shop-btn" data-shop-cat="apparel">👔 Apparel &amp; Textiles</button></li>
+        <li><button class="sidebar-shop-btn" data-shop-cat="industrial">🏭 Home &amp; Industrial</button></li>
+      </ul>
+    </aside>
+
+    <div class="content">
+      <div class="content-head">
+        <h3 id="shops-content-title">Registered Boutiques &amp; Brands</h3>
+      </div>
+      <!-- Sub-tabs for shops filter -->
+      <div class="tabs" id="shops-tabs">
+        <button class="shop-tab-btn active" data-shop-cat="all">All Shops</button>
+        <button class="shop-tab-btn" data-shop-cat="electronics">Electronics</button>
+        <button class="shop-tab-btn" data-shop-cat="food">Food Services</button>
+        <button class="shop-tab-btn" data-shop-cat="beauty">Beauty &amp; Cosmetics</button>
+        <button class="shop-tab-btn" data-shop-cat="tools">Technical Tools</button>
+        <button class="shop-tab-btn" data-shop-cat="apparel">Apparel &amp; Textiles</button>
+        <button class="shop-tab-btn" data-shop-cat="industrial">Home &amp; Industrial</button>
+      </div>
+
+      <div class="cat-pills" id="shops-cat-pills">
+        <button class="active" data-shop-cat="all">All Shops</button>
+        <button data-shop-cat="electronics">🔌 Electronics</button>
+        <button data-shop-cat="food">🍽️ Food Services</button>
+        <button data-shop-cat="beauty">💄 Beauty &amp; Cosmetics</button>
+        <button data-shop-cat="tools">🔧 Technical Tools</button>
+        <button data-shop-cat="apparel">👔 Apparel &amp; Textiles</button>
+        <button data-shop-cat="industrial">🏭 Home &amp; Industrial</button>
+      </div>
+
+      <div id="shops-directory-list" class="space-y-6">
+        <!-- Injected via app.js -->
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= PRODUCT DETAIL PAGE ================= -->
+  <main id="page-product" hidden>
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="#" id="pd-back-home-btn">Marketplace</a> &nbsp;/&nbsp; 
+        <span id="pd-crumb-cat"></span> &nbsp;/&nbsp; 
+        <span id="pd-crumb-name"></span>
+      </div>
+      <div class="pd-grid">
+        <div>
+          <div class="pd-gallery-main" id="pd-gallery-main">
+            <!-- Injected via app.js -->
+          </div>
+          <div class="pd-thumbs" id="pd-thumbs">
+            <!-- Injected via app.js -->
+          </div>
+        </div>
+        <div>
+          <span class="pd-badge" id="pd-badge"></span>
+          <h1 class="pd-title" id="pd-title"></h1>
+          <div class="stars" id="pd-stars"></div>
+          <div class="pd-price" id="pd-price"></div>
+          <div class="pd-moq" id="pd-moq"></div>
+          <p class="pd-desc" id="pd-desc"></p>
+          <table class="spec-table" id="pd-specs">
+            <!-- Specs table rows injected here -->
+          </table>
+          <div class="qty-row">
+            <div class="qty-stepper">
+              <button id="qty-minus" aria-label="Decrease quantity">−</button>
+              <input type="text" id="qty-value" value="1" inputmode="numeric">
+              <button id="qty-plus" aria-label="Increase quantity">+</button>
+            </div>
+            <span class="muted" style="font-size:12.5px;color:var(--ink-soft)">units</span>
+          </div>
+          <!-- Supplier Info Card -->
+          <div class="supplier-card" id="pd-supplier-card">
+            <!-- Injected via app.js -->
+          </div>
+
+          <div class="pd-actions">
+            <button class="primary" id="pd-add-cart">Add to Cart</button>
+            <button class="quote-btn" id="pd-request-quote">Request Quote</button>
+            <button id="pd-contact">Contact Supplier</button>
+          </div>
+
+          <!-- Shipping Info -->
+          <div class="shipping-info" id="pd-shipping">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <span id="pd-shipping-text">Ships within 3-7 business days</span>
+          </div>
+        </div>
+      </div>
+      <div class="related">
+        <h4>Related Products</h4>
+        <div class="grid" id="related-grid">
+          <!-- Injected via app.js -->
+        </div>
+      </div>
+      <!-- Recently Viewed -->
+      <div class="related" id="recently-viewed-section" hidden>
+        <h4>Recently Viewed</h4>
+        <div class="grid" id="recently-viewed-grid"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= SIGN IN / EMAIL REGISTRATION MODAL ================= -->
+  <div class="modal-overlay" id="signin-modal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="signin-modal-close" aria-label="Close">&times;</button>
+      <h3>Account Registration</h3>
+      <p>Register your business or buyer account with your email to manage orders, cart acquisitions, and direct supplier inquiries.</p>
+      <form class="modal-form" id="signin-form">
+        <div class="field">
+          <label for="signin-email">Email Address</label>
+          <input type="email" id="signin-email" required placeholder="buyer@edgeproducts.com">
+        </div>
+        <button type="submit" class="modal-submit">Register Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= WISHLIST DRAWER ================= -->
+  <aside class="cart-drawer" id="wishlist-drawer" hidden style="z-index: 1000;">
+    <div class="cart-head">
+      <h3>Your Wishlist</h3>
+      <button class="close-panel" id="wishlist-close-btn" aria-label="Close wishlist" style="position:static;">&times;</button>
+    </div>
+    <div class="cart-items" id="wishlist-items">
+      <!-- Injected via app.js -->
+    </div>
+  </aside>
+
+  <!-- ================= CHECKOUT MODAL ================= -->
+  <div class="modal-overlay" id="checkout-modal" hidden style="z-index: 2000;">
+    <div class="modal-content" style="max-width: 500px; width: 100%; padding: 24px;">
+      <button class="modal-close" id="checkout-modal-close" aria-label="Close" style="top: 15px; right: 15px;">&times;</button>
+      <h3 style="margin-bottom: 20px; font-size: 20px; font-weight: 700;">Complete Checkout</h3>
+      
+      <div id="checkout-step-1">
+        <p style="margin-bottom: 16px; font-size: 14px; color: var(--ink-soft);">How would you like to receive your order?</p>
+        <div style="display:flex; gap:12px;">
+          <button class="primary" style="flex:1" id="checkout-btn-delivery">Delivery</button>
+          <button class="quote-btn" style="flex:1" id="checkout-btn-pickup">Pickup</button>
+        </div>
+      </div>
+
+      <div id="checkout-step-delivery" hidden>
+        <form class="modal-form" id="checkout-form-delivery">
+          <div class="field"><label>WhatsApp / Phone</label><input type="tel" id="co-del-phone" required class="pe-input"></div>
+          <div class="field"><label>Email</label><input type="email" id="co-del-email" required class="pe-input"></div>
+          <div class="field"><label>Home Address</label><input type="text" id="co-del-address" required class="pe-input"></div>
+          <div class="field">
+            <label>Pin Location</label>
+            <div id="checkout-map" style="width: 100%; height: 200px; background: #eee; border-radius: 8px;"></div>
+          </div>
+          <button type="submit" class="primary w-full mt-4" style="width: 100%;">Confirm Delivery Order</button>
+        </form>
+      </div>
+
+      <div id="checkout-step-pickup" hidden>
+        <form class="modal-form" id="checkout-form-pickup">
+          <div class="field"><label>WhatsApp / Phone</label><input type="tel" id="co-pic-phone" required class="pe-input"></div>
+          <div class="field"><label>Email</label><input type="email" id="co-pic-email" required class="pe-input"></div>
+          <div class="field">
+            <label>Pickup Location</label>
+            <select required class="pe-input w-full" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
+              <option value="">Select a location</option>
+              <option value="hq">Prism Edge HQ (Accra)</option>
+              <option value="store">Partner Store</option>
+            </select>
+          </div>
+          <button type="submit" class="primary w-full mt-4" style="width: 100%;">Confirm Pickup Order</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CART DRAWER ================= -->
+  <div class="overlay" id="cart-overlay" hidden></div>
+  <aside class="cart-drawer" id="cart-drawer" hidden>
+    <div class="cart-head">
+      <h3>Your Cart</h3>
+      <button class="close-panel" id="cart-close-btn" aria-label="Close cart" style="position:static;">&times;</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <!-- Injected via app.js -->
+    </div>
+    <div class="cart-foot">
+      <div class="cart-subtotal"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+      <button id="cart-checkout">Confirm Checkout</button>
+    </div>
+  </aside>
+
+  <!-- ================= TOAST ALERTS ================= -->
+  <div class="toast" id="toast" hidden></div>
+
+  <div class="modal-overlay" id="quote-modal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="quote-modal-close" aria-label="Close">&times;</button>
+      <h3>Request a Quote</h3>
+      <p id="quote-product-name"></p>
+      <form class="modal-form" id="quote-form">
+        <div class="field"><label for="quote-company">Company Name</label><input type="text" id="quote-company" required placeholder="Your company"></div>
+        <div class="field"><label for="quote-email">Email</label><input type="email" id="quote-email" required placeholder="you@company.com"></div>
+        <div class="field"><label for="quote-qty">Quantity Needed</label><input type="number" id="quote-qty" min="1" value="100" required></div>
+        <div class="field"><label for="quote-message">Message (Optional)</label><textarea id="quote-message" placeholder="Additional requirements..."></textarea></div>
+        <button type="submit" class="modal-submit">Submit Quote Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <h5>About Edge Products</h5>
+        <ul>
+          <li><a href="../main site/index.html#about">Our story</a></li>
+          <li><a href="mailto:prismmedge@gmail.com">Careers</a></li>
+          <li><a href="help.html#trust">Trust &amp; safety</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Customer Service</h5>
+        <ul>
+          <li><a href="help.html">Help center</a></li>
+          <li><a href="help.html#returns">Returns &amp; refunds</a></li>
+          <li><a href="mailto:prismmedge@gmail.com">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>For Vendors</h5>
+        <ul>
+          <li><a href="admin.html">Start selling</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Payments &amp; Trust</h5>
+        <div class="trust-badges">
+          <span>SSL SECURED</span><span>ESCROW PAY</span><span>VERIFIED SUPPLIERS</span><span>BUYER PROTECTION</span>
+        </div>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>© 2026 Edge Products. All rights reserved.</span>
+      <span>Part of the Prism Edge ecosystem</span>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="database.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

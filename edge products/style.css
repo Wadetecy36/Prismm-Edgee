@@ -1,0 +1,110 @@
+body.custom-cursor-active * {
+    cursor: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: linear-gradient(-45deg, #000000, #001f3f, #3a3a3a, #fcf1d1, #ffffff);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    background-attachment: fixed;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.aurora-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.aurora {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+    will-change: transform;
+}
+
+.aurora-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #D4AF37 0%, transparent 70%);
+    top: -10%;
+    left: -10%;
+    animation: float1 20s ease-in-out infinite;
+}
+
+.aurora-2 {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, #000000 0%, transparent 70%);
+    bottom: -15%;
+    right: -10%;
+    animation: float2 25s ease-in-out infinite;
+}
+
+.aurora-3 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #996515 0%, transparent 70%);
+    top: 40%;
+    left: 40%;
+    opacity: 0.3;
+    animation: float3 30s ease-in-out infinite;
+}
+
+@keyframes float1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0)
+    }
+
+    50% {
+        transform: translate(100px, 200px)
+    }
+}
+
+@keyframes float2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0)
+    }
+
+    50% {
+        transform: translate(-150px, -100px)
+    }
+}
+
+@keyframes float3 {
+
+    0%,
+    100% {
+        transform: translate(0, 0)
+    }
+
+    50% {
+        transform: translate(-80px, 120px)
+    }
+}
