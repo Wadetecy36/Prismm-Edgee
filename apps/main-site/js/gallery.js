@@ -1,7 +1,6 @@
 import { seedGallery } from './data.js';
 import { showToast } from './toast.js';
 
-const ADMIN_PASS = 'PrismAdmin2024';
 let items = [];
 let current = 0;
 
@@ -17,14 +16,26 @@ export function initGallery() {
   fab?.addEventListener('click', openUploadModal);
 }
 
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function renderGrid() {
   const grid = document.getElementById('gallery-grid');
   if (!grid) return;
   grid.innerHTML = items.map((it, i) => {
+    const safeUrl = encodeURI(it.url || '');
+    const safeCaption = escapeHtml(it.caption || '');
     const media = it.type === 'video'
-      ? `<video src="${it.url}" muted></video><div class="play-overlay"><div class="pbtn"><svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>`
-      : `<img src="${it.url}" alt="${it.caption}" loading="lazy">`;
-    return `<div class="gallery-item" data-i="${i}">${media}<div class="caption">${it.caption}</div></div>`;
+      ? `<video src="${safeUrl}" muted></video><div class="play-overlay"><div class="pbtn"><svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>`
+      : `<img src="${safeUrl}" alt="${safeCaption}" loading="lazy">`;
+    return `<div class="gallery-item" data-i="${i}">${media}<div class="caption">${safeCaption}</div></div>`;
   }).join('');
 
   grid.querySelectorAll('.gallery-item').forEach(el => {
@@ -32,24 +43,51 @@ function renderGrid() {
   });
 }
 
-function initAdmin() {
+async function initAdmin() {
   const fab = document.getElementById('upload-fab');
+
+  // Verify server-side session
+  try {
+    const res = await fetch('/api/auth/check', { credentials: 'same-origin' }).catch(() => null);
+    if (res && res.ok) {
+      const data = await res.json();
+      if (data && data.authenticated) {
+        sessionStorage.setItem('pe_admin', '1');
+        fab?.classList.remove('hidden');
+        fab?.classList.add('flex');
+      }
+    }
+  } catch (_) {}
+
   const isAdmin = sessionStorage.getItem('pe_admin') === '1';
-  if (isAdmin) { fab.classList.remove('hidden'); fab.classList.add('flex'); }
+  if (isAdmin) { fab?.classList.remove('hidden'); fab?.classList.add('flex'); }
 
   let keys = '';
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', async (e) => {
     keys += e.key.toLowerCase();
     if (keys.length > 20) keys = keys.slice(-20);
     if (keys.includes('admin')) {
       const pass = prompt('Admin password:');
-      if (pass === ADMIN_PASS) {
-        sessionStorage.setItem('pe_admin', '1');
-        fab.classList.remove('hidden');
-        fab.classList.add('flex');
-        showToast('Admin mode enabled');
-      } else if (pass) {
-        alert('Incorrect password');
+      if (pass) {
+        try {
+          const authRes = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ password: pass })
+          });
+          const authData = await authRes.json().catch(() => ({}));
+          if (authRes.ok && authData.success) {
+            sessionStorage.setItem('pe_admin', '1');
+            fab?.classList.remove('hidden');
+            fab?.classList.add('flex');
+            showToast('Admin mode enabled');
+          } else {
+            alert(authData.error || 'Incorrect password');
+          }
+        } catch (_) {
+          alert('Authentication service unreachable');
+        }
       }
       keys = '';
     }
@@ -86,7 +124,7 @@ function openUploadModal() {
     selectedFile = e.target.files[0];
     if (selectedFile) fileName.textContent = selectedFile.name;
   };
-  dropZone.ondragover = (e) => { e.preventDefault(); dropZone.style.borderColor = '#7C3AED'; };
+  dropZone.ondragover = (e) => { e.preventDefault(); dropZone.style.borderColor = '#E8C97A'; };
   dropZone.ondragleave = () => { dropZone.style.borderColor = ''; };
   dropZone.ondrop = (e) => {
     e.preventDefault();
@@ -129,9 +167,12 @@ function openLightbox(i) {
 function renderLightbox() {
   const it = items[current];
   const content = document.getElementById('lb-content');
+  if (!content || !it) return;
+  const safeUrl = encodeURI(it.url || '');
+  const safeCaption = escapeHtml(it.caption || '');
   content.innerHTML = it.type === 'video'
-    ? `<video src="${it.url}" controls autoplay muted></video>`
-    : `<img src="${it.url}" alt="${it.caption}">`;
+    ? `<video src="${safeUrl}" controls autoplay muted></video>`
+    : `<img src="${safeUrl}" alt="${safeCaption}">`;
   document.getElementById('lb-caption').textContent = it.caption;
 }
 

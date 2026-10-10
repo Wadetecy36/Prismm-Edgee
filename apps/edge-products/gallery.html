@@ -7,12 +7,10 @@
   <title>Edge Products — Full Gallery</title>
   <link rel="icon" type="image/jpeg" href="assets/prism-edge-logo.jpg">
 
-  <!-- Google Fonts: Space Grotesk, Inter, IBM Plex Mono -->
+  <!-- Google Fonts: Cormorant Garamond, DM Sans, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -28,9 +26,9 @@
         extend: {
           colors: {
             brand: {
-              dark: '#07070b',
-              card: '#111118',
-              border: '#1a1a2a',
+              dark: '#070707',
+              card: 'rgba(18, 18, 18, 0.78)',
+              border: 'rgba(232, 201, 122, 0.16)',
               gold: '#E8C97A'
             },
             gold: {
@@ -44,9 +42,9 @@
             }
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Space Grotesk', 'sans-serif'],
-            mono: ['IBM Plex Mono', 'monospace']
+            sans: ['DM Sans', 'sans-serif'],
+            display: ['Cormorant Garamond', 'serif'],
+            mono: ['JetBrains Mono', 'monospace']
           }
         }
       }
@@ -58,9 +56,9 @@
     :root {
       --gold-primary: #E8C97A;
       --gold-hover: #F4DF9B;
-      --bg-dark: #07070b;
-      --card-dark: #111118;
-      --border-dark: #1a1a2a;
+      --bg-dark: #070707;
+      --card-dark: rgba(18, 18, 18, 0.78);
+      --border-dark: rgba(232, 201, 122, 0.16);
     }
 
     * {
@@ -69,20 +67,15 @@
 
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(-45deg, #000000, #001f3f, #3a3a3a, #fcf1d1, #ffffff);
-      background-size: 400% 400%;
-      animation: gradient 15s ease infinite;
+      font-family: 'DM Sans', sans-serif;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(232, 201, 122, 0.10), transparent 32rem),
+        radial-gradient(circle at 85% 60%, rgba(26, 62, 191, 0.07), transparent 28rem),
+        #070707;
       background-attachment: fixed;
-      color: #e5e5e5;
+      color: #F5F5F0;
       min-height: 100vh;
       overflow-x: hidden;
-    }
-
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     /* Custom Scrollbar */
@@ -145,16 +138,16 @@
 <body class="flex flex-col min-h-screen">
 
   <!-- ================= TOP NAVIGATION BAR ================= -->
-  <header class="sticky top-0 z-40 bg-[#070D1E] border-b border-[#1B294A] backdrop-blur-md">
+  <header class="sticky top-0 z-40 bg-[#070707]/90 border-b border-[#E8C97A]/15 backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- Brand Logo & Title -->
       <div class="flex items-center gap-4">
         <a href="index.html" class="flex items-center gap-3 group">
-          <img src="assets/prism-edge-logo.jpg" alt="Logo" class="w-9 h-9 object-contain rounded border border-gold-400/30 group-hover:border-gold-400 transition" onerror="this.style.display='none'">
+          <img src="assets/prism-edge-logo.png" alt="Logo" class="w-9 h-9 object-contain rounded border border-gold-400/30 group-hover:border-gold-400 transition" onerror="this.style.display='none'">
           <div class="flex flex-col">
-            <span class="font-display font-bold text-xl tracking-wider text-white">EDGE <span class="text-gold-400">PRODUCTS</span></span>
-            <span class="text-[10px] font-mono text-gold-400 uppercase tracking-widest -mt-1">Full Showcase Gallery</span>
+            <span class="font-display font-medium text-xl tracking-wider text-white">EDGE <span class="text-gold-400">PRODUCTS</span></span>
+            <span class="text-[10px] font-sans text-gold-400 uppercase tracking-widest -mt-1">Full Showcase Gallery</span>
           </div>
         </a>
       </div>
@@ -247,7 +240,7 @@
   <!-- ================= FULLSCREEN LIGHTBOX MODAL ================= -->
   <div id="lightbox-modal" class="fixed inset-0 z-50 hidden lightbox-backdrop flex items-center justify-center p-4 sm:p-6" onclick="closeLightbox(event)">
     <div class="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
-      <button onclick="closeLightbox()" class="absolute -top-12 right-0 sm:top-2 sm:-right-12 text-neutral-400 hover:text-white p-2 rounded-full bg-black/60 transition">
+      <button onclick="closeLightbox()" aria-label="Close lightbox" class="absolute -top-12 right-0 sm:top-2 sm:-right-12 text-neutral-400 hover:text-white p-2 rounded-full bg-black/60 transition">
         <i data-lucide="x" class="w-6 h-6"></i>
       </button>
 
@@ -265,7 +258,7 @@
   </div>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="mt-auto bg-[#070D1E] border-t border-[#1B294A] py-8">
+  <footer class="mt-auto bg-[#070707]/90 border-t border-[#E8C97A]/15 py-8">
     <div class="max-w-7xl mx-auto px-4 text-center text-xs text-neutral-400">
       <p>© 2026 Edge Products. All rights reserved. Part of the Prism Edge Ecosystem.</p>
     </div>

@@ -3,139 +3,979 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Prismm Edge design preview">
-  <meta name="theme-color" content="#0b0b0f">
-  <title>Prismm Edge | Design Preview</title>
+  <meta name="description" content="Prismm Edgee builds, grows, and operates digital businesses through strategy, technology, intelligence, and commerce.">
+  <meta name="theme-color" content="#070707">
+
+  <!-- Open Graph Metadata -->
+  <meta property="og:site_name" content="Prismm Edgee">
+  <meta property="og:title" content="PRISMM EDGEE — Built To Scale Brands">
+  <meta property="og:description" content="A digital growth ecosystem combining strategy, technology, intelligence, and commerce.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="apps/prism-labs/assets/prism-edge-logo.png">
+
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PRISMM EDGEE — Built To Scale Brands">
+  <meta name="twitter:description" content="A digital growth ecosystem combining strategy, technology, intelligence, and commerce.">
+  <meta name="twitter:image" content="apps/prism-labs/assets/prism-edge-logo.png">
+
+  <title>PRISMM EDGEE — Built To Scale Brands</title>
+  <link rel="canonical" href="https://prismmedgee.com/">
+  <link rel="icon" type="image/png" href="apps/prism-labs/assets/prism-edge-logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+
   <style>
-    * { box-sizing: border-box; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #070707;
+      --bg-surface: #0e0f14;
+      --gold: #E8C97A;
+      --gold-light: #F5E6B8;
+      --gold-dim: rgba(232, 201, 122, 0.12);
+      --gold-border: rgba(232, 201, 122, 0.18);
+      --gold-border-hover: rgba(232, 201, 122, 0.45);
+      --blue-subtle: #1A3EBF;
+      --blue-glow: rgba(26, 62, 191, 0.16);
+      --pearl: #F5F5F0;
+      --muted: rgba(245, 245, 240, 0.72);
+      --faint: rgba(245, 245, 240, 0.40);
+      --line: rgba(245, 245, 240, 0.08);
+      --card-bg: linear-gradient(165deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+      --card-bg-hover: linear-gradient(165deg, rgba(232, 201, 122, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
 
     body {
-      margin: 0;
       min-height: 100vh;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #0b0b0f;
-      color: #fff;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
-
-    .wrap {
-      width: min(900px, 100%);
-    }
-
-    .eyebrow {
-      color: #a78bfa;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    h1 {
-      font-size: clamp(42px, 9vw, 82px);
-      line-height: .95;
-      margin: 0 0 18px;
-      letter-spacing: -.055em;
-    }
-
-    .intro {
-      max-width: 620px;
-      color: #a1a1aa;
-      font-size: 17px;
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(232, 201, 122, 0.14), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 85% 45%, var(--blue-glow), transparent 70%),
+        radial-gradient(ellipse 50% 35% at 15% 75%, rgba(232, 201, 122, 0.06), transparent 60%);
+      background-attachment: fixed;
+      color: var(--pearl);
       line-height: 1.6;
-      margin-bottom: 38px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    /* Skip Link for Accessibility */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 24px;
+      background: var(--gold);
+      color: #070707;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      z-index: 100;
+      transition: top 0.2s ease;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    /* Global Focus Outline */
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    /* Container */
+    .container {
+      width: min(1120px, 100% - 48px);
+      margin-inline: auto;
+    }
+
+    /* Top Navigation Bar */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(7, 7, 7, 0.75);
+      border-bottom: 1px solid var(--line);
+      padding: 16px 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .nav-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--pearl);
+      transition: opacity 0.2s ease;
+    }
+
+    .nav-brand:hover {
+      opacity: 0.9;
+    }
+
+    .nav-brand-img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 0 10px rgba(232, 201, 122, 0.3));
+    }
+
+    .nav-brand-text {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-brand-text span {
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--gold-light);
+    }
+
+    .nav-cta {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #070707;
+      background: var(--gold);
+      padding: 8px 18px;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(232, 201, 122, 0.25);
+    }
+
+    /* Typography & Hierarchy */
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: var(--gold-border);
+    }
+
+    .heading-serif {
+      font-family: var(--font-display);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: var(--pearl);
+    }
+
+    /* Buttons */
+    .btn-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
       gap: 16px;
     }
 
-    a {
-      display: block;
-      padding: 24px;
-      min-height: 150px;
-      border: 1px solid #27272a;
-      border-radius: 20px;
-      background: #111116;
-      color: inherit;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       text-decoration: none;
-      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
-    a:hover {
-      transform: translateY(-4px);
-      border-color: #52525b;
-      background: #18181d;
+    .btn-primary {
+      background: var(--gold);
+      color: #070707;
+      border: 1px solid var(--gold);
+      box-shadow: 0 8px 24px rgba(232, 201, 122, 0.2);
     }
 
-    strong {
+    .btn-primary:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(232, 201, 122, 0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--pearl);
+      border: 1px solid var(--gold-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(232, 201, 122, 0.08);
+      border-color: var(--gold-border-hover);
+      color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    /* Section Spacing */
+    section {
+      padding: 96px 0;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 56px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* 1. HERO SECTION */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+    }
+
+    .hero-brand-mark {
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 24px;
       display: block;
-      font-size: 20px;
-      margin-bottom: 10px;
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 0 24px rgba(232, 201, 122, 0.35));
     }
 
-    span {
-      color: #a1a1aa;
+    .hero-headline {
+      font-size: clamp(48px, 9vw, 84px);
+      color: var(--gold);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      margin: 0 auto 28px;
+      font-size: clamp(17px, 2.5vw, 20px);
+      color: var(--pearl);
+      font-weight: 400;
+      line-height: 1.55;
+    }
+
+    .hero-statement {
+      display: inline-block;
+      max-width: 620px;
+      margin: 0 auto 40px;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      background: rgba(232, 201, 122, 0.05);
+      border: 1px solid var(--gold-border);
       font-size: 14px;
+      color: var(--gold-light);
+      letter-spacing: 0.02em;
+    }
+
+    /* 2. ECOSYSTEM SECTION */
+    .ecosystem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .eco-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 36px 30px;
+      background: var(--card-bg);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      transition: transform 0.28s cubic-bezier(0.2, 0, 0, 1), border-color 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+      overflow: hidden;
+    }
+
+    .eco-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232, 201, 122, 0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+
+    .eco-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold-border-hover);
+      background: var(--card-bg-hover);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(232, 201, 122, 0.12);
+    }
+
+    .eco-card:hover::before {
+      opacity: 1;
+    }
+
+    .eco-card-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .eco-card-title {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 600;
+      color: var(--pearl);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+      transition: color 0.2s ease;
+    }
+
+    .eco-card:hover .eco-card-title {
+      color: var(--gold-light);
+    }
+
+    .eco-card-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .eco-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: gap 0.2s ease, color 0.2s ease;
+    }
+
+    .eco-card:hover .eco-card-cta {
+      gap: 12px;
+      color: var(--gold-light);
+    }
+
+    /* 3. ECOSYSTEM FLOW */
+    .flow-wrapper {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(26, 62, 191, 0.04) 50%, rgba(255, 255, 255, 0.01) 100%);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: 56px 40px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      position: relative;
+      margin-bottom: 36px;
+    }
+
+    .flow-card {
+      text-align: center;
+      position: relative;
+      padding: 24px 16px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--line);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .flow-card:hover {
+      border-color: var(--gold-border);
+      transform: translateY(-2px);
+    }
+
+    .flow-step-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+    }
+
+    .flow-step-name {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--pearl);
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+
+    .flow-step-detail {
+      font-size: 13px;
+      color: var(--muted);
       line-height: 1.5;
     }
 
+    .flow-summary {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .flow-summary strong {
+      color: var(--gold-light);
+      font-weight: 600;
+    }
+
+    /* 4. WHY PRISMM EDGEE */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .principle-card {
+      padding: 36px 30px;
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .principle-card:hover {
+      border-color: var(--gold-border);
+      transform: translateY(-3px);
+    }
+
+    .principle-icon {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .principle-title {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--pearl);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .principle-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* 5. CLOSING CTA SECTION */
+    .cta-box {
+      text-align: center;
+      padding: 72px 40px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at 50% 0%, rgba(232, 201, 122, 0.12), transparent 70%),
+                  radial-gradient(circle at 50% 100%, var(--blue-glow), transparent 70%),
+                  var(--card-bg);
+      border: 1px solid var(--gold-border);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .cta-heading {
+      font-size: clamp(34px, 5.5vw, 54px);
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    .cta-lead {
+      max-width: 580px;
+      margin: 0 auto 36px;
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* 6. FOOTER */
     footer {
-      margin-top: 32px;
-      color: #52525b;
+      border-top: 1px solid var(--line);
+      padding: 48px 0 40px;
+      color: var(--faint);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-logo {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      mix-blend-mode: screen;
+      opacity: 0.85;
+    }
+
+    .footer-brand-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--pearl);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--gold-light);
+    }
+
+    .footer-copy {
+      text-align: center;
       font-size: 12px;
+      color: var(--faint);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 20px;
     }
 
-    @media (max-width: 700px) {
-      .grid {
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 960px) {
+      .ecosystem-grid,
+      .principles-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
       }
 
-      a {
-        min-height: auto;
+      .flow-steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
       }
     }
 
+    @media (max-width: 640px) {
+      .site-nav {
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 64px 0;
+      }
+
+      .hero {
+        padding: 64px 0 48px;
+      }
+
+      .flow-wrapper {
+        padding: 36px 20px;
+      }
+
+      .flow-steps {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .cta-box {
+        padding: 48px 24px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer-nav {
+        justify-content: center;
+        gap: 16px;
+      }
+    }
+
+    /* Accessibility: Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
-      a {
-        transition: none;
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
       }
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <div class="eyebrow">Prismm Edge · Client Preview</div>
 
-    <h1>The new Prismm experience.</h1>
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <p class="intro">
-      A working preview of the redesigned Prismm Edge ecosystem.
-      Explore the main website, AI workspace, and digital products storefront.
-    </p>
-
-    <section class="grid">
-      <a href="./apps/main-site/">
-        <strong>Prismm Edge</strong>
-        <span>Main website experience and brand ecosystem.</span>
+  <!-- Top Navigation Header -->
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="#main-content" class="nav-brand" aria-label="Prismm Edgee Home">
+        <img src="apps/prism-labs/assets/prism-edge-logo.png" alt="" class="nav-brand-img" width="32" height="32">
+        <span class="nav-brand-text">Prismm <span>Edgee</span></span>
       </a>
 
-      <a href="./apps/prism-labs/">
-        <strong>Prism Labs</strong>
-        <span>AI-powered tools, analysis and workspace experience.</span>
-      </a>
+      <nav aria-label="Ecosystem Navigation">
+        <ul class="nav-links">
+          <li><a href="#ecosystem" class="nav-link">Ecosystem</a></li>
+          <li><a href="#flow" class="nav-link">Lifecycle</a></li>
+          <li><a href="#principles" class="nav-link">Principles</a></li>
+          <li><a href="./apps/main-site/#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
 
-      <a href="./apps/edge-products/">
-        <strong>Edge Products</strong>
-        <span>Digital storefront, products, search and shopping experience.</span>
-      </a>
+      <a href="./apps/main-site/#contact" class="nav-cta">Work With Us</a>
+    </div>
+  </header>
+
+  <!-- Main Content Landmark -->
+  <main id="main-content">
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <img src="apps/prism-labs/assets/prism-edge-logo.png" alt="Prismm Edgee Emblem" class="hero-brand-mark" width="68" height="68">
+
+        <div class="eyebrow">PRISMM EDGEE</div>
+
+        <h1 id="hero-title" class="heading-serif hero-headline">
+          Built To Scale Brands.
+        </h1>
+
+        <p class="hero-copy">
+          A digital growth ecosystem combining strategy, technology, intelligence, and commerce.
+        </p>
+
+        <div class="hero-statement">
+          Prismm Edgee builds, grows, and operates digital businesses.
+        </div>
+
+        <div class="btn-group">
+          <a href="#ecosystem" class="btn btn-primary">Explore The Ecosystem</a>
+          <a href="./apps/main-site/#contact" class="btn btn-secondary">Work With Us</a>
+        </div>
+      </div>
     </section>
 
-    <footer>UI/UX rebuild preview · September 2026</footer>
+    <!-- 2. ECOSYSTEM SECTION -->
+    <section id="ecosystem" aria-labelledby="ecosystem-title">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">THE ARCHITECTURE</div>
+          <h2 id="ecosystem-title" class="heading-serif section-title">
+            Three Engines. One Ecosystem.
+          </h2>
+          <p class="section-subtitle">
+            Three specialized platforms interconnected to take ideas from foundational concept to dominant market presence.
+          </p>
+        </div>
+
+        <div class="ecosystem-grid">
+          <!-- CARD 1: MAIN SITE -->
+          <a href="./apps/main-site/" class="eco-card" aria-label="Explore Main Site — Strategy, design, development, and growth systems for ambitious brands">
+            <div>
+              <div class="eco-card-tag">01 / Strategy & Execution</div>
+              <h3 class="eco-card-title">Main Site</h3>
+              <p class="eco-card-desc">
+                Strategy, design, development, and growth systems for ambitious brands.
+              </p>
+            </div>
+            <div class="eco-card-cta">
+              <span>Explore Main Site</span>
+              <span aria-hidden="true">→</span>
+            </div>
+          </a>
+
+          <!-- CARD 2: PRISM LABS -->
+          <a href="./apps/prism-labs/" class="eco-card" aria-label="Explore Prism Labs — AI, data, automation, and experimental technology built to give businesses an unfair operational advantage">
+            <div>
+              <div class="eco-card-tag">02 / Intelligence & AI</div>
+              <h3 class="eco-card-title">Prism Labs</h3>
+              <p class="eco-card-desc">
+                AI, data, automation, and experimental technology built to give businesses an unfair operational advantage.
+              </p>
+            </div>
+            <div class="eco-card-cta">
+              <span>Explore Prism Labs</span>
+              <span aria-hidden="true">→</span>
+            </div>
+          </a>
+
+          <!-- CARD 3: EDGE PRODUCTS -->
+          <a href="./apps/edge-products/" class="eco-card" aria-label="Explore Edge Products — Digital commerce and product infrastructure designed to turn ideas into scalable products">
+            <div>
+              <div class="eco-card-tag">03 / Commerce & Scale</div>
+              <h3 class="eco-card-title">Edge Products</h3>
+              <p class="eco-card-desc">
+                Digital commerce and product infrastructure designed to turn ideas into scalable products.
+              </p>
+            </div>
+            <div class="eco-card-cta">
+              <span>Explore Edge Products</span>
+              <span aria-hidden="true">→</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ECOSYSTEM FLOW -->
+    <section id="flow" aria-labelledby="flow-title">
+      <div class="container">
+        <div class="flow-wrapper">
+          <div class="section-header" style="margin-bottom: 40px;">
+            <div class="eyebrow">LIFECYCLE CONTINUUM</div>
+            <h2 id="flow-title" class="heading-serif section-title">
+              End-to-End Business Evolution
+            </h2>
+            <p class="section-subtitle">
+              Prismm Edgee supports businesses across the entire lifecycle rather than selling isolated, piecemeal services.
+            </p>
+          </div>
+
+          <div class="flow-steps" role="list">
+            <div class="flow-card" role="listitem">
+              <div class="flow-step-num">STAGE 01</div>
+              <div class="flow-step-name">IDEA</div>
+              <p class="flow-step-detail">Market validation, strategic blueprinting, and technical architecture.</p>
+            </div>
+
+            <div class="flow-card" role="listitem">
+              <div class="flow-step-num">STAGE 02</div>
+              <div class="flow-step-name">BUILD</div>
+              <p class="flow-step-detail">High-performance digital products, web experiences, and commerce rails.</p>
+            </div>
+
+            <div class="flow-card" role="listitem">
+              <div class="flow-step-num">STAGE 03</div>
+              <div class="flow-step-name">GROW</div>
+              <p class="flow-step-detail">Audience acquisition, conversion optimization, and data-backed marketing.</p>
+            </div>
+
+            <div class="flow-card" role="listitem">
+              <div class="flow-step-num">STAGE 04</div>
+              <div class="flow-step-name">SCALE</div>
+              <p class="flow-step-detail">AI intelligence, operational automation, and repeatable multi-channel distribution.</p>
+            </div>
+          </div>
+
+          <p class="flow-summary">
+            By unifying brand craft, automated intelligence, and commerce infrastructure, we help modern businesses scale with compounding velocity.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. WHY PRISMM EDGEE -->
+    <section id="principles" aria-labelledby="principles-title">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">OUR METHODOLOGY</div>
+          <h2 id="principles-title" class="heading-serif section-title">
+            Built For The Next Stage.
+          </h2>
+          <p class="section-subtitle">
+            Three core principles powering sustainable enterprise growth in high-velocity digital markets.
+          </p>
+        </div>
+
+        <div class="principles-grid">
+          <article class="principle-card">
+            <div class="principle-icon" aria-hidden="true">I</div>
+            <h3 class="principle-title">BUILD</h3>
+            <p class="principle-desc">
+              Turn ideas into real digital products.
+            </p>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-icon" aria-hidden="true">II</div>
+            <h3 class="principle-title">OPTIMIZE</h3>
+            <p class="principle-desc">
+              Use technology, data, and automation to improve performance.
+            </p>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-icon" aria-hidden="true">III</div>
+            <h3 class="principle-title">SCALE</h3>
+            <p class="principle-desc">
+              Build systems that can grow without proportionally growing complexity.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CTA SECTION -->
+    <section class="cta-section" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="cta-box">
+          <div class="eyebrow" style="margin-bottom: 16px;">INITIATE ENGAGEMENT</div>
+          <h2 id="cta-title" class="heading-serif cta-heading">
+            Ready to build something that matters?
+          </h2>
+          <p class="cta-lead">
+            Partner with Prismm Edgee to design, engineer, and scale your next market-defining digital venture.
+          </p>
+          <div class="btn-group">
+            <a href="./apps/main-site/#contact" class="btn btn-primary">Start A Project</a>
+            <a href="#ecosystem" class="btn btn-secondary">Explore The Ecosystem</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <!-- 6. FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="apps/prism-labs/assets/prism-edge-logo.png" alt="" class="footer-logo" width="24" height="24">
+          <span class="footer-brand-title">Prismm Edgee</span>
+        </div>
+
+        <nav aria-label="Footer Navigation">
+          <ul class="footer-nav">
+            <li><a href="./apps/main-site/" class="footer-link">Main Site</a></li>
+            <li><a href="./apps/prism-labs/" class="footer-link">Prism Labs</a></li>
+            <li><a href="./apps/edge-products/" class="footer-link">Edge Products</a></li>
+            <li><a href="./apps/main-site/#contact" class="footer-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer-copy">
+        © 2026 Prismm Edgee. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>

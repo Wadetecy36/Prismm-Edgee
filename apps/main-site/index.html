@@ -3,15 +3,29 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Prism Edge builds digital brands, websites, marketing systems, and growth platforms designed to break through and scale.">
-<meta name="theme-color" content="#0A0A0F">
-<meta property="og:title" content="PRISM EDGE — Where Brands Break Through">
-<meta property="og:description" content="Creative and technical growth systems for ambitious brands.">
+<meta name="description" content="Prismm Edgee builds, grows, and operates digital businesses through strategy, high-performance web engineering, and scalable commerce systems.">
+<meta name="theme-color" content="#070707">
+
+<!-- Open Graph Metadata -->
+<meta property="og:site_name" content="Prismm Edgee">
+<meta property="og:title" content="PRISMM EDGEE — Built To Scale Brands">
+<meta property="og:description" content="We build high-performance digital experiences, products, systems, and growth infrastructure for ambitious businesses.">
 <meta property="og:type" content="website">
-<title>PRISM EDGE — Where Brands Break Through</title>
+<meta property="og:image" content="../prism-labs/assets/prism-edge-logo.png">
+
+<!-- Twitter Card Metadata -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PRISMM EDGEE — Built To Scale Brands">
+<meta name="twitter:description" content="We build high-performance digital experiences, products, systems, and growth infrastructure for ambitious businesses.">
+<meta name="twitter:image" content="../prism-labs/assets/prism-edge-logo.png">
+
+<title>PRISMM EDGEE — Built To Scale Brands</title>
+<link rel="canonical" href="https://prismmedgee.com/main/">
+<link rel="icon" type="image/png" href="../prism-labs/assets/prism-edge-logo.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <link rel="stylesheet" href="styles.css">
@@ -20,14 +34,14 @@
     theme: {
       extend: {
         colors: {
-          midnight: '#0A0A0F',
-          violet: '#7C3AED',
-          cyan: '#00D4FF',
-          sharp: '#F8F8FF',
+          midnight: '#070707',
+          violet: '#E8C97A',
+          cyan: '#1A3EBF',
+          sharp: '#F5F5F0',
         },
         fontFamily: {
-          display: ['Space Grotesk', 'sans-serif'],
-          body: ['Inter', 'sans-serif'],
+          display: ['Cormorant Garamond', 'serif'],
+          body: ['DM Sans', 'sans-serif'],
           mono: ['JetBrains Mono', 'monospace'],
         }
       }
@@ -36,6 +50,9 @@
 </script>
 </head>
 <body class="bg-midnight text-sharp font-body overflow-x-hidden">
+
+<!-- Accessible Skip Link -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
@@ -48,35 +65,26 @@
   <div class="noise"></div>
 </div>
 
+<!-- Header Navigation -->
 <nav id="main-nav" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between glass-nav">
-    <a href="#home" class="flex items-center gap-2 group">
-      <div class="prism-logo">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <path d="M14 3 L25 22 L3 22 Z" stroke="url(#logoGrad)" stroke-width="1.8" fill="none"/>
-          <path d="M14 3 L14 22" stroke="url(#logoGrad)" stroke-width="1" opacity="0.5"/>
-          <defs>
-            <linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28">
-              <stop offset="0%" stop-color="#7C3AED"/>
-              <stop offset="50%" stop-color="#00D4FF"/>
-              <stop offset="100%" stop-color="#F8F8FF"/>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-      <span class="font-display font-bold text-lg tracking-tight">PRISM<span class="text-violet">EDGE</span></span>
+    <a href="#home" class="flex items-center gap-3 group" aria-label="Prismm Edgee Home">
+      <img src="../prism-labs/assets/prism-edge-logo.png" alt="Prismm Edgee Logo" class="w-8 h-8 object-contain">
+      <span class="font-display font-medium text-xl tracking-wider text-[#F5F5F0]">PRISMM <span class="text-violet">EDGEE</span></span>
     </a>
 
-    <div class="hidden lg:flex items-center gap-8">
+    <div class="hidden xl:flex items-center gap-7">
       <a href="#home" class="nav-link">Home</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="#services" class="nav-link">Services</a>
-      <a href="#media" class="nav-link">Media</a>
-      <a href="https://prismlabs.com" target="_blank" rel="noopener" onclick="if(location.hostname==='localhost' || location.protocol==='file:'){event.preventDefault();location.href='../prism-labs/index.html';}" class="nav-link flex items-center gap-2">
+      <a href="#problem" class="nav-link">Problem</a>
+      <a href="#services" class="nav-link">Capabilities</a>
+      <a href="#media" class="nav-link">Work</a>
+      <a href="#why" class="nav-link">Why Us</a>
+      <a href="#process" class="nav-link">Process</a>
+      <a href="../prism-labs/index.html" class="nav-link flex items-center gap-1.5">
         PRISM LABS
-        <span class="badge-purple">Our Lab</span>
+        <span class="badge-purple">Lab</span>
       </a>
-      <a href="https://edgeproducts.com" target="_blank" rel="noopener" onclick="if(location.hostname==='localhost' || location.protocol==='file:'){event.preventDefault();location.href='../edge-products/index.html';}" class="nav-link flex items-center gap-2">
+      <a href="../edge-products/index.html" class="nav-link flex items-center gap-1.5">
         EDGE PRODUCTS
         <span class="badge-cyan">Shop</span>
       </a>
@@ -84,278 +92,598 @@
     </div>
 
     <div class="flex items-center gap-3">
-      <a href="#contact" class="hidden md:inline-flex btn-primary">Get Started</a>
-      <button id="menu-toggle" class="lg:hidden p-2" aria-label="Menu">
+      <a href="#contact" class="hidden md:inline-flex btn-primary text-xs !py-2.5 !px-5 tracking-wider uppercase">Start A Project</a>
+      <button id="menu-toggle" class="xl:hidden p-2 text-sharp focus:outline-none" aria-label="Open Navigation Menu">
         <i data-lucide="menu" class="w-6 h-6"></i>
       </button>
     </div>
   </div>
 </nav>
 
-<div id="mobile-menu" class="fixed inset-0 z-50 bg-midnight/98 backdrop-blur-xl hidden flex-col items-center justify-center">
-  <button id="menu-close" class="absolute top-6 right-6 p-2" aria-label="Close">
+<!-- Mobile Navigation Drawer -->
+<div id="mobile-menu" class="fixed inset-0 z-50 bg-midnight/98 backdrop-blur-2xl hidden flex-col items-center justify-center p-8">
+  <button id="menu-close" class="absolute top-6 right-6 p-2 text-sharp" aria-label="Close Navigation Menu">
     <i data-lucide="x" class="w-8 h-8"></i>
   </button>
-  <div class="flex flex-col items-center gap-6 text-2xl font-display">
+  <div class="flex flex-col items-center gap-5 text-xl font-display text-center">
     <a href="#home" class="mobile-link">Home</a>
-    <a href="#about" class="mobile-link">About</a>
-    <a href="#services" class="mobile-link">Services</a>
-    <a href="#media" class="mobile-link">Media</a>
-    <a href="https://prismlabs.com" target="_blank" rel="noopener" onclick="if(location.hostname==='localhost' || location.protocol==='file:'){event.preventDefault();location.href='../prism-labs/index.html';}" class="mobile-link flex items-center gap-2">PRISM LABS <span class="badge-purple">Our Lab</span></a>
-    <a href="https://edgeproducts.com" target="_blank" rel="noopener" onclick="if(location.hostname==='localhost' || location.protocol==='file:'){event.preventDefault();location.href='../edge-products/index.html';}" class="mobile-link flex items-center gap-2">EDGE PRODUCTS <span class="badge-cyan">Shop</span></a>
-    <a href="#contact" class="mobile-link">Contact</a>
-    <a href="#contact" class="btn-primary mt-4">Get Started</a>
+    <a href="#problem" class="mobile-link">The Problem</a>
+    <a href="#services" class="mobile-link">Capabilities</a>
+    <a href="#media" class="mobile-link">Selected Work</a>
+    <a href="#why" class="mobile-link">Why Prismm Edgee</a>
+    <a href="#process" class="mobile-link">Our Process</a>
+    <a href="../prism-labs/index.html" class="mobile-link flex items-center gap-2">PRISM LABS <span class="badge-purple">Lab</span></a>
+    <a href="../edge-products/index.html" class="mobile-link flex items-center gap-2">EDGE PRODUCTS <span class="badge-cyan">Shop</span></a>
+    <a href="#contact" class="mobile-link">Contact Us</a>
+    <a href="#contact" class="btn-primary mt-4 w-full">Start A Project</a>
   </div>
 </div>
 
-<section id="home" class="relative min-h-screen flex items-center justify-center px-6 pt-24">
-  <div class="text-center max-w-5xl relative z-10">
-    <div class="inline-flex items-center gap-2 font-mono text-sm text-cyan mb-6 reveal">
-      <span>The Future of Brand Growth</span>
-      <span class="blink">_</span>
-    </div>
-    <h1 class="font-display font-bold leading-[0.95] tracking-tight mb-8">
-      <span class="block text-6xl md:text-8xl reveal">We Scale Brands.</span>
-      <span class="block text-6xl md:text-8xl gradient-text reveal" style="animation-delay: 0.2s">We Build Futures.</span>
-    </h1>
-    <p class="text-lg md:text-xl text-sharp/70 max-w-2xl mx-auto mb-10 reveal" style="animation-delay: 0.4s">
-      Prism Edge is the creative and technical powerhouse helping businesses break through the noise — with world-class websites, strategy, and brand systems.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="animation-delay: 0.6s">
-      <a href="https://prismlabs.com" target="_blank" rel="noopener" onclick="if(location.hostname==='localhost' || location.protocol==='file:'){event.preventDefault();location.href='../prism-labs/index.html';}" class="btn-primary">
-        Explore Prism Labs
-        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-      </a>
-      <a href="#media" class="btn-outline">See Our Work</a>
-    </div>
-  </div>
+<main id="main-content">
 
-  <a href="#services" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-sharp/50 animate-bounce">
-    <i data-lucide="chevron-down" class="w-8 h-8"></i>
-  </a>
-</section>
+  <!-- 1. HERO SECTION -->
+  <section id="home" class="relative min-h-screen flex items-center justify-center px-6 pt-28 pb-16">
+    <div class="text-center max-w-5xl relative z-10 mx-auto">
+      <div class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-violet font-semibold mb-6 reveal">
+        <span>— PRISMM EDGEE —</span>
+      </div>
 
-<section id="services" class="py-32 px-6 relative">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-16">
-      <div class="font-mono text-sm text-cyan mb-3">// SERVICES</div>
-      <h2 class="font-display text-5xl md:text-6xl font-bold mb-4">What Prism Edge Does</h2>
-      <p class="text-sharp/60 text-lg">We are not just an agency. We are your growth engine.</p>
-    </div>
-    <div id="services-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-  </div>
-</section>
+      <h1 class="font-display font-light md:font-normal leading-[1.02] tracking-tight mb-6">
+        <span class="block text-5xl sm:text-7xl md:text-8xl reveal">Built To Scale</span>
+        <span class="block text-5xl sm:text-7xl md:text-8xl italic gradient-text reveal" style="animation-delay: 0.15s">Brands.</span>
+      </h1>
 
-<section id="about" class="py-32 px-6 relative">
-  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-    <div>
-      <div class="font-mono text-sm text-cyan mb-3">// ABOUT</div>
-      <h2 class="font-display text-5xl md:text-6xl font-bold mb-6">Built to Break <span class="gradient-text">Boundaries</span></h2>
-      <p class="text-sharp/70 text-lg leading-relaxed mb-8">
-        Prism Edge is a full-service brand growth company. We partner with businesses that are ready to scale — combining creative excellence with technical precision. Our team operates across two key platforms: <strong class="text-violet">Prism Labs</strong>, our brand scaling lab, and <strong class="text-cyan">Edge Products</strong>, our product and e-commerce division. Together, they form an ecosystem built for growth.
+      <p class="text-lg md:text-xl text-sharp/75 max-w-2xl mx-auto mb-6 font-light leading-relaxed reveal" style="animation-delay: 0.3s">
+        A digital growth ecosystem combining strategy, high-performance technology, intelligence, and commerce infrastructure.
       </p>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="stats-row">
-        <div class="stat"><div class="stat-num" data-target="100">0</div><div class="stat-label">Brands Served</div></div>
-        <div class="stat"><div class="stat-num" data-target="3">0</div><div class="stat-label">Countries</div></div>
-        <div class="stat"><div class="stat-num" data-target="2">0</div><div class="stat-label">Platforms</div></div>
-        <div class="stat"><div class="stat-num">1</div><div class="stat-label">Mission: Your Growth</div></div>
+
+      <div class="inline-block border border-violet/20 bg-violet/5 px-5 py-2 rounded-full text-xs sm:text-sm font-medium text-violet/90 mb-10 tracking-wide reveal" style="animation-delay: 0.4s">
+        Prismm Edgee builds, grows, and operates digital businesses.
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center reveal" style="animation-delay: 0.5s">
+        <a href="#contact" class="btn-primary w-full sm:w-auto">
+          Start A Project
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+        <a href="#media" class="btn-outline w-full sm:w-auto">Explore Our Work</a>
       </div>
     </div>
-    <div class="relative h-[500px] flex items-center justify-center">
-      <div class="about-prism">
-        <div class="face f1"></div>
-        <div class="face f2"></div>
-        <div class="face f3"></div>
-        <div class="face f4"></div>
+
+    <a href="#problem" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-sharp/40 hover:text-violet transition animate-bounce p-2" aria-label="Scroll to The Problem">
+      <i data-lucide="chevron-down" class="w-7 h-7"></i>
+    </a>
+  </section>
+
+  <!-- 2. PROBLEM / VALUE SECTION -->
+  <section id="problem" class="py-28 px-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <div class="text-xs uppercase tracking-widest text-violet font-semibold mb-3">— THE BOTTLENECK —</div>
+        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-light mb-4 text-sharp">Growth Breaks on Fragile Systems</h2>
+        <p class="text-sharp/65 text-base sm:text-lg leading-relaxed">
+          Most ambitious businesses do not struggle from a lack of vision. They stall because their digital surface and operational foundations were never engineered for scale.
+        </p>
       </div>
-      <div class="absolute inset-0 bg-gradient-radial from-violet/20 via-transparent to-transparent"></div>
-    </div>
-  </div>
-</section>
 
-<section id="ecosystem" class="py-32 px-6 relative">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-16">
-      <div class="font-mono text-sm text-cyan mb-3">// ECOSYSTEM</div>
-      <h2 class="font-display text-5xl md:text-6xl font-bold">Our Ecosystem</h2>
-    </div>
-    <div class="grid md:grid-cols-2 gap-6">
-      <a href="https://prismlabs.com" target="_blank" rel="noopener" onclick="if(location.hostname==='localhost' || location.protocol==='file:'){event.preventDefault();location.href='../prism-labs/index.html';}" class="eco-card eco-purple group">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="eco-icon bg-violet/20"><i data-lucide="flask-conical" class="w-6 h-6 text-violet"></i></div>
-          <span class="badge-purple">Our Lab</span>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Problem Card 1 -->
+        <div class="problem-card">
+          <div class="problem-badge"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> FRICTION 01</div>
+          <h3 class="text-2xl font-display font-semibold mb-2 text-sharp">Weak Digital Presence</h3>
+          <p class="text-sharp/65 text-sm leading-relaxed">
+            Generic website templates and inconsistent visual direction fail to establish immediate industry authority, leading high-value prospects to seek competitors.
+          </p>
         </div>
-        <h3 class="font-display text-4xl font-bold mb-2">Prism Labs</h3>
-        <p class="text-violet font-mono text-sm mb-4">The Brand Scaling Engine</p>
-        <p class="text-sharp/70 mb-8">Where we research, build, and deploy growth strategies for brands. Visit Prism Labs to start scaling your business today.</p>
-        <div class="inline-flex items-center gap-2 text-violet font-semibold group-hover:gap-4 transition-all">
-          Enter Prism Labs <i data-lucide="arrow-right" class="w-4 h-4"></i>
+
+        <!-- Problem Card 2 -->
+        <div class="problem-card">
+          <div class="problem-badge"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> FRICTION 02</div>
+          <h3 class="text-2xl font-display font-semibold mb-2 text-sharp">Outdated Web Platforms</h3>
+          <p class="text-sharp/65 text-sm leading-relaxed">
+            Bloated codebases, slow page loading, and fragile hosting stacks bleed visitor engagement before they ever interact with your core offer.
+          </p>
         </div>
-      </a>
-      <a href="https://edgeproducts.com" target="_blank" rel="noopener" onclick="if(location.hostname==='localhost' || location.protocol==='file:'){event.preventDefault();location.href='../edge-products/index.html';}" class="eco-card eco-cyan group">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="eco-icon bg-cyan/20"><i data-lucide="zap" class="w-6 h-6 text-cyan"></i></div>
-          <span class="badge-cyan">Shop</span>
+
+        <!-- Problem Card 3 -->
+        <div class="problem-card">
+          <div class="problem-badge"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> FRICTION 03</div>
+          <h3 class="text-2xl font-display font-semibold mb-2 text-sharp">Poor Conversion Yield</h3>
+          <p class="text-sharp/65 text-sm leading-relaxed">
+            Traffic arrives, but unoptimized user flows, friction-heavy checkouts, and weak conversion triggers prevent browsers from becoming committed buyers.
+          </p>
         </div>
-        <h3 class="font-display text-4xl font-bold mb-2">Edge Products</h3>
-        <p class="text-cyan font-mono text-sm mb-4">Products That Move</p>
-        <p class="text-sharp/70 mb-8">Browse and discover products curated and powered by the Prism Edge network. Quality. Speed. Edge.</p>
-        <div class="inline-flex items-center gap-2 text-cyan font-semibold group-hover:gap-4 transition-all">
-          Visit Edge Products <i data-lucide="arrow-right" class="w-4 h-4"></i>
+
+        <!-- Problem Card 4 -->
+        <div class="problem-card">
+          <div class="problem-badge"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> FRICTION 04</div>
+          <h3 class="text-2xl font-display font-semibold mb-2 text-sharp">Disconnected Systems</h3>
+          <p class="text-sharp/65 text-sm leading-relaxed">
+            Siloed sales tools, manual customer management, and lack of automated pipelines waste hundreds of hours in operational drag each quarter.
+          </p>
         </div>
-      </a>
-    </div>
-  </div>
-</section>
 
-<section id="media" class="py-32 px-6 relative">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-16">
-      <div class="font-mono text-sm text-cyan mb-3">// GALLERY</div>
-      <h2 class="font-display text-5xl md:text-6xl font-bold mb-4">Prism Edge in Action</h2>
-      <p class="text-sharp/60 text-lg">Our work, our world, our edge.</p>
-    </div>
-    <div id="gallery-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-  </div>
-</section>
+        <!-- Problem Card 5 -->
+        <div class="problem-card">
+          <div class="problem-badge"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> FRICTION 05</div>
+          <h3 class="text-2xl font-display font-semibold mb-2 text-sharp">Outgrown Infrastructure</h3>
+          <p class="text-sharp/65 text-sm leading-relaxed">
+            Early-stage setups buckle as transactional volume rises, creating technical debt that gets exponentially more expensive to untangle later.
+          </p>
+        </div>
 
-<button id="upload-fab" class="hidden fixed bottom-24 right-6 z-30 btn-primary rounded-full w-14 h-14 !p-0 items-center justify-center">
-  <i data-lucide="plus" class="w-6 h-6"></i>
-</button>
-
-<div id="upload-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm items-center justify-center p-6">
-  <div class="glass-card max-w-lg w-full p-8">
-    <div class="flex items-center justify-between mb-6">
-      <h3 class="font-display text-2xl font-bold">Upload Media</h3>
-      <button id="upload-close" class="p-2"><i data-lucide="x" class="w-5 h-5"></i></button>
-    </div>
-    <div id="drop-zone" class="border-2 border-dashed border-violet/40 rounded-xl p-10 text-center cursor-pointer hover:border-violet transition">
-      <i data-lucide="upload-cloud" class="w-10 h-10 mx-auto mb-3 text-violet"></i>
-      <p class="text-sharp/70 mb-2">Drag & drop media here</p>
-      <p class="text-sharp/40 text-sm">or</p>
-      <button type="button" id="file-btn" class="mt-3 btn-outline text-sm">Select File</button>
-      <input type="file" id="file-input" accept="image/*,video/*" class="hidden">
-      <p id="file-name" class="mt-3 text-sm text-cyan"></p>
-    </div>
-    <input id="caption-input" type="text" placeholder="Caption / Title" class="mt-4 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-violet">
-    <button id="post-btn" class="btn-primary w-full mt-4 justify-center">Post to Gallery</button>
-  </div>
-</div>
-
-<div id="lightbox" class="hidden fixed inset-0 z-50 bg-black/95 items-center justify-center">
-  <button id="lb-close" class="absolute top-6 right-6 p-2 text-sharp"><i data-lucide="x" class="w-8 h-8"></i></button>
-  <button id="lb-prev" class="absolute left-6 top-1/2 -translate-y-1/2 p-3 bg-white/10 rounded-full"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
-  <button id="lb-next" class="absolute right-6 top-1/2 -translate-y-1/2 p-3 bg-white/10 rounded-full"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
-  <div id="lb-content" class="max-w-6xl max-h-[90vh] p-6"></div>
-  <p id="lb-caption" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-sharp/80 font-mono text-sm"></p>
-</div>
-
-<section id="testimonials" class="py-32 px-6 relative">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-16">
-      <div class="font-mono text-sm text-cyan mb-3">// TESTIMONIALS</div>
-      <h2 class="font-display text-5xl md:text-6xl font-bold">What Our Clients Say</h2>
-    </div>
-    <div id="testimonials-track" class="flex gap-6 overflow-x-auto pb-4 snap-x scroll-smooth"></div>
-  </div>
-</section>
-
-<section class="py-24 px-6">
-  <div class="max-w-5xl mx-auto cta-banner text-center rounded-3xl p-16">
-    <h2 class="font-display text-5xl md:text-6xl font-bold mb-4">Ready to Find Your Edge?</h2>
-    <p class="text-sharp/80 text-lg mb-8">Let's build something extraordinary together.</p>
-    <button onclick="document.getElementById('chat-bubble').click()" class="btn-white">Start Your Journey</button>
-  </div>
-</section>
-
-<section id="contact" class="py-32 px-6 relative">
-  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
-    <div>
-      <div class="font-mono text-sm text-cyan mb-3">// CONTACT</div>
-      <h2 class="font-display text-5xl md:text-6xl font-bold mb-8">Let's <span class="gradient-text">Talk</span></h2>
-      <div class="space-y-5 text-lg">
-        <div class="flex items-center gap-4"><i data-lucide="mail" class="w-5 h-5 text-violet"></i><a href="mailto:hello@prismedge.com">hello@prismedge.com</a></div>
-        <div class="flex items-center gap-4"><i data-lucide="phone" class="w-5 h-5 text-cyan"></i><a href="https://wa.me/233000000000">+233 000 000 000</a></div>
-        <div class="flex items-center gap-4"><i data-lucide="map-pin" class="w-5 h-5 text-violet"></i>Accra, Ghana</div>
-      </div>
-      <div class="flex gap-3 mt-8">
-        <a href="#" class="social-icon"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-        <a href="#" class="social-icon"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-        <a href="#" class="social-icon"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-        <a href="#" class="social-icon"><i data-lucide="music" class="w-5 h-5"></i></a>
+        <!-- Problem Card 6: The Prism Solution -->
+        <div class="problem-card border-violet/30 bg-violet/[0.04]">
+          <div class="inline-flex items-center gap-1.5 text-xs font-mono font-semibold tracking-wider text-violet bg-violet/10 border border-violet/30 px-2.5 py-1 rounded-full mb-3.5">
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> THE PRISMM FIX
+          </div>
+          <h3 class="text-2xl font-display font-semibold mb-2 text-violet">Unified Growth Engine</h3>
+          <p class="text-sharp/75 text-sm leading-relaxed">
+            We replace piecemeal fixes with an integrated ecosystem: custom development, data-backed conversion optimization, and automated commerce operations.
+          </p>
+        </div>
       </div>
     </div>
-    <form id="contact-form" class="glass-card p-8 space-y-4">
-      <label class="sr-only" for="contact-name">Your Name</label>
-      <input id="contact-name" type="text" name="name" placeholder="Your Name" required class="form-input">
-      <label class="sr-only" for="contact-email">Email Address</label>
-      <input id="contact-email" type="email" name="email" placeholder="Email Address" required class="form-input">
-      <label class="sr-only" for="contact-whatsapp">WhatsApp Number</label>
-      <input id="contact-whatsapp" type="tel" name="whatsapp" placeholder="WhatsApp Number" class="form-input">
-      <label class="sr-only" for="contact-need">What do you need?</label>
-      <select id="contact-need" name="need" required class="form-input">
-        <option value="">What do you need?</option>
-        <option>Website</option>
-        <option>Brand Scaling</option>
-        <option>Products</option>
-        <option>Consulting</option>
-        <option>Other</option>
-      </select>
-      <label class="sr-only" for="contact-message">Your Message</label>
-      <textarea id="contact-message" name="message" rows="4" placeholder="Your Message" required class="form-input"></textarea>
-      <button type="submit" class="btn-primary w-full justify-center">Send Message</button>
-    </form>
-  </div>
-</section>
+  </section>
 
-<footer class="relative pt-20 pb-10 px-6 border-t border-white/5">
+  <!-- 3. SERVICES / CAPABILITIES SECTION -->
+  <section id="services" class="py-28 px-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <div class="text-xs uppercase tracking-widest text-violet font-semibold mb-3">— CAPABILITIES —</div>
+        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-light mb-4">Three Pillars of Execution</h2>
+        <p class="text-sharp/65 text-base sm:text-lg">
+          We organize our technical and creative execution around the three stages required to dominate a digital market.
+        </p>
+      </div>
+
+      <!-- Architectural Capabilities Grid -->
+      <div class="grid lg:grid-cols-3 gap-8 mb-12">
+        <!-- Pillar 1: BUILD -->
+        <div class="glass-card p-8 border-violet/20 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-mono font-bold tracking-widest text-violet bg-violet/10 border border-violet/20 px-3 py-1 rounded-full">01 / PILLAR</span>
+              <span class="text-2xl">🏛️</span>
+            </div>
+            <h3 class="font-display text-3xl font-semibold mb-3 text-sharp">BUILD</h3>
+            <p class="text-sharp/70 text-sm leading-relaxed mb-6">
+              Turn strategic vision into robust, high-performance digital products and flagship web platforms.
+            </p>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-sharp/80 font-mono">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-violet"></i> Flagship Brand Websites</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-violet"></i> Custom E-commerce Infrastructure</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-violet"></i> Full-Stack Web Applications</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-violet"></i> Component Design Systems</li>
+            </ul>
+          </div>
+          <a href="#contact" class="inline-flex items-center gap-2 text-xs font-semibold text-violet uppercase tracking-wider mt-8 hover:underline">
+            Initiate A Build <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+
+        <!-- Pillar 2: OPTIMIZE -->
+        <div class="glass-card p-8 border-violet/20 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-mono font-bold tracking-widest text-violet bg-violet/10 border border-violet/20 px-3 py-1 rounded-full">02 / PILLAR</span>
+              <span class="text-2xl">⚡</span>
+            </div>
+            <h3 class="font-display text-3xl font-semibold mb-3 text-sharp">OPTIMIZE</h3>
+            <p class="text-sharp/70 text-sm leading-relaxed mb-6">
+              Maximize speed, user retention, and conversion yields across your existing digital touchpoints.
+            </p>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-sharp/80 font-mono">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-violet"></i> Conversion Rate Optimization (CRO)</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-violet"></i> Core Web Vitals & Speed Engineering</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-violet"></i> User Flow & Friction Audits</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-violet"></i> Analytics & Funnel Instrumentation</li>
+            </ul>
+          </div>
+          <a href="#contact" class="inline-flex items-center gap-2 text-xs font-semibold text-violet uppercase tracking-wider mt-8 hover:underline">
+            Request System Audit <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+
+        <!-- Pillar 3: SCALE -->
+        <div class="glass-card p-8 border-cyan/30 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-mono font-bold tracking-widest text-cyan bg-cyan/10 border border-cyan/30 px-3 py-1 rounded-full">03 / PILLAR</span>
+              <span class="text-2xl">📈</span>
+            </div>
+            <h3 class="font-display text-3xl font-semibold mb-3 text-sharp">SCALE</h3>
+            <p class="text-sharp/70 text-sm leading-relaxed mb-6">
+              Deploy automated pipelines, intelligence workflows, and multi-channel commerce distribution.
+            </p>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-sharp/80 font-mono">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan"></i> AI & Workflow Automation</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan"></i> CRM & Sales Pipeline Sync</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan"></i> Scalable Wholesale / Retail Commerce</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan"></i> Ongoing Operational Stewardship</li>
+            </ul>
+          </div>
+          <a href="#contact" class="inline-flex items-center gap-2 text-xs font-semibold text-cyan uppercase tracking-wider mt-8 hover:underline">
+            Scale Operations <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Interactive Dynamic Services Render -->
+      <div class="mb-4 text-center">
+        <h3 class="font-display text-2xl font-light text-sharp/60">— Specialized Modules —</h3>
+      </div>
+      <div id="services-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- 4. WORK / PROOF (GALLERY) SECTION -->
+  <section id="media" class="py-28 px-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <div class="text-xs uppercase tracking-widest text-violet font-semibold mb-3">— SELECTED WORK —</div>
+        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-light mb-4">Engineered For Impact</h2>
+        <p class="text-sharp/65 text-base sm:text-lg">
+          A showcase of digital platforms, high-conversion interfaces, and technical systems crafted across the Prismm Edgee ecosystem.
+        </p>
+      </div>
+
+      <div id="gallery-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- Upload Modal and Lightbox Elements (Preserved for Gallery functionality) -->
+  <button id="upload-fab" class="hidden fixed bottom-24 right-6 z-30 btn-primary rounded-full w-14 h-14 !p-0 items-center justify-center shadow-lg" aria-label="Upload to gallery">
+    <i data-lucide="plus" class="w-6 h-6 text-black"></i>
+  </button>
+
+  <div id="upload-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm items-center justify-center p-6">
+    <div class="glass-card max-w-lg w-full p-8">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="font-display text-2xl font-semibold">Upload Media</h3>
+        <button id="upload-close" class="p-2 text-sharp" aria-label="Close upload modal"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div id="drop-zone" class="border-2 border-dashed border-violet/40 rounded-xl p-10 text-center cursor-pointer hover:border-violet transition">
+        <i data-lucide="upload-cloud" class="w-10 h-10 mx-auto mb-3 text-violet"></i>
+        <p class="text-sharp/70 mb-2">Drag & drop media here</p>
+        <p class="text-sharp/40 text-sm">or</p>
+        <button type="button" id="file-btn" class="mt-3 btn-outline text-sm">Select File</button>
+        <input type="file" id="file-input" accept="image/*,video/*" class="hidden">
+        <p id="file-name" class="mt-3 text-sm text-cyan"></p>
+      </div>
+      <input id="caption-input" type="text" placeholder="Caption / Title" class="mt-4 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-violet text-sharp">
+      <button id="post-btn" class="btn-primary w-full mt-4 justify-center">Post to Gallery</button>
+    </div>
+  </div>
+
+  <div id="lightbox" class="hidden fixed inset-0 z-50 bg-black/95 items-center justify-center">
+    <button id="lb-close" class="absolute top-6 right-6 p-2 text-sharp" aria-label="Close lightbox"><i data-lucide="x" class="w-8 h-8"></i></button>
+    <button id="lb-prev" class="absolute left-6 top-1/2 -translate-y-1/2 p-3 bg-white/10 rounded-full text-sharp" aria-label="Previous item"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+    <button id="lb-next" class="absolute right-6 top-1/2 -translate-y-1/2 p-3 bg-white/10 rounded-full text-sharp" aria-label="Next item"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+    <div id="lb-content" class="max-w-6xl max-h-[90vh] p-6 flex items-center justify-center"></div>
+    <p id="lb-caption" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-sharp/80 font-mono text-sm text-center px-4"></p>
+  </div>
+
+  <!-- 5. WHY PRISMM EDGEE (DIFFERENTIATION) -->
+  <section id="why" class="py-28 px-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <div class="text-xs uppercase tracking-widest text-violet font-semibold mb-3">— DIFFERENTIATION —</div>
+        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-light mb-4">Built Different. By Design.</h2>
+        <p class="text-sharp/65 text-base sm:text-lg">
+          We are not a traditional marketing agency or an offshore dev shop. We partner as full-lifecycle digital operators.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Diff 1 -->
+        <div class="why-card">
+          <div class="why-index">01</div>
+          <h3 class="text-2xl font-display font-semibold mb-3 text-sharp">Strategy + Execution</h3>
+          <p class="text-sharp/65 text-sm leading-relaxed">
+            We do not deliver theoretical slide decks. We design the commercial strategy and engineer the actual production code to implement it.
+          </p>
+        </div>
+
+        <!-- Diff 2 -->
+        <div class="why-card">
+          <div class="why-index">02</div>
+          <h3 class="text-2xl font-display font-semibold mb-3 text-sharp">Design + Engineering</h3>
+          <p class="text-sharp/65 text-sm leading-relaxed">
+            Visual polish without technical performance is useless. We balance editorial distinction with lightweight, zero-bloat architecture.
+          </p>
+        </div>
+
+        <!-- Diff 3 -->
+        <div class="why-card">
+          <div class="why-index">03</div>
+          <h3 class="text-2xl font-display font-semibold mb-3 text-sharp">Build + Optimization</h3>
+          <p class="text-sharp/65 text-sm leading-relaxed">
+            Deployment is day one. We instrument real user analytics to systematically tune conversion bottlenecks after launch.
+          </p>
+        </div>
+
+        <!-- Diff 4 -->
+        <div class="why-card">
+          <div class="why-index">04</div>
+          <h3 class="text-2xl font-display font-semibold mb-3 text-sharp">Long-Term Operator</h3>
+          <p class="text-sharp/65 text-sm leading-relaxed">
+            Rather than one-off transactional handoffs, we align incentives with your enterprise trajectory for compounding operational leverage.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PROCESS SECTION -->
+  <section id="process" class="py-28 px-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <div class="text-xs uppercase tracking-widest text-violet font-semibold mb-3">— OUR METHODOLOGY —</div>
+        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-light mb-4">A Direct Path From Idea to Scale</h2>
+        <p class="text-sharp/65 text-base sm:text-lg">
+          A four-step operating framework engineered for maximum speed, transparency, and commercial rigor.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Step 1 -->
+        <div class="process-card">
+          <div class="process-step">PHASE 01</div>
+          <h3 class="text-2xl font-display font-semibold mb-2 text-sharp">DISCOVER</h3>
+          <p class="text-sharp/65 text-sm leading-relaxed">
+            We diagnose your unit economics, audience drop-off points, and technical requirements before touching a single pixel.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="process-card">
+          <div class="process-step">PHASE 02</div>
+          <h3 class="text-2xl font-display font-semibold mb-2 text-sharp">BUILD</h3>
+          <p class="text-sharp/65 text-sm leading-relaxed">
+            Rapid iterative design, custom full-stack development, and integration of required business data rails.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="process-card">
+          <div class="process-step">PHASE 03</div>
+          <h3 class="text-2xl font-display font-semibold mb-2 text-sharp">LAUNCH</h3>
+          <p class="text-sharp/65 text-sm leading-relaxed">
+            Rigorous cross-device testing, Core Web Vitals optimization, live deployment, and tracking instrumentation.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="process-card">
+          <div class="process-step">PHASE 04</div>
+          <h3 class="text-2xl font-display font-semibold mb-2 text-sharp">SCALE</h3>
+          <p class="text-sharp/65 text-sm leading-relaxed">
+            Continuous conversion rate optimization, automated workflows, and scaling distribution to multiply ROI.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ECOSYSTEM BRIDGES & ABOUT -->
+  <section id="about" class="py-28 px-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <div class="text-xs uppercase tracking-widest text-violet font-semibold mb-3">— THE ECOSYSTEM —</div>
+        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-light mb-6">More Than An Agency. <span class="gradient-text italic">An Engine.</span></h2>
+        <p class="text-sharp/75 text-base sm:text-lg leading-relaxed mb-8">
+          Prismm Edgee operates as a cohesive digital holding that unites brand architecture, artificial intelligence research at <strong class="text-violet">Prism Labs</strong>, and curated commercial infrastructure at <strong class="text-cyan">Edge Products</strong>.
+        </p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6" id="stats-row">
+          <div class="stat"><div class="stat-num" data-target="100">0</div><div class="stat-label">Deployments</div></div>
+          <div class="stat"><div class="stat-num" data-target="3">0</div><div class="stat-label">Continents</div></div>
+          <div class="stat"><div class="stat-num" data-target="2">0</div><div class="stat-label">Platforms</div></div>
+          <div class="stat"><div class="stat-num">1</div><div class="stat-label">Clear Mission</div></div>
+        </div>
+      </div>
+
+      <div class="relative h-[440px] flex items-center justify-center">
+        <div class="about-prism">
+          <div class="face f1"></div>
+          <div class="face f2"></div>
+          <div class="face f3"></div>
+          <div class="face f4"></div>
+        </div>
+        <div class="absolute inset-0 bg-gradient-radial from-violet/20 via-transparent to-transparent"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecosystem Cards -->
+  <section id="ecosystem" class="py-24 px-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-14">
+        <div class="text-xs uppercase tracking-widest text-violet font-semibold mb-2">— SISTER PLATFORMS —</div>
+        <h2 class="font-display text-4xl sm:text-5xl font-light">Explore The Ecosystem</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <a href="../prism-labs/index.html" class="eco-card eco-purple group">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="eco-icon bg-violet/20"><i data-lucide="flask-conical" class="w-6 h-6 text-violet"></i></div>
+            <span class="badge-purple">Our Lab</span>
+          </div>
+          <h3 class="font-display text-4xl font-bold mb-2">Prism Labs</h3>
+          <p class="text-violet font-mono text-sm mb-4">Intelligence & Strategy Engine</p>
+          <p class="text-sharp/70 mb-8 leading-relaxed">Proprietary PRISMA AI strategist, intelligence blueprints, and automation workflows designed for rapid brand scaling.</p>
+          <div class="inline-flex items-center gap-2 text-violet font-semibold group-hover:gap-4 transition-all">
+            Enter Prism Labs <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </div>
+        </a>
+        <a href="../edge-products/index.html" class="eco-card eco-cyan group">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="eco-icon bg-cyan/20"><i data-lucide="zap" class="w-6 h-6 text-cyan"></i></div>
+            <span class="badge-cyan">Shop</span>
+          </div>
+          <h3 class="font-display text-4xl font-bold mb-2">Edge Products</h3>
+          <p class="text-cyan font-mono text-sm mb-4">Digital Commerce Infrastructure</p>
+          <p class="text-sharp/70 mb-8 leading-relaxed">Turn product concepts into scalable commerce. Curated wholesale, retail storefronts, and live product catalog infrastructure.</p>
+          <div class="inline-flex items-center gap-2 text-cyan font-semibold group-hover:gap-4 transition-all">
+            Visit Edge Products <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Testimonials -->
+  <section id="testimonials" class="py-28 px-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-xs uppercase tracking-widest text-violet font-semibold mb-3">— COLLABORATIONS —</div>
+        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-light">What Leaders Say</h2>
+      </div>
+      <div id="testimonials-track" class="flex gap-6 overflow-x-auto pb-4 snap-x scroll-smooth"></div>
+    </div>
+  </section>
+
+  <!-- 8. COMMERCIAL CLOSING CTA BANNER -->
+  <section class="py-24 px-6">
+    <div class="max-w-5xl mx-auto cta-banner text-center rounded-3xl p-12 sm:p-16 border border-violet/30">
+      <div class="text-xs uppercase tracking-widest text-violet font-semibold mb-4">— READY TO SCALE? —</div>
+      <h2 class="font-display text-4xl sm:text-6xl font-light mb-6">Ready to Build Something That Matters?</h2>
+      <p class="text-sharp/75 text-base sm:text-lg mb-10 font-light max-w-2xl mx-auto leading-relaxed">
+        Let's start with a direct conversation about your business, your conversion bottlenecks, and what it takes to scale.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#contact" class="btn-primary">Start A Project</a>
+        <button onclick="document.getElementById('chat-bubble').click()" class="btn-outline">Talk With An Agent</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CONTACT SECTION -->
+  <section id="contact" class="py-28 px-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
+      <div>
+        <div class="text-xs uppercase tracking-widest text-violet font-semibold mb-3">— CONTACT US —</div>
+        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-light mb-6">Let's Talk <span class="gradient-text italic">Business</span></h2>
+        <p class="text-sharp/70 text-base leading-relaxed mb-8">
+          Tell us about what you want to build or scale. We review every project brief within 24 hours and reply with actionable initial feedback.
+        </p>
+
+        <div class="space-y-5 text-base sm:text-lg">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-violet/10 border border-violet/20 flex items-center justify-center text-violet">
+              <i data-lucide="mail" class="w-5 h-5"></i>
+            </div>
+            <a href="mailto:prismmedgee@gmail.com" class="hover:text-violet transition">prismmedgee@gmail.com</a>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-violet/10 border border-violet/20 flex items-center justify-center text-violet">
+              <i data-lucide="phone" class="w-5 h-5"></i>
+            </div>
+            <a href="https://wa.me/233248607998" target="_blank" rel="noopener" class="hover:text-violet transition">+233 248 607 998</a>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-violet/10 border border-violet/20 flex items-center justify-center text-violet">
+              <i data-lucide="map-pin" class="w-5 h-5"></i>
+            </div>
+            <span>Accra, Ghana & Worldwide</span>
+          </div>
+        </div>
+
+        <div class="flex gap-3 mt-10">
+          <a href="#" class="social-icon" aria-label="Instagram"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+          <a href="#" class="social-icon" aria-label="Twitter"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+          <a href="#" class="social-icon" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+          <a href="#" class="social-icon" aria-label="TikTok"><i data-lucide="music" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <form id="contact-form" class="glass-card p-8 sm:p-10 space-y-4">
+        <div>
+          <label class="sr-only" for="contact-name">Your Full Name</label>
+          <input id="contact-name" type="text" name="name" placeholder="Your Full Name" required class="form-input">
+        </div>
+        <div>
+          <label class="sr-only" for="contact-email">Email Address</label>
+          <input id="contact-email" type="email" name="email" placeholder="Email Address" required class="form-input">
+        </div>
+        <div>
+          <label class="sr-only" for="contact-whatsapp">WhatsApp / Phone Number</label>
+          <input id="contact-whatsapp" type="tel" name="whatsapp" placeholder="WhatsApp / Phone Number" class="form-input">
+        </div>
+        <div>
+          <label class="sr-only" for="contact-need">What are you looking to build?</label>
+          <select id="contact-need" name="need" required class="form-input">
+            <option value="">What are you looking to build?</option>
+            <option value="New Website / Flagship Platform">New Website / Flagship Platform</option>
+            <option value="Digital Product / E-Commerce">Digital Product / E-Commerce</option>
+            <option value="Conversion & Infrastructure Optimization">Conversion & Infrastructure Optimization</option>
+            <option value="Growth Systems & Brand Scaling">Growth Systems & Brand Scaling</option>
+            <option value="Full-Lifecycle Operating Partnership">Full-Lifecycle Operating Partnership</option>
+            <option value="Other Scope">Other Scope</option>
+          </select>
+        </div>
+        <div>
+          <label class="sr-only" for="contact-message">Project Details & Objectives</label>
+          <textarea id="contact-message" name="message" rows="4" placeholder="Tell us about your business, current bottlenecks, and goals..." required class="form-input"></textarea>
+        </div>
+        <button type="submit" class="btn-primary w-full justify-center !py-4 font-semibold tracking-wider uppercase text-sm">Submit Project Inquiry</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- 10. FOOTER -->
+<footer class="relative pt-20 pb-12 px-6 border-t border-white/5">
   <div class="footer-gradient-line"></div>
   <div class="max-w-7xl mx-auto text-center">
-    <div class="flex items-center justify-center gap-2 mb-2">
-      <svg width="32" height="32" viewBox="0 0 28 28" fill="none">
-        <path d="M14 3 L25 22 L3 22 Z" stroke="url(#fGrad)" stroke-width="1.8" fill="none"/>
-        <defs>
-          <linearGradient id="fGrad" x1="0" y1="0" x2="28" y2="28">
-            <stop offset="0%" stop-color="#7C3AED"/>
-            <stop offset="100%" stop-color="#00D4FF"/>
-          </linearGradient>
-        </defs>
-      </svg>
-      <span class="font-display font-bold text-2xl">PRISM EDGE</span>
+    <div class="flex items-center justify-center gap-3 mb-3">
+      <img src="../prism-labs/assets/prism-edge-logo.png" alt="Prismm Edgee Emblem" class="w-8 h-8 object-contain">
+      <span class="font-display font-medium text-2xl tracking-wider text-[#F5F5F0]">PRISMM <span class="text-violet">EDGEE</span></span>
     </div>
-    <p class="text-sharp/50 font-mono text-sm mb-8">Where Brands Break Through</p>
-    <div class="flex flex-wrap justify-center gap-6 mb-4 text-sm text-sharp/70">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#media">Media</a>
-      <a href="#contact">Contact</a>
+    <p class="text-sharp/60 text-sm mb-8 tracking-wide font-light">Building, growing, and operating digital businesses.</p>
+
+    <div class="flex flex-wrap justify-center gap-6 mb-6 text-sm text-sharp/70">
+      <a href="#home" class="hover:text-violet transition">Home</a>
+      <a href="#problem" class="hover:text-violet transition">Problem</a>
+      <a href="#services" class="hover:text-violet transition">Capabilities</a>
+      <a href="#media" class="hover:text-violet transition">Work</a>
+      <a href="#why" class="hover:text-violet transition">Why Us</a>
+      <a href="#process" class="hover:text-violet transition">Process</a>
+      <a href="#contact" class="hover:text-violet transition">Contact</a>
     </div>
-    <div class="flex justify-center gap-6 mb-8 text-sm">
-      <a href="https://prismlabs.com" target="_blank" rel="noopener" onclick="if(location.hostname==='localhost' || location.protocol==='file:'){event.preventDefault();location.href='../prism-labs/index.html';}" class="text-violet">Prism Labs</a>
-      <a href="https://edgeproducts.com" target="_blank" rel="noopener" onclick="if(location.hostname==='localhost' || location.protocol==='file:'){event.preventDefault();location.href='../edge-products/index.html';}" class="text-cyan">Edge Products</a>
+
+    <div class="flex flex-wrap justify-center gap-6 mb-8 text-sm">
+      <a href="../../index.html" class="text-sharp/60 hover:text-sharp transition">Ecosystem Gateway</a>
+      <span class="text-white/20">•</span>
+      <a href="../prism-labs/index.html" class="text-violet hover:underline">Prism Labs</a>
+      <span class="text-white/20">•</span>
+      <a href="../edge-products/index.html" class="text-cyan hover:underline">Edge Products</a>
     </div>
-    <p class="text-sharp/40 text-xs">© 2025 Prism Edge. All Rights Reserved.</p>
+
+    <p class="text-sharp/40 text-xs">© 2026 Prismm Edgee. All Rights Reserved.</p>
   </div>
 </footer>
 
-<button id="chat-bubble" class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-violet/50 transition-all hover:scale-110" style="background: linear-gradient(135deg, #7C3AED, #00D4FF);">
-  <i data-lucide="message-circle" class="w-6 h-6 text-white"></i>
+<!-- Interactive Chat Assistant Bubble and Panel -->
+<button id="chat-bubble" class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-black/50 transition-all hover:scale-105" aria-label="Open chat assistant">
+  <i data-lucide="message-circle" class="w-6 h-6 text-black"></i>
 </button>
 
 <div id="chat-panel" class="hidden fixed bottom-24 right-6 z-40 w-[90vw] max-w-sm h-[500px] flex-col glass-card overflow-hidden">
   <div class="flex items-center justify-between p-4 border-b border-white/10">
     <div>
-      <h4 class="font-display font-semibold">Chat with Prism Edge</h4>
-      <div class="flex items-center gap-2 text-xs text-sharp/60"><span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>Online</div>
+      <h4 class="font-display font-semibold text-lg">Chat with Prismm Edgee</h4>
+      <div class="flex items-center gap-2 text-xs text-sharp/60"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>Online</div>
     </div>
-    <button id="chat-close" class="p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
+    <button id="chat-close" class="p-1 text-sharp/70 hover:text-sharp" aria-label="Close chat window"><i data-lucide="x" class="w-5 h-5"></i></button>
   </div>
   <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
   <div class="p-3 border-t border-white/10 flex gap-2">
-    <label class="sr-only" for="chat-input">Message Prism Edge</label>
-    <input id="chat-input" type="text" placeholder="Type a message..." class="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-violet">
-    <button id="chat-send" class="w-10 h-10 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #7C3AED, #00D4FF);"><i data-lucide="send" class="w-4 h-4"></i></button>
+    <label class="sr-only" for="chat-input">Message Prismm Edgee</label>
+    <input id="chat-input" type="text" placeholder="Type a message..." class="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-violet text-sharp">
+    <button id="chat-send" class="w-10 h-10 rounded-full flex items-center justify-center text-black font-bold bg-violet hover:bg-violet/90 transition" aria-label="Send message"><i data-lucide="send" class="w-4 h-4 text-black"></i></button>
   </div>
 </div>
 

@@ -30,9 +30,12 @@ export function renderServices() {
   import('./data.js').then(({ services }) => {
     grid.innerHTML = services.map(s => `
       <div class="service-card">
-        <div class="icon">${s.icon}</div>
-        <h3 class="font-display text-xl font-semibold mb-2">${s.title}</h3>
-        <p class="text-sharp/60 text-sm leading-relaxed">${s.desc}</p>
+        <div class="flex items-center justify-between mb-4">
+          <div class="icon">${s.icon}</div>
+          ${s.category ? `<span class="service-tag text-xs font-mono font-semibold tracking-wider px-2.5 py-1 rounded border border-white/10 text-violet bg-white/5">${s.category}</span>` : ''}
+        </div>
+        <h3 class="font-display text-2xl font-semibold mb-2">${s.title}</h3>
+        <p class="text-sharp/70 text-sm leading-relaxed">${s.desc}</p>
       </div>
     `).join('');
     grid.querySelectorAll('.service-card').forEach(card => {

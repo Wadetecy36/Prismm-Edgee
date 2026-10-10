@@ -9,9 +9,7 @@
   <!-- Google Fonts & Tailwind CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
@@ -20,21 +18,21 @@
         extend: {
           colors: {
             gold: {
-              300: '#F4DF9B',
+              300: '#F5E6B8',
               400: '#E8C97A',
               500: '#D4AF37',
               600: '#AA820A'
             },
             navy: {
-              DEFAULT: '#070D1E',
-              soft: '#0F1830',
-              border: '#1B294A'
+              DEFAULT: '#070707',
+              soft: '#121212',
+              border: 'rgba(232, 201, 122, 0.16)'
             }
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Space Grotesk', 'sans-serif'],
-            mono: ['IBM Plex Mono', 'monospace']
+            sans: ['DM Sans', 'sans-serif'],
+            display: ['Cormorant Garamond', 'serif'],
+            mono: ['JetBrains Mono', 'monospace']
           }
         }
       }
@@ -43,19 +41,14 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(-45deg, #000000, #001f3f, #3a3a3a, #fcf1d1, #ffffff);
-      background-size: 400% 400%;
-      animation: gradient 15s ease infinite;
+      font-family: 'DM Sans', sans-serif;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(232, 201, 122, 0.10), transparent 32rem),
+        radial-gradient(circle at 85% 60%, rgba(26, 62, 191, 0.07), transparent 28rem),
+        #070707;
       background-attachment: fixed;
-      color: #FFFFFF;
+      color: #F5F5F0;
       min-height: 100vh;
-    }
-
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     .gold-gradient-text {
@@ -70,15 +63,16 @@
     }
 
     .glass-card {
-      background: rgba(12, 14, 22, 0.88);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(18, 18, 18, 0.78);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(232, 201, 122, 0.16);
     }
 
     .input-field {
-      background: rgba(7, 13, 30, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      color: #fff;
+      background: rgba(10, 10, 10, 0.85);
+      border: 1px solid rgba(232, 201, 122, 0.2);
+      color: #F5F5F0;
       transition: all 0.2s ease;
     }
 
@@ -158,16 +152,13 @@
 <body class="min-h-screen flex flex-col">
 
   <!-- TOP APP BAR -->
-  <header class="bg-[#070D1E] border-b border-[#1B294A] px-6 py-4 flex items-center justify-between sticky top-0 z-50 backdrop-blur-md">
+  <header class="bg-[#070707]/90 border-b border-[#E8C97A]/15 px-6 py-4 flex items-center justify-between sticky top-0 z-50 backdrop-blur-xl">
     <div class="flex items-center gap-3">
-      <a href="index.html" class="flex items-center gap-2">
-        <svg class="w-8 h-8" viewBox="0 0 30 30" fill="none">
-          <path d="M4 26L15 4L26 26H4Z" stroke="#16233F" stroke-width="2" stroke-linejoin="round" />
-          <path d="M4 26L15 4L15 26H4Z" fill="#C8850A" />
-        </svg>
-        <span class="font-display font-bold text-xl text-white tracking-tight">Edge<span class="text-[#E8C97A]">Products</span></span>
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/prism-edge-logo.png" alt="Edge Products" class="w-8 h-8 object-contain">
+        <span class="font-display font-medium text-xl text-white tracking-wide">EDGE <span class="text-[#E8C97A]">PRODUCTS</span></span>
       </a>
-      <span class="text-[10px] font-mono tracking-widest uppercase text-[#E8C97A] bg-[#E8C97A]/10 border border-[#E8C97A]/20 px-2 py-0.5 rounded">ADMIN PORTAL</span>
+      <span class="text-[10px] font-sans tracking-widest uppercase text-[#E8C97A] bg-[#E8C97A]/10 border border-[#E8C97A]/20 px-2.5 py-0.5 rounded-full">ADMIN PORTAL</span>
     </div>
 
     <div class="flex items-center gap-4 text-xs font-medium">
@@ -207,7 +198,7 @@
   <!-- DASHBOARD WORKSPACE -->
   <div id="dashboard-workspace" class="hidden flex-1 flex flex-col">
     <!-- Tabs Nav -->
-    <div class="border-b border-[#1B294A] bg-[#070D1E] px-6 flex items-center gap-2 overflow-x-auto">
+    <div class="border-b border-[#E8C97A]/15 bg-[#070707]/80 backdrop-blur-md px-6 flex items-center gap-2 overflow-x-auto">
       <button onclick="switchTab('shop-upload')" id="tab-btn-shop-upload"
         class="tab-btn active py-3.5 px-5 text-xs font-semibold uppercase tracking-widest text-neutral-300 hover:text-white transition flex items-center gap-2">
         <i data-lucide="upload-cloud" class="w-4 h-4"></i> Shop Products Upload
@@ -272,7 +263,7 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
               <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1.5">Category Sector *</label>
-              <select id="shop-category" class="w-full input-field py-2.5 px-3 text-xs rounded-lg bg-[#070D1E]">
+              <select id="shop-category" class="w-full input-field py-2.5 px-3 text-xs rounded-lg bg-[#0e0e0e]">
                 <option value="Electronics">🔌 Electronics</option>
                 <option value="Beauty & Cosmetics">💄 Beauty & Cosmetics</option>
                 <option value="Food Services">🍽️ Food Services</option>
@@ -283,7 +274,7 @@
             </div>
             <div>
               <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1.5">Affiliated Boutique House</label>
-              <select id="shop-biz-owner" class="w-full input-field py-2.5 px-3 text-xs rounded-lg bg-[#070D1E]">
+              <select id="shop-biz-owner" class="w-full input-field py-2.5 px-3 text-xs rounded-lg bg-[#0e0e0e]">
                 <option value="">Independent Masterpiece (None)</option>
               </select>
             </div>
@@ -480,7 +471,7 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Category Sector *</label>
-              <select id="prod-category" class="w-full input-field py-2.5 px-3 text-xs rounded-lg bg-[#070D1E]">
+              <select id="prod-category" class="w-full input-field py-2.5 px-3 text-xs rounded-lg bg-[#0e0e0e]">
                 <option value="Electronics">🔌 Electronics</option>
                 <option value="Beauty & Cosmetics">💄 Beauty & Cosmetics</option>
                 <option value="Food Services">🍽️ Food Services</option>
@@ -491,7 +482,7 @@
             </div>
             <div>
               <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-1">Affiliated Boutique</label>
-              <select id="prod-biz-owner" class="w-full input-field py-2.5 px-3 text-xs rounded-lg bg-[#070D1E]">
+              <select id="prod-biz-owner" class="w-full input-field py-2.5 px-3 text-xs rounded-lg bg-[#0e0e0e]">
                 <option value="">Independent Vendor (None)</option>
               </select>
             </div>
@@ -621,9 +612,24 @@
 
     let selectedShopFiles = [];
 
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
       lucide.createIcons();
-      // Mandatory password entry everytime
+
+      // Check server session state first
+      try {
+        const authRes = await fetch('/api/auth/check', { credentials: 'same-origin' }).catch(() => null);
+        if (authRes && authRes.ok) {
+          const authData = await authRes.json();
+          if (authData && authData.authenticated) {
+            sessionStorage.setItem('admin_authenticated', 'true');
+            document.getElementById('login-overlay').classList.add('hidden');
+            document.getElementById('dashboard-workspace').classList.remove('hidden');
+            loadAllData();
+            return;
+          }
+        }
+      } catch (_) {}
+
       sessionStorage.removeItem('admin_authenticated');
       document.getElementById('login-overlay').classList.remove('hidden');
       document.getElementById('dashboard-workspace').classList.add('hidden');
@@ -641,22 +647,48 @@
       }
     });
 
-    function handleLogin(e) {
+    async function handleLogin(e) {
       e.preventDefault();
       const pass = document.getElementById('pass-input').value;
-      if (pass === 'PrismAdmin') {
-        sessionStorage.setItem('admin_authenticated', 'true');
-        document.getElementById('login-overlay').classList.add('hidden');
-        document.getElementById('dashboard-workspace').classList.remove('hidden');
-        loadAllData();
-        showToast('✓ Authentication Successful');
-      } else {
-        showToast('Invalid Administrative Key', 'err');
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.innerText = 'Verifying...'; }
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ password: pass })
+        });
+
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.success) {
+          if (data.token) {
+            sessionStorage.setItem('admin_token', data.token);
+          }
+          sessionStorage.setItem('admin_authenticated', 'true');
+          document.getElementById('pass-input').value = '';
+          document.getElementById('login-overlay').classList.add('hidden');
+          document.getElementById('dashboard-workspace').classList.remove('hidden');
+          loadAllData();
+          showToast('✓ Authentication Successful');
+        } else {
+          const errorMsg = data.error || (res.status === 429 ? 'Too many attempts. Locked out.' : 'Invalid Administrative Key');
+          showToast(errorMsg, 'err');
+        }
+      } catch (err) {
+        showToast('Network error during authentication', 'err');
+      } finally {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = '<i data-lucide="key" class="w-4 h-4"></i> Unlock Portal'; lucide.createIcons(); }
       }
     }
 
-    function lockPortal() {
+    async function lockPortal() {
+      try {
+        await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' }).catch(() => null);
+      } catch (_) {}
       sessionStorage.removeItem('admin_authenticated');
+      sessionStorage.removeItem('admin_token');
       document.getElementById('login-overlay').classList.remove('hidden');
       document.getElementById('dashboard-workspace').classList.add('hidden');
       showToast('Portal Locked');
@@ -691,9 +723,37 @@
       setTimeout(() => toast.remove(), 3000);
     }
 
-    // Local Storage Helpers (IndexedDB + LocalStorage)
+    function getAdminHeaders() {
+      const headers = { 'Content-Type': 'application/json' };
+      const token = sessionStorage.getItem('admin_token');
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+      return headers;
+    }
+
+    // Storage & API Helpers
     async function fetchAdminItems(storeName) {
-      // IndexedDB is the primary source of truth.
+      try {
+        const headers = {};
+        const token = sessionStorage.getItem('admin_token');
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        const res = await fetch(`/api/data/${storeName}?_t=${Date.now()}`, {
+          credentials: 'same-origin',
+          headers: headers
+        }).catch(() => null);
+
+        if (res && res.ok) {
+          const sData = await res.json();
+          if (Array.isArray(sData) && sData.length > 0) {
+            for (const item of sData) {
+              if (item && item.id) await idbSave(storeName, item);
+            }
+            return sData;
+          }
+        }
+      } catch (_) {}
+
+      // IndexedDB is the local source of truth.
       const items = await idbGetAll(storeName);
       if (items && items.length > 0) return items;
 
@@ -714,7 +774,7 @@
         item.id = `${storeName}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
       }
 
-      // IndexedDB is the primary storage.
+      // IndexedDB local save
       const saved = await idbSave(storeName, item);
 
       // Mirror small records to LocalStorage.
@@ -729,6 +789,16 @@
           localStorage.setItem(storeName, JSON.stringify(items));
         } catch (_) {}
       }
+
+      // Sync to server API
+      try {
+        await fetch(`/api/data/${storeName}`, {
+          method: 'POST',
+          headers: getAdminHeaders(),
+          credentials: 'same-origin',
+          body: JSON.stringify(item)
+        }).catch(() => null);
+      } catch (_) {}
 
       notifyShopUpdate();
       return saved;
@@ -745,6 +815,19 @@
           localStorage.setItem(storeName, JSON.stringify(items));
         } catch (_) {}
       }
+
+      // Sync deletion to server API
+      try {
+        const headers = {};
+        const token = sessionStorage.getItem('admin_token');
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        await fetch(`/api/data/${storeName}/${id}`, {
+          method: 'DELETE',
+          headers: headers,
+          credentials: 'same-origin'
+        }).catch(() => null);
+      } catch (_) {}
 
       notifyShopUpdate();
       return deleted;
@@ -894,9 +977,9 @@
 
         grid.innerHTML = data.map(m => `
           <div class="relative group aspect-square rounded-lg overflow-hidden border border-neutral-800 bg-black">
-            <img src="${m.url || m.src}" class="w-full h-full object-cover">
+            <img src="${m.url || m.src}" alt="Storefront media" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2 p-2 text-center">
-              <button onclick="deleteStorefrontMedia('${m.id}')" class="p-2 rounded-full bg-red-500/80 text-white hover:bg-red-600 transition">
+              <button onclick="deleteStorefrontMedia('${m.id}')" aria-label="Delete storefront media" class="p-2 rounded-full bg-red-500/80 text-white hover:bg-red-600 transition">
                 <i data-lucide="trash-2" class="w-4 h-4"></i>
               </button>
             </div>
@@ -994,13 +1077,13 @@
         grid.innerHTML = data.map(b => `
           <div class="glass-card p-4 rounded-xl flex items-center justify-between border border-neutral-800">
             <div class="flex items-center gap-3">
-              <img src="${b.logo}" class="w-10 h-10 rounded-full border border-neutral-700 object-cover bg-black">
+              <img src="${b.logo}" alt="${b.name}" class="w-10 h-10 rounded-full border border-neutral-700 object-cover bg-black">
               <div>
                 <h4 class="text-sm font-semibold text-white">${b.name}</h4>
                 <p class="text-[11px] text-neutral-400">${b.location} • ${b.categories ? b.categories.join(', ') : ''}</p>
               </div>
             </div>
-            <button onclick="deleteBusiness('${b.id}')" class="p-2 text-neutral-400 hover:text-red-400 transition">
+            <button onclick="deleteBusiness('${b.id}')" aria-label="Delete business" class="p-2 text-neutral-400 hover:text-red-400 transition">
               <i data-lucide="trash-2" class="w-4 h-4"></i>
             </button>
           </div>
@@ -1082,13 +1165,13 @@
         grid.innerHTML = data.map(p => `
           <div class="glass-card p-4 rounded-xl flex items-center justify-between border border-neutral-800">
             <div class="flex items-center gap-3">
-              <img src="${(p.images && p.images[0]) || 'assets/no-goods-placeholder.jpg'}" class="w-12 h-12 rounded border border-neutral-700 object-cover bg-black">
+              <img src="${(p.images && p.images[0]) || 'assets/no-goods-placeholder.jpg'}" alt="${p.name}" class="w-12 h-12 rounded border border-neutral-700 object-cover bg-black">
               <div>
                 <h4 class="text-sm font-semibold text-white">${p.name}</h4>
                 <p class="text-[11px] text-neutral-400">GHS ${(p.price || 0).toLocaleString()} • ${p.category || 'General'} • Stock: ${p.stock ?? 10}</p>
               </div>
             </div>
-            <button onclick="deleteProduct('${p.id}')" class="p-2 text-neutral-400 hover:text-red-400 transition">
+            <button onclick="deleteProduct('${p.id}')" aria-label="Delete product" class="p-2 text-neutral-400 hover:text-red-400 transition">
               <i data-lucide="trash-2" class="w-4 h-4"></i>
             </button>
           </div>

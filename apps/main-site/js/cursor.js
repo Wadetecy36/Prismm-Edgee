@@ -3,6 +3,11 @@ export function initCursor() {
   const ring = document.getElementById('cursor-ring');
   if (!dot || !ring) return;
 
+  if (window.matchMedia && !window.matchMedia('(pointer: fine)').matches) {
+    return;
+  }
+  document.body.classList.add('custom-cursor-enabled');
+
   let mx = window.innerWidth / 2, my = window.innerHeight / 2;
   let rx = mx, ry = my;
 

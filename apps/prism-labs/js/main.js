@@ -17,6 +17,32 @@ function initFooterAndCTAs() {
   }
 }
 
+function initMobileMenu() {
+  const toggle = document.getElementById('labs-menu-toggle');
+  const close = document.getElementById('labs-menu-close');
+  const menu = document.getElementById('labs-mobile-menu');
+  if (!toggle || !menu) return;
+
+  const openMenu = () => {
+    menu.classList.remove('hidden');
+    menu.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMenu = () => {
+    menu.classList.remove('flex');
+    menu.classList.add('hidden');
+    document.body.style.overflow = '';
+  };
+
+  toggle.addEventListener('click', openMenu);
+  if (close) close.addEventListener('click', closeMenu);
+
+  menu.querySelectorAll('.labs-mobile-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+}
+
 function initApp() {
   initCursor();
   initHero();
@@ -25,6 +51,7 @@ function initApp() {
   initStories();
   initPrismaChat();
   initFooterAndCTAs();
+  initMobileMenu();
   initAnimations();
   initInteractiveLogo();
   // initCubeInteraction is handled inside initInteractiveLogo()

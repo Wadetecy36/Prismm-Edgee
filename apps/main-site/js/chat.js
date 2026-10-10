@@ -75,12 +75,24 @@ function pushMsg(role, text) {
   renderMessages();
 }
 
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function renderMessages() {
   const box = document.getElementById('chat-messages');
+  if (!box) return;
   box.innerHTML = messages.map(m => {
     const time = new Date(m.ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const safeText = escapeHtml(m.text);
     return `<div class="flex flex-col ${m.role === 'user' ? 'items-end' : 'items-start'}">
-      <div class="chat-msg ${m.role}">${m.text}</div>
+      <div class="chat-msg ${m.role}">${safeText}</div>
       <div class="msg-time">${time}</div>
     </div>`;
   }).join('');
@@ -110,6 +122,6 @@ function resetIdle() {
 
 function sendTranscript() {
   const transcript = messages.map(m => `[${new Date(m.ts).toLocaleString()}] ${m.role.toUpperCase()}: ${m.text}`).join('\n');
-  console.log('📧 Mock email to hello@prismedge.com:\n', transcript);
+  console.log('📧 Mock email to prismmedgee@gmail.com:\n', transcript);
   showToast('Chat transcript sent to our team');
 }

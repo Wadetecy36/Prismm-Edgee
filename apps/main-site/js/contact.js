@@ -20,10 +20,10 @@ export function initContact() {
       });
       if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
       form.reset();
-      showToast('Message sent. We'll be in touch soon.');
+      showToast("Message sent. We'll be in touch soon.");
     } catch (error) {
       console.error('[CONTACT] Submission failed:', error);
-      showToast('Couldn't send the message. Please try again or use WhatsApp/email.');
+      showToast("Couldn't send the message. Please try again or use WhatsApp/email.");
     } finally {
       if (submit) { submit.disabled = false; submit.textContent = original; }
     }

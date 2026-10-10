@@ -50,11 +50,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     window.addEventListener('storage', (e) => {
       if (e.key === 'prism_shop_sync') refreshState();
+      if (e.key === 'edgeProducts_cart') {
+        try {
+          state.cart = JSON.parse(e.newValue || '[]');
+          renderCartCount();
+          if (typeof renderCartDrawer === 'function') renderCartDrawer();
+        } catch (_) {}
+      }
+      if (e.key === 'edgeProducts_wishlist') {
+        try {
+          state.wishlist = JSON.parse(e.newValue || '[]');
+          if (typeof renderWishlistCount === 'function') renderWishlistCount();
+        } catch (_) {}
+      }
     });
     window.addEventListener('focus', () => refreshState());
 
-    // Auto-refresh fallback every 5 seconds
-    setInterval(() => refreshState(), 5000);
+    // Auto-refresh fallback every 60 seconds when tab is active
+    setInterval(() => {
+      if (!document.hidden) refreshState();
+    }, 60000);
 
     router();
   } catch (error) {
@@ -65,6 +80,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 // ===================== STATE REFRESH =====================
 
 async function refreshState() {
+  state.cart = JSON.parse(localStorage.getItem('edgeProducts_cart') || '[]');
+  state.wishlist = JSON.parse(localStorage.getItem('edgeProducts_wishlist') || '[]');
   state.products = await getAllItems('products') || [];
   state.businesses = await getAllItems('businesses') || [];
   state.customers = await getAllItems('customers') || [];
@@ -410,25 +427,32 @@ function bindStaticEvents() {
   });
 
   const formDel = el('checkout-form-delivery');
-  if (formDel) formDel.addEventListener('submit', (e) => {
+  if (formDel) formDel.addEventListener('submit', async (e) => {
     e.preventDefault();
-    toast('Delivery order confirmed!');
-    state.cart = [];
-    localStorage.setItem('edgeProducts_cart', JSON.stringify(state.cart));
-    if (typeof renderCartCount === 'function') renderCartCount();
-    if (typeof renderCartDrawer === 'function') renderCartDrawer();
-    el('checkout-modal').hidden = true;
+    const phone = el('co-del-phone')?.value;
+    const email = el('co-del-email')?.value;
+    const address = el('co-del-address')?.value;
+    await executeOrderCheckout({
+      fulfillmentType: 'delivery',
+      phone,
+      email,
+      addressOrHub: address
+    });
   });
 
   const formPic = el('checkout-form-pickup');
-  if (formPic) formPic.addEventListener('submit', (e) => {
+  if (formPic) formPic.addEventListener('submit', async (e) => {
     e.preventDefault();
-    toast('Pickup order confirmed!');
-    state.cart = [];
-    localStorage.setItem('edgeProducts_cart', JSON.stringify(state.cart));
-    if (typeof renderCartCount === 'function') renderCartCount();
-    if (typeof renderCartDrawer === 'function') renderCartDrawer();
-    el('checkout-modal').hidden = true;
+    const phone = el('co-pic-phone')?.value;
+    const email = el('co-pic-email')?.value;
+    const locationSelect = formPic.querySelector('.checkout-location');
+    const location = locationSelect ? locationSelect.value : 'Prism Edge HQ';
+    await executeOrderCheckout({
+      fulfillmentType: 'pickup',
+      phone,
+      email,
+      addressOrHub: location
+    });
   });
 
   const sortSelect = el('sort-select');
@@ -697,9 +721,13 @@ function toast(msg) {
 }
 
 function esc(s) {
-  const d = document.createElement('div');
-  d.textContent = s;
-  return d.innerHTML;
+  if (s == null) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 // ===================== HERO SLIDESHOW (SHOP PRODUCTS UPLOAD CONNECTED) =====================
@@ -889,6 +917,7 @@ function renderProductGrid() {
     card.className = 'card';
     const cColor = getCategoryColor((p.category || p.cat || '').toLowerCase());
     const cTint = getCategoryTint((p.category || p.cat || '').toLowerCase());
+    const cLabel = getCategoryLabel(p.category || p.cat);
     card.style.setProperty('--cat-color', cColor);
     card.style.setProperty('--cat-tint', cTint);
 
@@ -907,18 +936,22 @@ function renderProductGrid() {
     const priceVal = (typeof p.price === 'number') ? p.price.toLocaleString() : (p.price || '0');
     const moqVal = p.moq || 1;
     const isWished = state.wishlist.includes(p.id);
+    const stockLabel = (typeof p.stock === 'number') ? (p.stock > 0 ? `${p.stock} in stock` : 'Out of stock') : 'Available';
 
     card.innerHTML = `
       <div class="card-media" onclick="location.hash='#/product/${p.id}'" style="cursor:pointer;">
         <img src="${imgUrl}" alt="${esc(p.name)}" onerror="this.src='assets/no-goods-placeholder.jpg'">
         ${badgeHtml}
-        <button class="wishlist-btn ${isWished ? 'active' : ''}" data-id="${p.id}" title="Add to wishlist">♥</button>
+        <button class="wishlist-btn ${isWished ? 'active' : ''}" data-id="${p.id}" title="Add to wishlist" aria-label="Add to wishlist">♥</button>
       </div>
       <div class="card-body">
-        <div class="name" onclick="location.hash='#/product/${p.id}'" style="cursor:pointer;">${esc(p.name)}</div>
-        <div class="stars" aria-label="${p.reviews ? `${p.reviews} reviews` : 'No reviews yet'}">★★★★★ <span class="count">(${p.reviews || 0})</span></div>
-        <div class="price">GHS ${priceVal}</div>
-        <div class="moq">MOQ: ${moqVal} unit${moqVal > 1 ? 's' : ''}</div>
+        <div class="card-cat">${esc(cLabel)}</div>
+        <div class="name" onclick="location.hash='#/product/${p.id}'" style="cursor:pointer;" title="${esc(p.name)}">${esc(p.name)}</div>
+        <div class="card-meta">
+          <div class="price">GHS ${priceVal}</div>
+          <div class="stock-tag">${stockLabel}</div>
+        </div>
+        <div class="moq" style="font-size:11.5px; color:var(--ep-muted); margin-bottom:12px;">MOQ: ${moqVal} unit${moqVal > 1 ? 's' : ''}</div>
         <div class="card-actions">
           <button class="view-btn" onclick="location.hash='#/product/${p.id}'">Details</button>
           <button class="primary add-btn">Add to Cart</button>
@@ -1115,8 +1148,8 @@ function renderProductDetailUI() {
       <div class="supplier-details">
         <div>📍 ${esc(biz?.location || 'Location not specified')}</div>
         <div>📞 ${esc(biz?.contact || 'Contact via platform')}</div>
-        <div>⏱ Response: ${esc(biz?.responseRate || '95%')}</div>
-        <div>📅 Active: ${biz?.yearsActive || 3}+ years</div>
+        ${biz && biz.responseRate ? `<div>⏱ Response: ${esc(biz.responseRate)}</div>` : ''}
+        ${biz && biz.yearsActive ? `<div>📅 Active: ${esc(biz.yearsActive)}+ years</div>` : ''}
       </div>
     `;
   }
@@ -1128,15 +1161,21 @@ function renderProductDetailUI() {
 // ===================== CART ACTIONS =====================
 
 function addToCart(id, qty) {
+  qty = parseInt(qty, 10) || 1;
+  if (qty <= 0) return;
+
   const prod = state.products.find(p => p.id === id);
   if (!prod) return;
 
-  if (prod.stock < qty) {
-    alert('Acquisition request exceeds active inventory stock.');
+  const maxStock = typeof prod.stock === 'number' ? prod.stock : 999;
+  const existing = state.cart.find(x => x.id === id);
+  const currentQty = existing ? existing.qty : 0;
+
+  if (currentQty + qty > maxStock) {
+    alert(`Acquisition request exceeds active inventory stock (${maxStock} available, ${currentQty} already in cart).`);
     return;
   }
 
-  const existing = state.cart.find(x => x.id === id);
   if (existing) {
     existing.qty += qty;
   } else {
@@ -1200,7 +1239,7 @@ function renderCartDrawer() {
   wrap.innerHTML = '';
 
   if (state.cart.length === 0) {
-    wrap.innerHTML = '<div class="cart-empty">Your cart is empty.<br>Browse the marketplace to add products.</div>';
+    wrap.innerHTML = '<div class="cart-empty"><p style="font-weight:600; color:var(--ep-text); margin-bottom:4px;">Your cart is empty</p><p style="color:var(--ep-muted); font-size:12px;">Browse curated products across our boutique directory to begin.</p></div>';
     el('cart-subtotal').textContent = 'GHS 0';
     return;
   }
@@ -1214,23 +1253,48 @@ function renderCartDrawer() {
     subtotal += rowTotal;
 
     const row = document.createElement('div');
-    row.className = 'cart-row';
+    row.className = 'cart-item';
     const cTint = getCategoryTint((p.category || p.cat || '').toLowerCase());
     const imgUrl = (p.images && p.images.length > 0) ? p.images[0] : 'assets/no-goods-placeholder.jpg';
 
     row.innerHTML = `
-      <div class="card-media" style="width:48px; height:48px; padding:4px; background:${cTint}">
-        <img src="${imgUrl}" onerror="this.src='assets/no-goods-placeholder.jpg'">
+      <img src="${imgUrl}" alt="${esc(p.name)}" style="background:${cTint}" onerror="this.src='assets/no-goods-placeholder.jpg'">
+      <div class="cart-item-info" style="min-width:0;">
+        <h4 style="font-size:13px; font-weight:600; line-height:1.3; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-bottom:4px;">${esc(p.name)}</h4>
+        <div style="color:var(--ep-gold); font-size:12px; font-weight:700; margin-bottom:6px;">GHS ${rowTotal.toLocaleString()}</div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div class="cart-qty-stepper">
+            <button class="cart-qty-btn cart-dec" aria-label="Decrease quantity">−</button>
+            <span style="font-size:11px; font-weight:700; min-width:18px; text-align:center;">${item.qty}</span>
+            <button class="cart-qty-btn cart-inc" aria-label="Increase quantity">+</button>
+          </div>
+          <button class="cart-remove-btn" style="background:none; border:none; color:var(--ep-muted); font-size:11px; text-decoration:underline; cursor:pointer;">Remove</button>
+        </div>
       </div>
-      <div class="grow">
-        <div>${esc(p.name)}</div>
-        <div style="color:var(--ink-soft); font-size:12px;">Qty ${item.qty}</div>
-        <button class="remove">Remove</button>
-      </div>
-      <div class="price">GHS ${rowTotal.toLocaleString()}</div>
     `;
 
-    row.querySelector('.remove').addEventListener('click', () => {
+    row.querySelector('.cart-dec').addEventListener('click', () => {
+      if (item.qty > 1) {
+        item.qty -= 1;
+      } else {
+        state.cart = state.cart.filter(x => x.id !== item.id);
+      }
+      saveCart();
+      renderCartDrawer();
+    });
+
+    row.querySelector('.cart-inc').addEventListener('click', () => {
+      const prod = state.products.find(x => x.id === item.id);
+      if (prod && item.qty >= prod.stock) {
+        toast('Maximum available stock reached');
+        return;
+      }
+      item.qty += 1;
+      saveCart();
+      renderCartDrawer();
+    });
+
+    row.querySelector('.cart-remove-btn').addEventListener('click', () => {
       state.cart = state.cart.filter(x => x.id !== item.id);
       saveCart();
       renderCartDrawer();
@@ -1242,42 +1306,51 @@ function renderCartDrawer() {
   el('cart-subtotal').textContent = `GHS ${subtotal.toLocaleString()}`;
 }
 
-async function handleCartCheckout() {
-  if (state.cart.length === 0) {
-    toast('Cart is empty');
-    return;
+async function executeOrderCheckout({ fulfillmentType, phone, email, addressOrHub }) {
+  if (!state.cart || state.cart.length === 0) {
+    toast('Your cart is empty');
+    return false;
   }
 
-  const email = state.emailSignee || sessionStorage.getItem('active_email');
-  if (!email) {
-    el('signin-modal').hidden = false;
-    alert('Please register your account email to proceed with transaction.');
-    return;
+  if (!phone || !phone.trim()) {
+    alert('Please provide a valid WhatsApp / Phone number for order coordination.');
+    return false;
   }
 
   const orderId = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
-  const totalCost = state.cart.reduce((total, item) => {
+  const subtotal = state.cart.reduce((total, item) => {
     const p = state.products.find(x => x.id === item.id);
     return total + (p ? (p.price * item.qty) : 0);
   }, 0);
 
+  const deliveryFee = fulfillmentType === 'delivery' ? 25 : 0;
+  const grandTotal = subtotal + deliveryFee;
+
+  const orderItems = state.cart.map(item => {
+    const p = state.products.find(x => x.id === item.id);
+    return {
+      productId: item.id,
+      name: p ? p.name : 'Product',
+      price: p ? p.price : 0,
+      quantity: item.qty,
+      itemTotal: (p ? p.price : 0) * item.qty
+    };
+  });
+
   const orderDetails = {
     id: orderId,
-    customerEmail: email,
-    items: state.cart.map(item => {
-      const p = state.products.find(x => x.id === item.id);
-      return {
-        productId: item.id,
-        name: p ? p.name : 'Unknown Product',
-        price: p ? p.price : 0,
-        quantity: item.qty
-      };
-    }),
-    total: totalCost,
-    phone: '+233 24 000 0000',
-    paymentMode: 'Mobile Money (MoMo)',
+    customerName: email ? email.split('@')[0] : 'Valued Customer',
+    customerPhone: phone.trim(),
+    customerEmail: (email || state.emailSignee || '').trim(),
+    fulfillmentType: fulfillmentType,
+    destination: (addressOrHub || '').trim(),
+    items: orderItems,
+    subtotal: subtotal,
+    deliveryFee: deliveryFee,
+    total: grandTotal,
+    paymentMode: 'Direct Mobile Money / Cash on Fulfillment',
     status: 'Pending',
-    createdAt: new Date().toLocaleString()
+    createdAt: new Date().toISOString()
   };
 
   try {
@@ -1294,16 +1367,30 @@ async function handleCartCheckout() {
 
     state.cart = [];
     saveCart();
-    
-    el('cart-drawer').hidden = true;
-    el('cart-overlay').hidden = true;
-    
-    alert(`✧ Order Confirmed!\nReference Code: ${orderId}\nA supplier representative will contact you shortly.`);
+    if (typeof renderCartCount === 'function') renderCartCount();
+    if (typeof renderCartDrawer === 'function') renderCartDrawer();
+
+    const coModal = el('checkout-modal');
+    if (coModal) coModal.hidden = true;
+
+    alert(`✧ Order Confirmed!\nReference Code: ${orderId}\nTotal: GHS ${grandTotal.toLocaleString()}\nFulfillment: ${fulfillmentType.toUpperCase()}\nOur logistics team will contact you on ${phone.trim()}.`);
+
     await refreshState();
+    return true;
   } catch (err) {
     console.error('Checkout failed:', err);
-    alert('Transacting error occurred.');
+    alert('An error occurred during order confirmation. Please try again.');
+    return false;
   }
+}
+
+async function handleCartCheckout() {
+  const coModal = el('checkout-modal');
+  const step1 = el('checkout-step-1');
+  if (coModal) coModal.hidden = false;
+  if (step1) step1.hidden = false;
+  if (el('checkout-step-delivery')) el('checkout-step-delivery').hidden = true;
+  if (el('checkout-step-pickup')) el('checkout-step-pickup').hidden = true;
 }
 
 function trackRecentlyViewed(productId) {
