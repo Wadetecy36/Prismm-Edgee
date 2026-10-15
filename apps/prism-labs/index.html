@@ -2,10 +2,22 @@
 <html lang="en">
 
 <head>
+  <script>
+    if (location.pathname === '/labs' || location.pathname === '/prism-labs') {
+      location.replace(location.pathname + '/' + location.search + location.hash);
+    }
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PRISM EDGE — Built To Scale Brands</title>
-  <link rel="icon" type="image/jpeg" href="assets/prism-edge-logo.jpg">
+  <meta name="description" content="Prism Labs helps brands scale through high-performance websites, digital marketing, and AI-powered business consulting.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="PRISM LABS — Built To Scale Brands">
+  <meta property="og:description" content="Website development, digital marketing, and AI-powered brand consulting from Prism Labs.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/prism-edge-logo.png">
+  <title>PRISM LABS — Built To Scale Brands</title>
+  <link rel="canonical" href="https://prismmedgee.com/labs/">
+  <link rel="icon" type="image/png" href="assets/prism-edge-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -32,9 +44,7 @@
   </script>
   <link rel="stylesheet" href="css/styles.css" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="text-prism-pearl font-sans antialiased overflow-x-hidden">
@@ -42,31 +52,56 @@
   <nav class="fixed top-0 left-0 right-0 z-50 glass-nav">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <a href="#hero" class="flex items-center gap-3 group">
-        <img src="assets/prism-edge-logo.jpg" alt="PRISM EDGE Logo"
+        <img src="assets/prism-edge-logo.png" alt="PRISM EDGE Logo"
           class="w-10 h-10 object-contain mix-blend-screen group-hover:scale-110 transition-transform">
         <span class="font-serif text-2xl text-prism-gold tracking-wider">PRISM <span
             class="font-light">EDGE</span></span>
       </a>
-      <div class="hidden md:flex gap-8 text-sm tracking-wide">
+      <div class="hidden md:flex gap-7 text-sm tracking-wide">
         <a href="#about" class="hover:text-prism-gold transition">About</a>
-        <a href="#story" class="hover:text-prism-gold transition">Story</a>
+        <a href="#methodology" class="hover:text-prism-gold transition">Methodology</a>
+        <a href="#prisma" class="hover:text-prism-gold transition">PRISMA AI</a>
         <a href="#websites" class="hover:text-prism-gold transition">Websites</a>
         <a href="#marketing" class="hover:text-prism-gold transition">Marketing</a>
-        <a href="#prisma" class="hover:text-prism-gold transition">PRISMA AI</a>
-        <a href="/" onclick="if(window.location.protocol==='file:'){event.preventDefault();window.location.href='../main site/index.html';}" class="hover:text-prism-gold transition">
-          MAIN SITE
-          <span
-            class="px-2 py-0.5 bg-prism-gold/10 text-[10px] text-prism-gold rounded-full border border-prism-gold/20">Parent</span>
-        </a>
-        <a href="/shop/" onclick="if(window.location.protocol==='file:'){event.preventDefault();window.location.href='../edge products/index.html';}"
-          class="hover:text-prism-gold transition">
-          EDGE PRODUCTS
-        </a>
+        <a href="#story" class="hover:text-prism-gold transition">Case Studies</a>
       </div>
-      <a href="#prisma"
-        class="hidden md:block px-5 py-2 border border-prism-gold/40 text-prism-gold rounded-full text-xs tracking-wider hover:bg-prism-gold hover:text-prism-black transition">CONSULT</a>
+      <div class="hidden xl:flex items-center gap-3 ml-2 text-[11px] tracking-widest">
+        <a href="../../index.html" class="text-prism-pearl/60 hover:text-prism-gold transition">GATEWAY</a>
+        <a href="../main-site/index.html" class="text-prism-pearl/60 hover:text-prism-gold transition">MAIN SITE</a>
+        <a href="../edge-products/index.html" class="text-prism-pearl/60 hover:text-prism-gold transition">SHOP</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#prisma"
+          class="hidden md:block px-5 py-2 border border-prism-gold/40 text-prism-gold rounded-full text-xs tracking-wider hover:bg-prism-gold hover:text-prism-black transition">CONSULT</a>
+        <button id="labs-menu-toggle" class="md:hidden p-2 text-prism-gold hover:text-prism-pearl transition" aria-label="Open Navigation Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </nav>
+
+  <div id="labs-mobile-menu" class="fixed inset-0 z-50 bg-[#070707]/98 backdrop-blur-2xl hidden flex-col items-center justify-center p-6">
+    <button id="labs-menu-close" class="absolute top-6 right-6 p-2 text-prism-gold hover:text-prism-pearl transition" aria-label="Close Navigation Menu">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <div class="flex flex-col items-center gap-5 text-xl font-serif tracking-wider text-prism-pearl text-center">
+      <a href="#about" class="labs-mobile-link hover:text-prism-gold transition">About</a>
+      <a href="#methodology" class="labs-mobile-link hover:text-prism-gold transition">Methodology</a>
+      <a href="#prisma" class="labs-mobile-link hover:text-prism-gold transition">PRISMA AI</a>
+      <a href="#websites" class="labs-mobile-link hover:text-prism-gold transition">Websites</a>
+      <a href="#marketing" class="labs-mobile-link hover:text-prism-gold transition">Marketing</a>
+      <a href="#story" class="labs-mobile-link hover:text-prism-gold transition">Case Studies</a>
+      <div class="w-16 h-px bg-prism-gold/20 my-2"></div>
+      <a href="../../index.html" class="text-xs font-sans tracking-widest text-prism-pearl/60 hover:text-prism-gold transition">ECOSYSTEM GATEWAY</a>
+      <a href="../main-site/index.html" class="text-xs font-sans tracking-widest text-prism-pearl/60 hover:text-prism-gold transition">PRISM EDGE MAIN</a>
+      <a href="../edge-products/index.html" class="text-xs font-sans tracking-widest text-prism-pearl/60 hover:text-prism-gold transition">EDGE PRODUCTS SHOP</a>
+      <a href="#prisma" class="labs-mobile-link mt-3 px-8 py-3 bg-prism-gold text-prism-black font-sans font-semibold rounded-full text-xs tracking-widest uppercase">CONSULT ADVISOR</a>
+    </div>
+  </div>
 
   <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
 
@@ -144,7 +179,7 @@
           <h3 class="font-serif text-2xl text-prism-gold mb-3">Website Development</h3>
           <p class="text-prism-pearl/70 text-sm leading-relaxed flex-1">High-performance digital experiences engineered
             around your brand and conversion goals.</p>
-          <a href="templates.html" target="_blank"
+          <a href="templates.html" target="_blank" rel="noopener noreferrer"
             class="btn-view-templates-trigger mt-8 inline-flex items-center gap-2 text-xs font-bold tracking-widest text-prism-black bg-prism-gold px-5 py-2.5 rounded-full hover:scale-105 transition-transform self-start">
             VIEW TEMPLATES <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -177,6 +212,81 @@
           <h3 class="font-serif text-2xl text-prism-gold mb-3">Brand Scaling & AI Consulting</h3>
           <p class="text-prism-pearl/70 text-sm leading-relaxed">PRISMA, our proprietary AI advisor, decodes your brand
             and prescribes precise next moves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTELLIGENCE CONTINUUM (BUSINESS PROBLEM -> OBSERVE -> ANALYZE -> DECIDE -> BUILD) ================= -->
+  <section id="methodology" class="py-24 px-6 relative border-t border-prism-gold/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="text-prism-gold/70 tracking-[0.3em] text-xs mb-3">— THE INTELLIGENCE CONTINUUM</p>
+        <h2 class="font-serif text-5xl md:text-6xl text-prism-gold mb-4">How Prism Labs Solves Growth</h2>
+        <p class="max-w-3xl mx-auto text-base sm:text-lg text-prism-pearl/75 leading-relaxed">
+          From diagnostic analysis to high-performance build, our structured methodology turns commercial friction into systematic competitive advantage.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <!-- Step 1: PROBLEM -->
+        <div class="glass-card p-6 flex flex-col justify-between border-prism-gold/20">
+          <div>
+            <div class="text-xs font-mono font-bold text-prism-gold tracking-widest mb-3">STAGE 01</div>
+            <h3 class="font-serif text-2xl text-prism-pearl mb-2">BUSINESS PROBLEM</h3>
+            <p class="text-xs text-prism-pearl/70 leading-relaxed">
+              Identify unit economic constraints, conversion leaks, and positioning gaps holding the business back.
+            </p>
+          </div>
+          <div class="text-prism-gold/40 text-xs font-mono mt-4">Friction Diagnosis</div>
+        </div>
+
+        <!-- Step 2: OBSERVE -->
+        <div class="glass-card p-6 flex flex-col justify-between border-prism-gold/20">
+          <div>
+            <div class="text-xs font-mono font-bold text-prism-gold tracking-widest mb-3">STAGE 02</div>
+            <h3 class="font-serif text-2xl text-prism-pearl mb-2">OBSERVE</h3>
+            <p class="text-xs text-prism-pearl/70 leading-relaxed">
+              Ingest audience behavior, channel metrics, and historical pattern data across verified client sectors.
+            </p>
+          </div>
+          <div class="text-prism-gold/40 text-xs font-mono mt-4">Data Ingestion</div>
+        </div>
+
+        <!-- Step 3: ANALYZE -->
+        <div class="glass-card p-6 flex flex-col justify-between border-prism-gold/30 bg-prism-gold/[0.03]">
+          <div>
+            <div class="text-xs font-mono font-bold text-prism-gold tracking-widest mb-3">STAGE 03</div>
+            <h3 class="font-serif text-2xl text-prism-gold mb-2">ANALYZE</h3>
+            <p class="text-xs text-prism-pearl/75 leading-relaxed">
+              Generate real-time radar scores across presence, content, audience clarity, conversion, and brand identity.
+            </p>
+          </div>
+          <div class="text-prism-gold/60 text-xs font-mono mt-4">PRISMA Scoring</div>
+        </div>
+
+        <!-- Step 4: DECIDE -->
+        <div class="glass-card p-6 flex flex-col justify-between border-prism-blue/40 bg-prism-blue/[0.04]">
+          <div>
+            <div class="text-xs font-mono font-bold text-prism-blue tracking-widest mb-3">STAGE 04</div>
+            <h3 class="font-serif text-2xl text-prism-pearl mb-2">DECIDE</h3>
+            <p class="text-xs text-prism-pearl/70 leading-relaxed">
+              Formulate clear strategic trade-offs: what to prioritize, what traps to avoid, and exact roadmap steps.
+            </p>
+          </div>
+          <div class="text-prism-blue/60 text-xs font-mono mt-4">Action Roadmap</div>
+        </div>
+
+        <!-- Step 5: BUILD -->
+        <div class="glass-card p-6 flex flex-col justify-between border-prism-gold/20">
+          <div>
+            <div class="text-xs font-mono font-bold text-prism-gold tracking-widest mb-3">STAGE 05</div>
+            <h3 class="font-serif text-2xl text-prism-pearl mb-2">BUILD</h3>
+            <p class="text-xs text-prism-pearl/70 leading-relaxed">
+              Engineer bespoke websites, custom design systems, and compound growth marketing pipelines.
+            </p>
+          </div>
+          <div class="text-prism-gold/40 text-xs font-mono mt-4">Digital Execution</div>
         </div>
       </div>
     </div>
@@ -233,11 +343,13 @@
           <div class="grid grid-cols-2 gap-4 reveal">
             <div class="relative group overflow-hidden rounded-xl border border-white/5">
               <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600"
+                alt="Digital marketing campaign showcase"
                 class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
               <div class="absolute inset-0 bg-prism-gold/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
             <div class="relative group overflow-hidden rounded-xl border border-white/5 mt-8">
               <img src="https://images.unsplash.com/photo-1561070791-2526d30994b8?w=600"
+                alt="Brand identity and creative media"
                 class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
               <div class="absolute inset-0 bg-prism-gold/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
@@ -278,9 +390,10 @@
           <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
           <div class="p-4 border-t border-prism-gold/10">
             <form id="chat-form" class="flex gap-2">
+              <label for="chat-input" class="sr-only">Tell PRISMA about your business</label>
               <input id="chat-input" type="text" placeholder="Tell PRISMA about your business..."
                 class="flex-1 bg-prism-black/60 border border-prism-pearl/10 rounded-full px-5 py-3 text-sm focus:outline-none focus:border-prism-gold/60 transition" />
-              <button type="submit"
+              <button type="submit" aria-label="Send message to PRISMA"
                 class="px-5 py-3 bg-prism-gold text-prism-black rounded-full hover:scale-105 transition-transform flex items-center justify-center">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                   stroke-linecap="round" stroke-linejoin="round">
@@ -293,7 +406,10 @@
         </div>
 
         <div class="lg:col-span-2 glass-card p-6 h-[600px] overflow-y-auto relative">
-          <p class="text-prism-gold/70 tracking-[0.3em] text-xs mb-4">GRAPHICAL ANALYSIS</p>
+          <div class="flex items-center justify-between mb-4">
+            <p class="text-prism-gold/70 tracking-[0.3em] text-xs">GRAPHICAL ANALYSIS</p>
+            <span class="text-[10px] tracking-wider px-2 py-0.5 rounded bg-prism-gold/10 text-prism-gold/80 border border-prism-gold/20 font-mono">DIAGNOSTIC MODEL</span>
+          </div>
           <div id="analysis-placeholder"
             class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-prism-pearl/40 bg-prism-black/20 backdrop-blur-sm z-10">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -336,7 +452,7 @@
       <div class="md:col-span-2">
         <div class="md:col-span-2">
           <div class="flex items-center gap-4 mb-4">
-            <img src="assets/prism-edge-logo.jpg" alt="Logo"
+            <img src="assets/prism-edge-logo.png" alt="Logo"
               class="w-12 h-12 object-contain mix-blend-screen">
             <h3 class="font-serif text-3xl text-prism-gold tracking-wider">PRISM EDGE</h3>
           </div>
@@ -347,21 +463,20 @@
       <div>
         <p class="text-prism-gold tracking-widest text-xs mb-4">NAVIGATE</p>
         <ul class="space-y-2 text-sm text-prism-pearl/70">
-          <li><a href="#about" class="hover:text-prism-gold">About</a></li>
-          <li><a href="#story" class="hover:text-prism-gold">Story</a></li>
-          <li><a href="#websites" class="hover:text-prism-gold">Websites</a></li>
-          <li><a href="#marketing" class="hover:text-prism-gold">Marketing</a></li>
-          <li><a href="#prisma" class="hover:text-prism-gold">PRISMA AI</a></li>
-          <li><a href="/" target="_blank" class="hover:text-prism-gold font-medium mt-4 inline-block">← Back to Main
-              Site</a></li>
-          <li><a href="#" id="admin-login-link" class="hover:text-prism-gold mt-2 inline-block">Admin Portal</a></li>
+          <li><a href="#about" class="hover:text-prism-gold transition">About</a></li>
+          <li><a href="#methodology" class="hover:text-prism-gold transition">Methodology</a></li>
+          <li><a href="#prisma" class="hover:text-prism-gold transition">PRISMA AI</a></li>
+          <li><a href="#websites" class="hover:text-prism-gold transition">Websites</a></li>
+          <li><a href="#marketing" class="hover:text-prism-gold transition">Marketing</a></li>
+          <li><a href="#story" class="hover:text-prism-gold transition">Case Studies</a></li>
+          <li><a href="../../index.html" class="hover:text-prism-gold transition">Ecosystem Gateway</a></li>
         </ul>
       </div>
       <div>
         <p class="text-prism-gold tracking-widest text-xs mb-4">CONTACT</p>
         <ul class="space-y-2 text-sm text-prism-pearl/70">
           <li>
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=prismmedgee@gmail.com" target="_blank"
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=prismmedgee@gmail.com" target="_blank" rel="noopener noreferrer"
               class="hover:text-prism-gold flex items-center gap-2">
               <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -372,7 +487,7 @@
             </a>
           </li>
           <li>
-            <a href="https://wa.me/2330248607998" target="_blank" class="hover:text-prism-gold flex items-center gap-2">
+            <a href="https://wa.me/233248607998" target="_blank" rel="noopener noreferrer" class="hover:text-prism-gold flex items-center gap-2">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path
@@ -384,7 +499,7 @@
           </li>
         </ul>
         <div class="flex gap-3 mt-5">
-          <a href="https://www.instagram.com/" target="_blank"
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"
             class="w-9 h-9 rounded-full border border-prism-gold/20 flex items-center justify-center hover:border-prism-gold transition">
             <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -393,7 +508,7 @@
               <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
             </svg>
           </a>
-          <a href="https://web.facebook.com/" target="_blank"
+          <a href="https://web.facebook.com/" target="_blank" rel="noopener noreferrer"
             class="w-9 h-9 rounded-full border border-prism-gold/20 flex items-center justify-center hover:border-prism-gold transition">
             <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -412,7 +527,6 @@
   <div id="lightbox-root"></div>
   <div id="admin-root"></div>
 
-  <script src="../kqDJT8D/js/db.js"></script>
   <script src="js/config.js"></script>
   <script src="js/cursor.js"></script>
   <script src="js/templates.js"></script>
@@ -422,7 +536,6 @@
   <script src="js/hero.js"></script>
   <script src="js/interactive_logo.js"></script>
   <script src="js/stories.js"></script>
-  <script src="js/admin.js"></script>
   <script src="js/main.js"></script>
 </body>
 
